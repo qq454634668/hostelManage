@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.product.mapper.UserMapper">
+    <resultMap id="dicCodeJldw" type="java.util.Map">
+        <result column="D_ID" property="d_id"/>
+        <result column="D_JLDWBH" property="d_jldwbh"/>
+        <result column="D_JLDWMC" property="d_jldwmc"/>
+        <result column="COMPANY_ID" property="company_id"/>
+    </resultMap>
+    <select id="existUser" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from t_customer t1 where t1.c_userid = #{c_userid}
+    </select>
+</mapper>
