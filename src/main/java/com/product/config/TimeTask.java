@@ -26,6 +26,7 @@ public class TimeTask {
      * 更新排名
      * 5分钟更新一次
      */
+
 //    @Scheduled(cron = "0 0/5 * * * ?")
     public void gxPm(){
         Date date = new Date();
