@@ -11,4 +11,8 @@
     <select id="existUser" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(1) from t_customer t1 where t1.c_userid = #{c_userid}
     </select>
+    <insert id="AddMenu" parameterType="java.util.Map">
+         insert into menu_info (name,parent_id,url,icon,px) VALUES (#{name},#{parent_id},#{url},#{icon},#{px})
+    </insert>
+
 </mapper>
