@@ -3,6 +3,7 @@ package com.product.service.impl;
 import com.product.mapper.PurviewMapper;
 import com.product.service.PurviewService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -17,13 +18,21 @@ public class PurviewServiceImpl implements PurviewService {
     private PurviewMapper purviewMapper;
 
     @Override
+    @Transactional
     public void AddMenu(Map<String, Object> param) {
-        purviewMapper.AddMenu(param);
+        int flag = purviewMapper.AddMenu(param);
+        if(flag <= 0){
+            throw new RuntimeException("增加次数失败");
+        }
     }
 
     @Override
+    @Transactional
     public void EditMenu(Map<String, Object> param) {
-        purviewMapper.EditMenu(param);
+        int flag = purviewMapper.EditMenu(param);
+        if(flag <= 0){
+            throw new RuntimeException("修改次数失败");
+        }
     }
 
     @Override
@@ -41,5 +50,42 @@ public class PurviewServiceImpl implements PurviewService {
             result.add(resultMap);
         }
         return result;
+    }
+
+    @Override
+    @Transactional
+    public void DeleteMenu(Map<String, Object> param) {
+        int flag = purviewMapper.DeleteMenu(param);
+        if(flag <= 0){
+            throw new RuntimeException("删除次数失败");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void AddRole(Map<String, Object> param) {
+        int flag = purviewMapper.AddRoleInfo(param);
+        Long id ;
+        System.out.println("删除执行完成");
+        if(flag <= 0){
+            throw new RuntimeException("删除次数失败");
+        }else{
+            String menu_id = (String) param.get("menu_id");
+            if(menu_id.length()!=0){
+                id = (Long) param.get("id");
+                System.out.println("自增长ID========="+id);
+                param.put("role_id",id);
+                String[] menuId_String = menu_id.split(",");
+                List menuId_List =new ArrayList();
+                for(int i=0;i<menuId_String.length;i++){
+                    Map<String,Object> lsMap = new HashMap<>();
+                    lsMap.put("menu_id",menuId_String[i]);
+                    menuId_List.add(lsMap);
+                }
+                param.put("menuId_List",menuId_List);
+                purviewMapper.AddRoleMenu(param);
+            }
+        }
+
     }
 }

@@ -45,6 +45,8 @@ public class PurviewController {
         return result;
     }
 
+    /**--------------------------------菜单 start----------------------------------------*/
+
     /**
      * 增加菜单
      * @parent_id
@@ -83,6 +85,11 @@ public class PurviewController {
 
     /**
      * 修改菜单
+     * @id
+     * @name
+     * @url
+     * @icon
+     * @px
      */
     @RequestMapping("/EditMenu")
     @ResponseBody
@@ -95,6 +102,11 @@ public class PurviewController {
             String url = request.getParameter("url");
             String icon = request.getParameter("icon");
             String px = request.getParameter("px");
+            param.put("id",id);
+            param.put("name",name);
+            param.put("url",url);
+            param.put("icon",icon);
+            param.put("px",px);
             purviewService.EditMenu(param);
             result.put("message","修改菜单成功");
             result.put("code","200");
@@ -107,7 +119,10 @@ public class PurviewController {
         return result;
     }
 
-
+    /**
+     * 查询菜单
+     * 查询树状结构菜单
+     */
     @RequestMapping("/QueryMenu")
     @ResponseBody
     public Map<String,Object> QueryMenu(HttpServletRequest request){
@@ -128,4 +143,65 @@ public class PurviewController {
         }
         return result;
     }
+
+
+    /**
+     *删除菜单
+     * @id
+     */
+    @RequestMapping("/DeleteMenu")
+    @ResponseBody
+    public Map<String,Object> DeleteMenu(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String id = request.getParameter("id");
+            param.put("id",id);
+            purviewService.DeleteMenu(param);
+            result.put("message","删除菜单成功");
+            result.put("code","200");
+            result.put("data",null);
+        }catch (Exception e){
+            result.put("message","删除菜单失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**--------------------------------菜单 end----------------------------------------*/
+
+
+
+
+    /**--------------------------------角色 start--------------------------------------*/
+
+    /**
+     * 创建角色
+     * @role_name 角色名
+     * @menu_id   菜单ID（例子:1,2,3,4）
+     */
+    @RequestMapping("/AddRole")
+    @ResponseBody
+    public Map<String,Object> AddRole(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String role_name = request.getParameter("role_name");
+            String menu_id = request.getParameter("menu_id");
+            param.put("role_name",role_name);
+            param.put("menu_id",menu_id);
+            purviewService.AddRole(param);
+            result.put("message","创建角色成功");
+            result.put("code","200");
+            result.put("data",null);
+        }catch (Exception e){
+            result.put("message","创建角色失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+
+    /**--------------------------------角色 end--------------------------------------*/
 }

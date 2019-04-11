@@ -18,4 +18,14 @@ public interface PurviewService {
      * 查询菜单
      */
     List<Map<String,Object>> QueryMenu(Map<String,Object> param);
+
+    /**
+     * 删除菜单
+     */
+    void DeleteMenu(Map<String,Object> param);
+
+    /**
+     *创建角色
+     */
+    void AddRole(Map<String,Object> param);
 }

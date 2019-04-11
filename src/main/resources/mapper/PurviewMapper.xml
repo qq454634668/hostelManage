@@ -19,4 +19,18 @@
     <select id="QueryMenu" parameterType="java.util.Map" resultMap="MenuInfo">
         select * from menu_info where parent_id = #{parent_id}
     </select>
+    <delete id="DeleteMenu" parameterType="java.util.Map">
+        delete from menu_info where id =#{id} or parent_id =#{id}
+    </delete>
+    <insert id="AddRoleInfo" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
+        insert into role_info (role_name) values (#{role_name})
+    </insert>
+    <insert id="AddRoleMenu" parameterType="java.util.Map">
+        insert into role_menu (role_id, menu_id) values
+                 <foreach collection="menuId_List" item="item" index="index" separator=",">
+                    (#{role_id,jdbcType=BIGINT},
+                     #{item.menu_id,jdbcType=BIGINT}
+                     )
+                </foreach>
+    </insert>
 </mapper>
