@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.product.mapper.ProductMapper">
-    <resultMap id="dicCodeJldw" type="java.util.Map">
-        <result column="D_ID" property="d_id"/>
-        <result column="D_JLDWBH" property="d_jldwbh"/>
-        <result column="D_JLDWMC" property="d_jldwmc"/>
-        <result column="COMPANY_ID" property="company_id"/>
+<mapper namespace="com.product.mapper.PurviewMapper">
+    <resultMap id="MenuInfo" type="java.util.Map">
+        <result column="ID" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="PARENT_ID" property="parent_id"/>
+        <result column="URL" property="url"/>
+        <result column="ICON" property="icon"/>
+        <result column="PX" property="px"/>
     </resultMap>
-    <select id="existUser" resultType="java.lang.Integer" parameterType="java.util.Map">
-        select count(1) from t_customer t1 where t1.c_userid = #{c_userid}
-    </select>
     <insert id="AddMenu" parameterType="java.util.Map">
          insert into menu_info (name,parent_id,url,icon,px) VALUES (#{name},#{parent_id},#{url},#{icon},#{px})
     </insert>
-
+    <update id="EditMenu" parameterType="java.util.Map">
+        update menu_info set name=#{name},url=#{url},icon=#{icon},px=#{px} where id =#{id}
+    </update>
+    <select id="QueryMenu" parameterType="java.util.Map" resultMap="MenuInfo">
+        select * from menu_info where parent_id = #{parent_id}
+    </select>
 </mapper>
