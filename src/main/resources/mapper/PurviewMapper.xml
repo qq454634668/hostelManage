@@ -33,4 +33,16 @@
                      )
                 </foreach>
     </insert>
+    <update id="EditRoleName" parameterType="java.util.Map">
+        update role_info set role_name = #{role_name} where id =#{id}
+    </update>
+    <delete id="DeleteRoleMenu" parameterType="java.util.Map">
+        delete from role_menu where role_id =#{role_id}
+    </delete>
+    <delete id="DeleteRoleInfo" parameterType="java.util.Map">
+        delete from role_info where id =#{role_id}
+    </delete>
+    <select id="ExistRoleUser" parameterType="java.util.Map" resultType="int">
+        select count(*) from user_role where role_id =#{role_id}
+    </select>
 </mapper>

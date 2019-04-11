@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 权限功能
+ * 权限管理功能
  */
 @Controller
 @RequestMapping("/purview")
@@ -203,5 +203,116 @@ public class PurviewController {
     }
 
 
+    /**
+     * 修改角色  --修改角色名
+     * role_name
+     * id
+     */
+    @RequestMapping("/EditRoleName")
+    @ResponseBody
+    public Map<String,Object> EditRoleName(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String role_name = request.getParameter("role_name");
+            String id = request.getParameter("id");
+            param.put("role_name",role_name);
+            param.put("id",id);
+            purviewService.EditRoleName(param);
+            result.put("message","修改角色名成功");
+            result.put("code","200");
+            result.put("data",null);
+        }catch (Exception e){
+            result.put("message","修改角色名失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**
+     * 修改角色  --修改角色菜单
+     * role_id
+     * menu_id
+     */
+    @RequestMapping("/EditRoleMenu")
+    @ResponseBody
+    public Map<String,Object> EditRoleMenu(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String role_id = request.getParameter("role_id");
+            String menu_id = request.getParameter("menu_id");
+            param.put("role_id",role_id);
+            param.put("menu_id",menu_id);
+            purviewService.EditRoleMenu(param);
+            result.put("message","修改角色菜单成功");
+            result.put("code","200");
+            result.put("data",null);
+        }catch (Exception e){
+            result.put("message","修改角色菜单失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+
+    /**
+     * 删除角色
+     * id
+     */
+    @RequestMapping("/DeleteRole")
+    @ResponseBody
+    public Map<String,Object> DeleteRole(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String id = request.getParameter("id");
+            param.put("role_id",id);
+            purviewService.DeleteRole(param);
+            result.put("message","删除角色成功");
+            result.put("code","200");
+            result.put("data",null);
+        }catch (Exception e){
+            result.put("message","删除角色失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+
+
+    /**
+     * 角色是否存在关联用户
+     * id
+     */
+    @RequestMapping("/ExistRoleUser")
+    @ResponseBody
+    public Map<String,Object> ExistRoleUser(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String id = request.getParameter("id");
+            param.put("role_id",id);
+            int length= purviewService.ExistRoleUser(param);
+            result.put("message","角色是否存在关联用户查询成功");
+            result.put("code","200");
+            result.put("data",length);
+        }catch (Exception e){
+            result.put("message","删除角色角色是否存在关联用户查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
     /**--------------------------------角色 end--------------------------------------*/
+
+    /**--------------------------------用户 start--------------------------------------*/
+
+
+
+
+    /**--------------------------------用户 end--------------------------------------*/
 }

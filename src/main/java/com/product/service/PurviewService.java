@@ -28,4 +28,20 @@ public interface PurviewService {
      *创建角色
      */
     void AddRole(Map<String,Object> param);
+    /**
+     *修改角色  --修改角色名
+     */
+    void EditRoleName(Map<String,Object> param);
+    /**
+     *修改角色  --修改角色菜单
+     */
+    void EditRoleMenu(Map<String,Object> param);
+    /**
+     * 删除角色
+     */
+    void DeleteRole(Map<String,Object> param);
+    /**
+     * 角色是否存在关联用户
+     */
+    int ExistRoleUser(Map<String,Object> param);
 }

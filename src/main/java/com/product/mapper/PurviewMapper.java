@@ -33,5 +33,22 @@ public interface PurviewMapper {
      */
     int AddRoleMenu(Map<String,Object> param);
 
+    /**
+     * 修改角色  --修改角色名
+     */
+    int EditRoleName(Map<String,Object> param);
+    /**
+     * 删除角色对应菜单
+     */
+    int DeleteRoleMenu(Map<String,Object> param);
+    /**
+     * 删除角色
+     */
+    int DeleteRoleInfo(Map<String,Object> param);
+    /**
+     * 角色是否存在关联用户
+     */
+    int ExistRoleUser(Map<String,Object> param);
+
 
 }

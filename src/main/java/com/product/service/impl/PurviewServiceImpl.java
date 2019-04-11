@@ -22,7 +22,7 @@ public class PurviewServiceImpl implements PurviewService {
     public void AddMenu(Map<String, Object> param) {
         int flag = purviewMapper.AddMenu(param);
         if(flag <= 0){
-            throw new RuntimeException("增加次数失败");
+            throw new RuntimeException("增加失败");
         }
     }
 
@@ -31,7 +31,7 @@ public class PurviewServiceImpl implements PurviewService {
     public void EditMenu(Map<String, Object> param) {
         int flag = purviewMapper.EditMenu(param);
         if(flag <= 0){
-            throw new RuntimeException("修改次数失败");
+            throw new RuntimeException("修改失败");
         }
     }
 
@@ -57,7 +57,7 @@ public class PurviewServiceImpl implements PurviewService {
     public void DeleteMenu(Map<String, Object> param) {
         int flag = purviewMapper.DeleteMenu(param);
         if(flag <= 0){
-            throw new RuntimeException("删除次数失败");
+            throw new RuntimeException("删除失败");
         }
     }
 
@@ -87,5 +87,57 @@ public class PurviewServiceImpl implements PurviewService {
             }
         }
 
+    }
+
+    @Override
+    @Transactional
+    public void EditRoleName(Map<String, Object> param) {
+        int flag = purviewMapper.EditRoleName(param);
+        if(flag <= 0){
+            throw new RuntimeException("修改失败");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void EditRoleMenu(Map<String, Object> param) {
+        int flag = purviewMapper.DeleteRoleMenu(param);
+        if(flag <= 0){
+            throw new RuntimeException("修改失败");
+        }else{
+            String menu_id = (String) param.get("menu_id");
+            if(menu_id.length()!=0){
+                param.put("role_id",param.get("role_id"));
+                String[] menuId_String = menu_id.split(",");
+                List menuId_List =new ArrayList();
+                for(int i=0;i<menuId_String.length;i++){
+                    Map<String,Object> lsMap = new HashMap<>();
+                    lsMap.put("menu_id",menuId_String[i]);
+                    menuId_List.add(lsMap);
+                }
+                param.put("menuId_List",menuId_List);
+                purviewMapper.AddRoleMenu(param);
+            }
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public void DeleteRole(Map<String, Object> param) {
+        int flag = purviewMapper.DeleteRoleInfo(param);
+        if(flag <= 0){
+            throw new RuntimeException("删除失败");
+        }else{
+            int flag2 = purviewMapper.DeleteRoleMenu(param);
+            if(flag2 <= 0){
+                throw new RuntimeException("删除失败");
+            }
+        }
+    }
+
+    @Override
+    public int ExistRoleUser(Map<String, Object> param) {
+        return purviewMapper.ExistRoleUser(param);
     }
 }
