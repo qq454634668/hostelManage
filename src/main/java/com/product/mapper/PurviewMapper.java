@@ -49,6 +49,10 @@ public interface PurviewMapper {
      * 角色是否存在关联用户
      */
     int ExistRoleUser(Map<String,Object> param);
+    /**
+     * 添加用户
+     */
+    int AddUser(Map<String,Object> param);
 
 
 }

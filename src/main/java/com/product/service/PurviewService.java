@@ -44,4 +44,8 @@ public interface PurviewService {
      * 角色是否存在关联用户
      */
     int ExistRoleUser(Map<String,Object> param);
+    /**
+     * 添加用户
+     */
+    void AddUser(Map<String,Object> param);
 }

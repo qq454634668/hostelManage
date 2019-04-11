@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 权限管理功能
@@ -37,6 +35,10 @@ public class PurviewController {
 //            List<Map<String,Object>> list=new ArrayList<>();
 //            PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
 //            result.put("data",pageList);
+
+//            Date date = new Date();   时间创建
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+//            String created_time = sdf.format(date);
         }catch (Exception e){
             result.put("message","调用失败");
             result.put("code","500");
@@ -312,7 +314,48 @@ public class PurviewController {
     /**--------------------------------用户 start--------------------------------------*/
 
 
-
+    /**
+     * 新增用户
+     * @username  用户名
+     * @password  密码
+     * @realname  真实姓名
+     * @lxdh      联系电话
+     * @xy        学院
+     * @nj        年级（入学年份）
+     */
+    @RequestMapping("/AddUser")
+    @ResponseBody
+    public Map<String,Object> AddUser(HttpServletRequest request){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String created_time = sdf.format(date);
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String realname = request.getParameter("realname");
+            String lxdh = request.getParameter("lxdh");
+            String xy = request.getParameter("xy");
+            String nj = request.getParameter("nj");
+            param.put("username",username);
+            param.put("password",password);
+            param.put("realname",realname);
+            param.put("lxdh",lxdh);
+            param.put("xy",xy);
+            param.put("nj",nj);
+            param.put("rksj",created_time);
+            purviewService.AddUser(param);
+            result.put("message","添加用户成功");
+            result.put("code","200");
+            result.put("data",null);
+        }catch (Exception e){
+            result.put("message","添加用户失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
 
     /**--------------------------------用户 end--------------------------------------*/
 }

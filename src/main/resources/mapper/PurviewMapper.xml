@@ -45,4 +45,10 @@
     <select id="ExistRoleUser" parameterType="java.util.Map" resultType="int">
         select count(*) from user_role where role_id =#{role_id}
     </select>
+    <insert id="AddUser" parameterType="java.util.Map">
+        insert into user_teacher
+            (username,password,realname,lxdh,xy,nj,rksj)
+              values
+            (#{username},#{password},#{realname},#{lxdh},#{xy},#{nj},#{rksj})
+    </insert>
 </mapper>

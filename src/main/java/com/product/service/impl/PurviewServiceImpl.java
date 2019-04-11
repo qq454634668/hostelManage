@@ -140,4 +140,12 @@ public class PurviewServiceImpl implements PurviewService {
     public int ExistRoleUser(Map<String, Object> param) {
         return purviewMapper.ExistRoleUser(param);
     }
+
+    @Override
+    public void AddUser(Map<String, Object> param) {
+        int flag = purviewMapper.AddUser(param);
+        if(flag <= 0){
+            throw new RuntimeException("添加失败");
+        }
+    }
 }
