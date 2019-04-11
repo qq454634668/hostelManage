@@ -51,4 +51,10 @@
               values
             (#{username},#{password},#{realname},#{lxdh},#{xy},#{nj},#{rksj})
     </insert>
+    <insert id="AddUserRole" parameterType="java.util.Map">
+        insert into user_role
+            (user_id,role_id)
+              values
+            (#{user_id},#{role_id})
+    </insert>
 </mapper>

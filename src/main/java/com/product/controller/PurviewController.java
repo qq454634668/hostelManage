@@ -357,5 +357,33 @@ public class PurviewController {
         return result;
     }
 
+    /**
+     * 用户授权
+     * @id  用户ID
+     * @role_id  角色ID
+     */
+    @RequestMapping("/AddUserRole")
+    @ResponseBody
+    public Map<String,Object> AddUserRole(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String user_id = request.getParameter("id");
+            String role_id = request.getParameter("role_id");
+            param.put("user_id",user_id);
+            param.put("role_id",role_id);
+            purviewService.AddUserRole(param);
+            result.put("message","用户授权成功");
+            result.put("code","200");
+            result.put("data",null);
+        }catch (Exception e){
+            result.put("message","用户授权失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+
     /**--------------------------------用户 end--------------------------------------*/
 }

@@ -148,4 +148,12 @@ public class PurviewServiceImpl implements PurviewService {
             throw new RuntimeException("添加失败");
         }
     }
+
+    @Override
+    public void AddUserRole(Map<String, Object> param) {
+        int flag = purviewMapper.AddUserRole(param);
+        if(flag <= 0){
+            throw new RuntimeException("添加失败");
+        }
+    }
 }

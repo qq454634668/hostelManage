@@ -48,4 +48,8 @@ public interface PurviewService {
      * 添加用户
      */
     void AddUser(Map<String,Object> param);
+    /**
+     * 用户授权
+     */
+    void AddUserRole(Map<String,Object> param);
 }

@@ -53,6 +53,10 @@ public interface PurviewMapper {
      * 添加用户
      */
     int AddUser(Map<String,Object> param);
+    /**
+     * 用户授权
+     */
+    int AddUserRole(Map<String,Object> param);
 
 
 }
