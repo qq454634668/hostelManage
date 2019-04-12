@@ -52,4 +52,20 @@ public interface PurviewService {
      * 用户授权
      */
     void AddUserRole(Map<String,Object> param);
+    /**
+     * 用户删除
+     */
+    void DeleteUser(Map<String,Object> param);
+    /**
+     *修改用户
+     */
+    void EditUser(Map<String,Object> param);
+    /**
+     * 修改用户授权
+     */
+    void EditUserRole(Map<String,Object> param);
+    /**
+     *用户列表
+     */
+    List<Map<String, Object>> QueryUserList(Map<String,Object> param,int pageNum,int pageSize);
 }

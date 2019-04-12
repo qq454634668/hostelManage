@@ -384,6 +384,131 @@ public class PurviewController {
         return result;
     }
 
+    /**
+     * 用户删除
+     * @id  用户ID
+     */
+    @RequestMapping("/DeleteUser")
+    @ResponseBody
+    public Map<String,Object> DeleteUser(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String user_id = request.getParameter("id");
+            param.put("user_id",user_id);
+            purviewService.DeleteUser(param);
+            result.put("message","用户删除成功");
+            result.put("code","200");
+            result.put("data",null);
+        }catch (Exception e){
+            result.put("message","用户删除失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * 修改用户 --修改用户基本信息
+     * @username  用户名
+     * @password  密码
+     * @realname  真实姓名
+     * @lxdh      联系电话
+     * @xy        学院
+     * @nj        年级（入学年份）
+     * @id        用户ID
+     */
+    @RequestMapping("/EditUser")
+    @ResponseBody
+    public Map<String,Object> EditUser(HttpServletRequest request){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String created_time = sdf.format(date);
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String user_id = request.getParameter("id");
+            param.put("user_id",user_id);
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String realname = request.getParameter("realname");
+            String lxdh = request.getParameter("lxdh");
+            String xy = request.getParameter("xy");
+            String nj = request.getParameter("nj");
+            param.put("username",username);
+            param.put("password",password);
+            param.put("realname",realname);
+            param.put("lxdh",lxdh);
+            param.put("xy",xy);
+            param.put("nj",nj);
+            param.put("rksj",created_time);
+            purviewService.EditUser(param);
+            result.put("message","修改用户 --修改用户基本信息成功");
+            result.put("code","200");
+            result.put("data",null);
+        }catch (Exception e){
+            result.put("message","修改用户 --修改用户基本信息失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * 修改用户 --修改用户授权
+     * @id  用户ID
+     * @role_id  角色ID
+     */
+    @RequestMapping("/EditUserRole")
+    @ResponseBody
+    public Map<String,Object> EditUserRole(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String user_id = request.getParameter("id");
+            String role_id = request.getParameter("role_id");
+            param.put("user_id",user_id);
+            param.put("role_id",role_id);
+            purviewService.EditUser(param);
+            result.put("message","修改用户 --修改用户基本信息成功");
+            result.put("code","200");
+            result.put("data",null);
+        }catch (Exception e){
+            result.put("message","修改用户 --修改用户基本信息失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+
+    /**
+     * 用户列表
+     * key   （用户名，真实姓名，手机号模糊搜索）
+     * pageNum
+     * pageSize
+     */
+    @RequestMapping("/QueryUserList")
+    @ResponseBody
+        public Map<String,Object> QueryUserList(HttpServletRequest request,int pageNum,int pageSize){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        List<Map<String,Object>> list=new ArrayList<>();
+        try{
+            String key = request.getParameter("key");
+            param.put("key",'%'+key+'%');
+            list = purviewService.QueryUserList(param,pageNum,pageSize);
+            PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
+            result.put("data",pageList);
+            result.put("message","调用成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","调用失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
 
     /**--------------------------------用户 end--------------------------------------*/
 }

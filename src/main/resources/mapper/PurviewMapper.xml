@@ -10,6 +10,16 @@
         <result column="ICON" property="icon"/>
         <result column="PX" property="px"/>
     </resultMap>
+    <resultMap id="UserList" type="java.util.Map">
+        <result column="ID" property="id"/>
+        <result column="USERNAME" property="username"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="REALNAME" property="realname"/>
+        <result column="LXDH" property="lxdh"/>
+        <result column="XY" property="xy"/>
+        <result column="NJ" property="nj"/>
+        <result column="RKSJ" property="rksj"/>
+    </resultMap>
     <insert id="AddMenu" parameterType="java.util.Map">
          insert into menu_info (name,parent_id,url,icon,px) VALUES (#{name},#{parent_id},#{url},#{icon},#{px})
     </insert>
@@ -57,4 +67,30 @@
               values
             (#{user_id},#{role_id})
     </insert>
+    <delete id="DeleteUser" parameterType="java.util.Map">
+        delete from user_teacher where id =#{user_id}
+    </delete>
+    <delete id="DeleteUserRole" parameterType="java.util.Map">
+        delete from user_role where user_id =#{user_id}
+    </delete>
+    <update id="EditUser" parameterType="java.util.Map">
+        update user_teacher set username=#{username},
+                                password=#{password},
+                                realname=#{realname},
+                                lxdh=#{lxdh},
+                                xy=#{xy},
+                                nj=#{nj},
+                                rksj=#{rksj}
+                                where id =#{user_id}
+    </update>
+    <select id="QueryUserList" parameterType="java.util.Map" resultMap="UserList">
+        select * from user_teacher
+        <where>
+            <if test="key!=null and key!=''">
+                username like #{key} or
+                realname like #{key} or
+                lxdh like #{key}
+            </if>
+        </where>
+    </select>
 </mapper>

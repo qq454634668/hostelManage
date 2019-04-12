@@ -57,6 +57,22 @@ public interface PurviewMapper {
      * 用户授权
      */
     int AddUserRole(Map<String,Object> param);
+    /**
+     * 删除用户
+     */
+    int DeleteUser(Map<String,Object> param);
+    /**
+     *删除用户权限关联表
+     */
+    int DeleteUserRole(Map<String,Object> param);
+    /**
+     *修改用户
+     */
+    int EditUser(Map<String,Object> param);
+    /**
+     *用户列表
+     */
+    List<Map<String, Object>> QueryUserList(Map<String,Object> param);
 
 
 }

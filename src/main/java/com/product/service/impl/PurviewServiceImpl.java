@@ -1,5 +1,6 @@
 package com.product.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.product.mapper.PurviewMapper;
 import com.product.service.PurviewService;
 import org.springframework.stereotype.Service;
@@ -142,6 +143,7 @@ public class PurviewServiceImpl implements PurviewService {
     }
 
     @Override
+    @Transactional
     public void AddUser(Map<String, Object> param) {
         int flag = purviewMapper.AddUser(param);
         if(flag <= 0){
@@ -150,10 +152,54 @@ public class PurviewServiceImpl implements PurviewService {
     }
 
     @Override
+    @Transactional
     public void AddUserRole(Map<String, Object> param) {
         int flag = purviewMapper.AddUserRole(param);
         if(flag <= 0){
             throw new RuntimeException("添加失败");
         }
+    }
+
+    @Override
+    @Transactional
+    public void DeleteUser(Map<String, Object> param) {
+        int flag = purviewMapper.DeleteUser(param);
+        if(flag <= 0){
+            throw new RuntimeException("删除失败");
+        }else{
+            int flag2 = purviewMapper.DeleteUserRole(param);
+            if(flag2 <= 0){
+                throw new RuntimeException("删除失败");
+            }
+        }
+    }
+
+    @Override
+    @Transactional
+    public void EditUser(Map<String, Object> param) {
+        int flag = purviewMapper.EditUser(param);
+        if(flag <= 0){
+            throw new RuntimeException("修改失败");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void EditUserRole(Map<String, Object> param) {
+        int flag = purviewMapper.DeleteUserRole(param);
+        if(flag <= 0){
+            throw new RuntimeException("修改失败");
+        }else{
+            int flag2 = purviewMapper.AddUserRole(param);
+            if(flag2 <= 0){
+                throw new RuntimeException("修改失败");
+            }
+        }
+    }
+
+    @Override
+    public List<Map<String, Object>> QueryUserList(Map<String, Object> param,int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return purviewMapper.QueryUserList(param);
     }
 }
