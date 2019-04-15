@@ -91,4 +91,22 @@ public class LiveServiceImpl implements LiveService {
             }
         }
     }
+
+    @Override
+    @Transactional
+    public void EditApartment(Map<String, Object> param) {
+        int flag = liveMapper.EditApartment(param);
+        if(flag <= 0){
+            throw new RuntimeException("修改失败");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void DeleteApartment(Map<String, Object> param) {
+        int flag = liveMapper.DeleteApartment(param);
+        if(flag <= 0){
+            throw new RuntimeException("删除失败");
+        }
+    }
 }

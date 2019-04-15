@@ -42,4 +42,12 @@ public interface LiveMapper {
      *公寓添加方法2（通过返回ID，插入处理好的bh和gybh字段）
      */
     int AddApartment2(Map<String,Object> param);
+    /**
+     * 修改公寓区  --根据ID修改name名
+     */
+    int EditApartment(Map<String,Object> param);
+    /**
+     * 删除校区
+     */
+    int DeleteApartment(Map<String,Object> param);
 }

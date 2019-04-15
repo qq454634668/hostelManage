@@ -236,12 +236,12 @@ public class LiveController {
             param.put("rksj",created_time);
             param.put("id",id);
             param.put("name",name);
-            liveService.EditCampus(param);
+            liveService.EditApartment(param);
             result.put("data",null);
-            result.put("message","校区修改成功");
+            result.put("message","公寓区修改成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","校区修改失败");
+            result.put("message","公寓区修改失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }
@@ -249,7 +249,7 @@ public class LiveController {
     }
 
     /**
-     * 删除公寓区校区
+     * 删除公寓区
      * id
      */
     @RequestMapping("/DeleteApartment")
@@ -260,12 +260,12 @@ public class LiveController {
         try{
             String id = request.getParameter("id");
             param.put("id",id);
-            liveService.DeleteCampus(param);
+            liveService.DeleteApartment(param);
             result.put("data",null);
-            result.put("message","校区删除成功");
+            result.put("message","公寓区删除成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","校区删除失败");
+            result.put("message","公寓区删除失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }

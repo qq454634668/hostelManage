@@ -54,4 +54,10 @@
         <update id="AddApartment2" parameterType="java.util.Map">
             update apartment_info set bh=#{bh},gybh=#{gybh} where id = #{id}
         </update>
+        <update id="EditApartment" parameterType="java.util.Map">
+             update apartment_info set name = #{name},rksj=#{rksj} where id = #{id}
+        </update>
+        <delete id="DeleteApartment" parameterType="java.util.Map">
+            delete from apartment_info where id = #{id}
+        </delete>
 </mapper>
