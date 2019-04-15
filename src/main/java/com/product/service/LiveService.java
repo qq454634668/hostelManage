@@ -40,4 +40,8 @@ public interface LiveService {
      * 删除公寓区
      */
     void DeleteApartment(Map<String,Object> param);
+    /**
+     * 是否存在楼
+     */
+    int ExistFloor(Map<String,Object> param);
 }

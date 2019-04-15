@@ -109,4 +109,9 @@ public class LiveServiceImpl implements LiveService {
             throw new RuntimeException("删除失败");
         }
     }
+
+    @Override
+    public int ExistFloor(Map<String, Object> param) {
+        return liveMapper.ExistFloor(param);
+    }
 }

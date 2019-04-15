@@ -282,13 +282,13 @@ public class LiveController {
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
-            String bh = request.getParameter("bh");
-            param.put("bh",bh);
-            result.put("data",liveService.ExistApartment(param));
-            result.put("message","是否存在公寓查询成功");
+            String gybh = request.getParameter("gybh");
+            param.put("gybh",gybh);
+            result.put("data",liveService.ExistFloor(param));
+            result.put("message","是否存在楼查询成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","是否存在公寓查询失败");
+            result.put("message","是否存在楼查询失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }

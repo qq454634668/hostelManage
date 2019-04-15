@@ -50,4 +50,8 @@ public interface LiveMapper {
      * 删除校区
      */
     int DeleteApartment(Map<String,Object> param);
+    /**
+     * 是否存在楼
+     */
+    int ExistFloor(Map<String,Object> param);
 }
