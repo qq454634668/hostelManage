@@ -44,4 +44,8 @@ public interface LiveService {
      * 是否存在楼
      */
     int ExistFloor(Map<String,Object> param);
+    /**
+     *公寓区列表
+     */
+    List<Map<String, Object>> QueryFloorList(Map<String,Object> param,int pageNum,int pageSize);
 }

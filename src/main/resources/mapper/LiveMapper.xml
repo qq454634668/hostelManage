@@ -5,19 +5,30 @@
         <resultMap id="CampusList" type="java.util.Map">
             <result column="ID" property="id"/>
             <result column="BH" property="bh"/>
-            <result column="NAME" property="name"/>
+            <result column="NAME" property="louname"/>
             <result column="RKSJ" property="rksj"/>
         </resultMap>
         <resultMap id="ApartmentList" type="java.util.Map">
             <result column="ID" property="id"/>
             <result column="BH" property="bh"/>
-            <result column="NAME" property="name"/>
-            <result column="RKSJ" property="rksj"/>
+            <result column="NAME" property="gyname"/>
             <result column="XQBH" property="xqbh"/>
             <result column="GYBH" property="gybh"/>
             <result column="RKSJ" property="rksj"/>
             <result column="XQNAME" property="xqname"/>
-
+        </resultMap>
+        <resultMap id="FloorList" type="java.util.Map">
+            <result column="ID" property="id"/>
+            <result column="BH" property="bh"/>
+            <result column="NAME" property="name"/>
+            <result column="LOUZT" property="louzt"/>
+            <result column="LOUNAME" property="louname"/>
+            <result column="XQBH" property="xqbh"/>
+            <result column="XQNAME" property="xqname"/>
+            <result column="GYBH" property="gybh"/>
+            <result column="GYNAME" property="gyname"/>
+            <result column="LOUBH" property="loubh"/>
+            <result column="RKSJ" property="rksj"/>
         </resultMap>
         <insert id="AddCampus" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
               insert into campus_info (name,rksj) VALUES (#{name},#{rksj})
@@ -62,5 +73,27 @@
         </delete>
         <select id="ExistFloor" parameterType="java.util.Map" resultType="int">
             select count(*) from apartment_info where gybh =#{gybh}
+        </select>
+        <select id="QueryFloorList" parameterType="java.util.Map" resultMap="FloorList">
+            select t.id,
+                   t.bh,
+                   t.name,
+                   t.louzt,
+                   (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louname,
+                   xqbh,
+                   (select name from campus_info b where  t.xqbh = b.bh) xqname,
+                   gybh,
+                   (select name from apartment_info c where  t.gybh = c.gybh) gyname,
+                   loubh,
+                   rksj
+               from floor_info t
+               <where>
+                   <if test="xqbh!=null and xqbh !=''">
+                      and xqbh =#{xqbh}
+                   </if>
+                   <if test="gybh!=null and gybh !=''">
+                       and gybh =#{gybh}
+                   </if>
+               </where>
         </select>
 </mapper>

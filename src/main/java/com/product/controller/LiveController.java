@@ -224,7 +224,7 @@ public class LiveController {
      */
     @RequestMapping("/EditApartment")
     @ResponseBody
-    public Map<String,Object> EditAddApartment(HttpServletRequest request){
+    public Map<String,Object> EditApartment(HttpServletRequest request){
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String created_time = sdf.format(date);
@@ -254,7 +254,7 @@ public class LiveController {
      */
     @RequestMapping("/DeleteApartment")
     @ResponseBody
-    public Map<String,Object> DeleteAddApartment(HttpServletRequest request){
+    public Map<String,Object> DeleteApartment(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
@@ -298,4 +298,149 @@ public class LiveController {
     /**--------------------------------公寓区管理 end----------------------------------------*/
 
 
+
+
+    /**--------------------------------楼管理 start----------------------------------------*/
+
+    /**
+     * 楼列表
+     * pageNum
+     * pageSize
+     * xqbh  校区编号（可以为空）
+     * gybh  公寓编号（可以为空）
+     */
+    @RequestMapping("/QueryFloorList")
+    @ResponseBody
+    public Map<String,Object> QueryFloorList(HttpServletRequest request,int pageNum,int pageSize){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        List<Map<String,Object>> list=new ArrayList<>();
+        try{
+            String xqbh =request.getParameter("xqbh");
+            String gybh =request.getParameter("gybh");
+            param.put("xqbh",xqbh);
+            param.put("gybh",gybh);
+            list = liveService.QueryFloorList(param,pageNum,pageSize);
+            PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
+            result.put("data",pageList);
+            result.put("message","公寓区列表查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","公寓区列表查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * 未完成
+     * 新增楼
+     * name  校区名称
+     * xqbh  校区编号
+     */
+    @RequestMapping("/AddFloor")
+    @ResponseBody
+    public Map<String,Object> AddFloor(HttpServletRequest request){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String created_time = sdf.format(date);
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String name = request.getParameter("name");
+            String xqbh = request.getParameter("xqbh");
+            param.put("rksj",created_time);
+            param.put("name",name);
+            param.put("xqbh",xqbh);
+            liveService.AddApartment(param);
+            result.put("data",null);
+            result.put("message","公寓区添加成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","公寓区添加失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**
+     * 修改楼
+     * name  校区名称
+     * id
+     * 只允许修改公寓区名字，不允许修改学校区，bh已经生成，下级无法自动更改关联所属关系
+     */
+    @RequestMapping("/EditFloor")
+    @ResponseBody
+    public Map<String,Object> EditFloor(HttpServletRequest request){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String created_time = sdf.format(date);
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String name = request.getParameter("name");
+            String id = request.getParameter("id");
+            param.put("rksj",created_time);
+            param.put("id",id);
+            param.put("name",name);
+            liveService.EditApartment(param);
+            result.put("data",null);
+            result.put("message","公寓区修改成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","公寓区修改失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * 删除楼
+     * id
+     */
+    @RequestMapping("/DelFloor")
+    @ResponseBody
+    public Map<String,Object> DelFloor(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String id = request.getParameter("id");
+            param.put("id",id);
+            liveService.DeleteApartment(param);
+            result.put("data",null);
+            result.put("message","公寓区删除成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","公寓区删除失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**
+     * 该楼下床位是否都是空置或者停用状态（没有入住状态）
+     * 楼  loubh
+     */
+    @RequestMapping("/ExistBedZt")
+    @ResponseBody
+    public Map<String,Object> ExistBedZt(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String gybh = request.getParameter("gybh");
+            param.put("gybh",gybh);
+            result.put("data",liveService.ExistFloor(param));
+            result.put("message","是否存在楼查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","是否存在楼查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+    /**--------------------------------楼管理 end----------------------------------------*/
 }

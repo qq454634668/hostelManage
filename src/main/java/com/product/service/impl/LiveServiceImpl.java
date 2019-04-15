@@ -114,4 +114,9 @@ public class LiveServiceImpl implements LiveService {
     public int ExistFloor(Map<String, Object> param) {
         return liveMapper.ExistFloor(param);
     }
+
+    @Override
+    public List<Map<String, Object>> QueryFloorList(Map<String, Object> param, int pageNum, int pageSize) {
+        return null;
+    }
 }
