@@ -48,4 +48,10 @@
                           </if>
 
         </select>
+        <insert id="AddApartment1" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
+            insert into apartment_info (name,xqbh,rksj) VALUES (#{name},#{xqbh},#{rksj})
+        </insert>
+        <update id="AddApartment2" parameterType="java.util.Map">
+            update apartment_info set bh=#{bh},gybh=#{gybh} where id = #{id}
+        </update>
 </mapper>

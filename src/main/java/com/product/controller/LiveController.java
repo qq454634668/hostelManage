@@ -189,6 +189,7 @@ public class LiveController {
     /**
      * 新增公寓区
      * name  校区名称
+     * xqbh  校区编号
      */
     @RequestMapping("/AddApartment")
     @ResponseBody
@@ -200,14 +201,16 @@ public class LiveController {
         Map<String,Object> param = new HashMap<>();
         try{
             String name = request.getParameter("name");
+            String xqbh = request.getParameter("xqbh");
             param.put("rksj",created_time);
             param.put("name",name);
-            liveService.AddCampus(param);
+            param.put("xqbh",xqbh);
+            liveService.AddApartment(param);
             result.put("data",null);
-            result.put("message","校区添加成功");
+            result.put("message","公寓区添加成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","校区添加失败");
+            result.put("message","公寓区添加失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }
@@ -217,6 +220,7 @@ public class LiveController {
      * 修改公寓区
      * name  校区名称
      * id
+     * 只允许修改公寓区名字，不允许修改学校区，bh已经生成，下级无法自动更改关联所属关系
      */
     @RequestMapping("/EditApartment")
     @ResponseBody

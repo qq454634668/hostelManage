@@ -71,4 +71,24 @@ public class LiveServiceImpl implements LiveService {
         PageHelper.startPage(pageNum,pageSize);
         return liveMapper.QueryApartmentList(param);
     }
+
+    @Override
+    @Transactional
+    public void AddApartment(Map<String, Object> param) {
+        int flag = liveMapper.AddApartment1(param);
+        if(flag <= 0){
+            throw new RuntimeException("添加失败");
+        }else{
+            String xqbh = (String) param.get("xqbh");
+            String id =  String.valueOf(param.get("id"));
+            String gybh = CodeMakeUtils.decade(id);
+            param.put("id",id);
+            param.put("gybh",gybh);
+            param.put("bh",xqbh+gybh);
+            int flag2 = liveMapper.AddApartment2(param);
+            if(flag2 <= 0){
+                throw new RuntimeException("修改失败");
+            }
+        }
+    }
 }

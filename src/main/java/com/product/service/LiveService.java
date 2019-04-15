@@ -28,4 +28,12 @@ public interface LiveService {
      *公寓区列表
      */
     List<Map<String, Object>> QueryApartmentList(Map<String,Object> param,int pageNum,int pageSize);
+    /**
+     * 新增公寓区-----新增campus_info数据
+     */
+    void AddApartment(Map<String,Object> param);
+    /**
+     * 修改公寓区
+     */
+    void EditApartment(Map<String,Object> param);
 }

@@ -34,4 +34,12 @@ public interface LiveMapper {
      *公寓区列表
      */
     List<Map<String, Object>> QueryApartmentList(Map<String,Object> param);
+    /**
+     *公寓添加方法1（只添加了name，xqbh,rksj，还有方法2，通过处理插入计算后的编号）
+     */
+    int AddApartment1(Map<String,Object> param);
+    /**
+     *公寓添加方法2（通过返回ID，插入处理好的bh和gybh字段）
+     */
+    int AddApartment2(Map<String,Object> param);
 }
