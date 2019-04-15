@@ -2,4 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.product.mapper.LiveMapper">
+        <resultMap id="CampusList" type="java.util.Map">
+            <result column="ID" property="id"/>
+            <result column="BH" property="bh"/>
+            <result column="NAME" property="name"/>
+            <result column="RKSJ" property="rksj"/>
+        </resultMap>
+        <insert id="AddCampus" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
+              insert into campus_info (name,rksj) VALUES (#{name},#{rksj})
+        </insert>
+        <update id="EditCampusBh" parameterType="java.util.Map">
+            update campus_info set bh = #{bh} where id = #{id}
+        </update>
+        <update id="EditCampus" parameterType="java.util.Map">
+            update campus_info set name = #{name},rksj=#{rksj} where id = #{id}
+        </update>
+        <delete id="DeleteCampus" parameterType="java.util.Map">
+            delete from campus_info where id = #{id}
+        </delete>
+        <select id="ExistApartment" parameterType="java.util.Map" resultType="int">
+            select count(*) from apartment_info where xqbh =#{bh}
+        </select>
+        <select id="QueryCampusList" parameterType="java.util.Map"  resultMap="CampusList">
+            select * from campus_info
+        </select>
 </mapper>

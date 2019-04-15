@@ -67,9 +67,9 @@ public class PurviewServiceImpl implements PurviewService {
     public void AddRole(Map<String, Object> param) {
         int flag = purviewMapper.AddRoleInfo(param);
         Long id ;
-        System.out.println("删除执行完成");
+        System.out.println("插入执行完成");
         if(flag <= 0){
-            throw new RuntimeException("删除次数失败");
+            throw new RuntimeException("插入执行失败");
         }else{
             String menu_id = (String) param.get("menu_id");
             if(menu_id.length()!=0){
