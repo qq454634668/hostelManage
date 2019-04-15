@@ -24,4 +24,8 @@ public interface LiveService {
      *校区列表
      */
     List<Map<String, Object>> QueryCampusList(Map<String,Object> param,int pageNum,int pageSize);
+    /**
+     *公寓区列表
+     */
+    List<Map<String, Object>> QueryApartmentList(Map<String,Object> param,int pageNum,int pageSize);
 }

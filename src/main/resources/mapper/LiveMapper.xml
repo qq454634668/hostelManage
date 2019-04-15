@@ -8,6 +8,17 @@
             <result column="NAME" property="name"/>
             <result column="RKSJ" property="rksj"/>
         </resultMap>
+        <resultMap id="ApartmentList" type="java.util.Map">
+            <result column="ID" property="id"/>
+            <result column="BH" property="bh"/>
+            <result column="NAME" property="name"/>
+            <result column="RKSJ" property="rksj"/>
+            <result column="XQBH" property="xqbh"/>
+            <result column="GYBH" property="gybh"/>
+            <result column="RKSJ" property="rksj"/>
+            <result column="XQNAME" property="xqname"/>
+
+        </resultMap>
         <insert id="AddCampus" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
               insert into campus_info (name,rksj) VALUES (#{name},#{rksj})
         </insert>
@@ -25,5 +36,16 @@
         </select>
         <select id="QueryCampusList" parameterType="java.util.Map"  resultMap="CampusList">
             select * from campus_info
+        </select>
+
+
+
+        <select id="QueryApartmentList" parameterType="java.util.Map" resultMap="ApartmentList">
+            select t.*,t1.name xqname from apartment_info t,campus_info t1
+                        where t.xqbh = t1.bh
+                          <if test="xqbh!=null and xqbh!=''">
+                              and t.xqbh = #{xqbh}
+                          </if>
+
         </select>
 </mapper>

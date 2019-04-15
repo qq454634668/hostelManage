@@ -65,4 +65,10 @@ public class LiveServiceImpl implements LiveService {
         PageHelper.startPage(pageNum,pageSize);
         return liveMapper.QueryCampusList(param);
     }
+
+    @Override
+    public List<Map<String, Object>> QueryApartmentList(Map<String, Object> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return liveMapper.QueryApartmentList(param);
+    }
 }

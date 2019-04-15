@@ -30,4 +30,8 @@ public interface LiveMapper {
      *校区列表
      */
     List<Map<String, Object>> QueryCampusList(Map<String,Object> param);
+    /**
+     *公寓区列表
+     */
+    List<Map<String, Object>> QueryApartmentList(Map<String,Object> param);
 }
