@@ -578,6 +578,7 @@ public class LiveController {
     }
     /**
      * 判断该楼该房间下床位是否都是空置或者停用状态（没有入住状态）
+     *
      * 房间编号 fjbh
      * 楼  loubh
      * data结果大于0，表示是有入住状态的床位，不允许修改
