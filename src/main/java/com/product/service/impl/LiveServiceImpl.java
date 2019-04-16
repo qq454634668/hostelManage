@@ -143,4 +143,13 @@ public class LiveServiceImpl implements LiveService {
             }
         }
     }
+
+    @Override
+    @Transactional
+    public void EditFloor(Map<String, Object> param) {
+        int flag = liveMapper.EditFloor(param);
+        if(flag <= 0){
+            throw new RuntimeException("删除失败");
+        }
+    }
 }

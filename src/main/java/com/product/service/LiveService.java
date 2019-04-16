@@ -52,4 +52,8 @@ public interface LiveService {
      * 新增楼区
      */
     void AddFloor(Map<String,Object> param);
+    /**
+     * 修改公寓区
+     */
+    void EditFloor(Map<String,Object> param);
 }

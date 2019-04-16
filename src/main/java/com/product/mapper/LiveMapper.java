@@ -66,4 +66,9 @@ public interface LiveMapper {
      * 新增楼2  通过计算得到楼编号
      */
     int AddFloor2(Map<String,Object> param);
+    /**
+     * 修改楼 通过ID修改name
+     */
+    int EditFloor(Map<String,Object> param);
+
 }

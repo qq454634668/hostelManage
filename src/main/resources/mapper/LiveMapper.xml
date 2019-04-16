@@ -102,4 +102,7 @@
         <update id="AddFloor2" parameterType="java.util.Map">
             update floor_info set bh=#{bh},loubh=#{loubh} where id = #{id}
         </update>
+        <update id="EditFloor" parameterType="java.util.Map">
+             update floor_info set name = #{name},rksj=#{rksj} where id = #{id}
+        </update>
 </mapper>

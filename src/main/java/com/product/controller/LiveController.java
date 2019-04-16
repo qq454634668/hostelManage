@@ -371,9 +371,9 @@ public class LiveController {
     }
     /**
      * 修改楼
-     * name  校区名称
+     * name  楼名称
      * id
-     * 只允许修改公寓区名字，不允许修改学校区，bh已经生成，下级无法自动更改关联所属关系
+     * 只允许修改楼名字，不允许修改学校区，bh已经生成，下级无法自动更改关联所属关系
      */
     @RequestMapping("/EditFloor")
     @ResponseBody
@@ -389,12 +389,12 @@ public class LiveController {
             param.put("rksj",created_time);
             param.put("id",id);
             param.put("name",name);
-            liveService.EditApartment(param);
+            liveService.EditFloor(param);
             result.put("data",null);
-            result.put("message","公寓区修改成功");
+            result.put("message","楼修改成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","公寓区修改失败");
+            result.put("message","楼修改失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }
