@@ -183,13 +183,21 @@ public class LiveServiceImpl implements LiveService {
         }else{
             //根据房间标准，确定循环次数，生成床位编号，
             //获得房间最终编号，再拼床的状态
-            String bh = (String) param.get("bh");
-//            String loubh = CodeMakeUtils.decade(id);
-            param.put("bh",bh);
-            int flag2 = liveMapper.AddFloor2(param);
-            if(flag2 <= 0){
-                throw new RuntimeException("修改失败");
+            String roomzzbh = (String) param.get("bh");    //房间最终编号
+            String louzt = (String) param.get("louzt");    //房间最终编号
+            String fjbz = (String) param.get("fjbz");
+            for(int i=1;i<Integer.parseInt(fjbz)+1;i++){
+                String cwbh = CodeMakeUtils.decade(""+i);
+                param.put("cwbh",cwbh);
+                String bh =roomzzbh+cwbh+louzt;
+                param.put("bh",bh);
+                int flag2 =liveMapper.AddBed(param);
+                if(flag2 <= 0){
+                    throw new RuntimeException("添加失败");
+                }
             }
+
+
         }
     }
 }
