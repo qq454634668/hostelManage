@@ -426,21 +426,23 @@ public class LiveController {
     }
     /**
      * 该楼下床位是否都是空置或者停用状态（没有入住状态）
+     * 是否存在正在使用床位
      * 楼  loubh
+     * data结果大于0，表示是有入住状态的床位，不允许删除
      */
-    @RequestMapping("/ExistBedZt")
+    @RequestMapping("/ExistBedZtLou")
     @ResponseBody
-    public Map<String,Object> ExistBedZt(HttpServletRequest request){
+    public Map<String,Object> ExistBedZtLou(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
-            String gybh = request.getParameter("gybh");
-            param.put("gybh",gybh);
-            result.put("data",liveService.ExistFloor(param));
-            result.put("message","是否存在楼查询成功");
+            String loubh = request.getParameter("loubh");
+            param.put("loubh",loubh);
+            result.put("data",liveService.ExistBedZtLou(param));
+            result.put("message","是否存在正在使用床位查询成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","是否存在楼查询失败");
+            result.put("message","是否存在正在使用床位查询失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }
@@ -448,4 +450,41 @@ public class LiveController {
     }
 
     /**--------------------------------楼管理 end----------------------------------------*/
+
+
+    /**--------------------------------房间管理 start----------------------------------------*/
+    /**
+     * 房间列表
+     * pageNum
+     * pageSize
+     * xqbh  校区编号（可以为空）
+     * gybh  公寓编号（可以为空）
+     * loubh 楼编号（可以为空）
+     */
+    @RequestMapping("/QueryRoomList")
+    @ResponseBody
+    public Map<String,Object> QueryRoomList(HttpServletRequest request,int pageNum,int pageSize){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        List<Map<String,Object>> list=new ArrayList<>();
+        try{
+            String xqbh =request.getParameter("xqbh");
+            String gybh =request.getParameter("gybh");
+            String loubh =request.getParameter("loubh");
+            param.put("xqbh",xqbh);
+            param.put("gybh",gybh);
+            param.put("loubh",loubh);
+            list = liveService.QueryRoomList(param,pageNum,pageSize);
+            PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
+            result.put("data",pageList);
+            result.put("message","房间列表查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","房间列表查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**--------------------------------房间管理 end----------------------------------------*/
 }

@@ -60,4 +60,12 @@ public interface LiveService {
      * 删除楼栋
      */
     void DelFloor(Map<String,Object> param);
+    /**
+     * 是否存在床
+     */
+    int ExistBedZtLou(Map<String,Object> param);
+    /**
+     *房间列表
+     */
+    List<Map<String, Object>> QueryRoomList(Map<String,Object> param,int pageNum,int pageSize);
 }

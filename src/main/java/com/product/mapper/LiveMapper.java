@@ -74,5 +74,13 @@ public interface LiveMapper {
      * 删除楼栋
      */
     int DelFloor(Map<String,Object> param);
+    /**
+     * 是否存在正在使用床位
+     */
+    int ExistBedZtLou(Map<String,Object> param);
+    /**
+     * 房间列表
+     */
+    List<Map<String, Object>> QueryRoomList(Map<String,Object> param);
 
 }

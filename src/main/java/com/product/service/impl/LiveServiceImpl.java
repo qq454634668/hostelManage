@@ -131,7 +131,7 @@ public class LiveServiceImpl implements LiveService {
             String xqbh = (String) param.get("xqbh");
             String gybh = (String) param.get("gybh");
             String id =  String.valueOf(param.get("id"));
-            String loubh = CodeMakeUtils.hundred(id);
+            String loubh = CodeMakeUtils.decade(id);
             param.put("id",id);
             param.put("gybh",gybh);
             param.put("xqbh",xqbh);
@@ -160,5 +160,16 @@ public class LiveServiceImpl implements LiveService {
         if(flag <= 0){
             throw new RuntimeException("删除失败");
         }
+    }
+
+    @Override
+    public int ExistBedZtLou(Map<String, Object> param) {
+        return liveMapper.ExistBedZtLou(param);
+    }
+
+    @Override
+    public List<Map<String, Object>> QueryRoomList(Map<String, Object> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return liveMapper.QueryRoomList(param);
     }
 }

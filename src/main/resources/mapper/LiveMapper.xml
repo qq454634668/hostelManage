@@ -22,12 +22,25 @@
             <result column="BH" property="bh"/>
             <result column="NAME" property="name"/>
             <result column="LOUZT" property="louzt"/>
-            <result column="LOUNAME" property="louname"/>
+            <result column="LOUZTNAME" property="louztname"/>
             <result column="XQBH" property="xqbh"/>
             <result column="XQNAME" property="xqname"/>
             <result column="GYBH" property="gybh"/>
             <result column="GYNAME" property="gyname"/>
             <result column="LOUBH" property="loubh"/>
+            <result column="RKSJ" property="rksj"/>
+        </resultMap>
+        <resultMap id="RoomList" type="java.util.Map">
+            <result column="ID" property="id"/>
+            <result column="FJBH" property="fjbh"/>
+            <result column="FJBZ" property="fjbz"/>
+            <result column="FJBZNAME" property="fjbzname"/>
+            <result column="LOUBH" property="loubh"/>
+            <result column="LOUNAME" property="louname"/>
+            <result column="XQBH" property="xqbh"/>
+            <result column="XQNAME" property="xqname"/>
+            <result column="GYBH" property="gybh"/>
+            <result column="GYNAME" property="gyname"/>
             <result column="RKSJ" property="rksj"/>
         </resultMap>
         <insert id="AddCampus" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
@@ -108,4 +121,33 @@
         <delete id="DelFloor" parameterType="java.util.Map">
             delete from floor_info where id = #{id}
         </delete>
+        <select id="ExistBedZtLou" parameterType="java.util.Map" resultType="int">
+            select count(*) from bed_info
+              where loubh = #{loubh} and zt = '2'
+        </select>
+        <select id="QueryRoomList" parameterType="java.util.Map" resultMap="RoomList">
+            select id,
+            fjbh,
+            fjbz,
+            (select name from dictionary a where a.lx='room' and t.fjbz = a.code) fjbzname,
+            loubh,
+            (select name from floor_info b where  t.loubh = b.loubh) louname,
+            xqbh,
+            (select name from campus_info c where  t.xqbh = c.bh) xqname,
+            gybh,
+            (select name from apartment_info d where  t.gybh = d.gybh) gyname,
+            rksj
+            from room_info t
+            <where>
+                <if test="xqbh!=null and xqbh !=''">
+                    and xqbh =#{xqbh}
+                </if>
+                <if test="gybh!=null and gybh !=''">
+                    and gybh =#{gybh}
+                </if>
+                <if test="loubh!=null and loubh !=''">
+                    and loubh =#{loubh}
+                </if>
+            </where>
+        </select>
 </mapper>
