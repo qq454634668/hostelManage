@@ -54,4 +54,16 @@ public interface LiveMapper {
      * 是否存在楼
      */
     int ExistFloor(Map<String,Object> param);
+    /**
+     * 楼列表
+     */
+    List<Map<String, Object>> QueryFloorList(Map<String,Object> param);
+    /**
+     * 新增楼1  增加基本信息 name,louzt,xqbh,gybh
+     */
+    int AddFloor1(Map<String,Object> param);
+    /**
+     * 新增楼2  通过计算得到楼编号
+     */
+    int AddFloor2(Map<String,Object> param);
 }

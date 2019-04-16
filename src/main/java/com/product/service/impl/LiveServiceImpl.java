@@ -117,6 +117,30 @@ public class LiveServiceImpl implements LiveService {
 
     @Override
     public List<Map<String, Object>> QueryFloorList(Map<String, Object> param, int pageNum, int pageSize) {
-        return null;
+        PageHelper.startPage(pageNum,pageSize);
+        return liveMapper.QueryFloorList(param);
+    }
+
+    @Override
+    @Transactional
+    public void AddFloor(Map<String, Object> param) {
+        int flag = liveMapper.AddFloor1(param);
+        if(flag <= 0){
+            throw new RuntimeException("添加失败");
+        }else{
+            String xqbh = (String) param.get("xqbh");
+            String gybh = (String) param.get("gybh");
+            String id =  String.valueOf(param.get("id"));
+            String loubh = CodeMakeUtils.hundred(id);
+            param.put("id",id);
+            param.put("gybh",gybh);
+            param.put("xqbh",xqbh);
+            param.put("loubh",loubh);
+            param.put("bh",xqbh+gybh+loubh);
+            int flag2 = liveMapper.AddFloor2(param);
+            if(flag2 <= 0){
+                throw new RuntimeException("修改失败");
+            }
+        }
     }
 }

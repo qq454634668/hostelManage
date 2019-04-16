@@ -96,4 +96,10 @@
                    </if>
                </where>
         </select>
+        <insert id="AddFloor1" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
+            insert into floor_info (name,louzt,xqbh,gybh,rksj) VALUES (#{name},#{louzt},#{xqbh},#{gybh},#{rksj})
+        </insert>
+        <update id="AddFloor2" parameterType="java.util.Map">
+            update floor_info set bh=#{bh},loubh=#{loubh} where id = #{id}
+        </update>
 </mapper>

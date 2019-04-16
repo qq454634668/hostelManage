@@ -334,10 +334,11 @@ public class LiveController {
     }
 
     /**
-     * 未完成
      * 新增楼
-     * name  校区名称
+     * name  楼名
+     * louzt  楼状态
      * xqbh  校区编号
+     * gybh  公寓编号
      */
     @RequestMapping("/AddFloor")
     @ResponseBody
@@ -349,16 +350,20 @@ public class LiveController {
         Map<String,Object> param = new HashMap<>();
         try{
             String name = request.getParameter("name");
+            String louzt = request.getParameter("louzt");
             String xqbh = request.getParameter("xqbh");
+            String gybh = request.getParameter("gybh");
             param.put("rksj",created_time);
             param.put("name",name);
+            param.put("louzt",louzt);
             param.put("xqbh",xqbh);
-            liveService.AddApartment(param);
+            param.put("gybh",gybh);
+            liveService.AddFloor(param);
             result.put("data",null);
-            result.put("message","公寓区添加成功");
+            result.put("message","楼添加成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","公寓区添加失败");
+            result.put("message","楼添加失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }

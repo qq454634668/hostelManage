@@ -45,7 +45,11 @@ public interface LiveService {
      */
     int ExistFloor(Map<String,Object> param);
     /**
-     *公寓区列表
+     *楼列表
      */
     List<Map<String, Object>> QueryFloorList(Map<String,Object> param,int pageNum,int pageSize);
+    /**
+     * 新增楼区
+     */
+    void AddFloor(Map<String,Object> param);
 }
