@@ -243,6 +243,26 @@ public class LiveServiceImpl implements LiveService {
 
     @Override
     public int ExistRoomRz(Map<String, Object> param) {
-        return 0;
+        return liveMapper.ExistRoomRz(param);
+    }
+
+    @Override
+    public int repeatRoom(Map<String, Object> param) {
+        return liveMapper.repeatRoom(param);
+    }
+
+    @Override
+    @Transactional
+    public void DelRoom(Map<String, Object> param) {
+        int del1 = liveMapper.DelRoom(param);
+        if(del1 <= 0){
+            throw new RuntimeException("删除失败");
+        }else{
+            int del2 = liveMapper.DelBed(param);
+            if(del2 <= 0){
+                throw new RuntimeException("删除失败");
+            }
+        }
+
     }
 }

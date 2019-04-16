@@ -61,6 +61,7 @@ public interface LiveService {
      * 删除楼栋
      */
     void DelFloor(Map<String,Object> param);
+
     /**
      * 是否存在床
      */
@@ -81,4 +82,12 @@ public interface LiveService {
      * 该楼该房间下是否有入住
      */
     int ExistRoomRz(Map<String,Object> param);
+    /**
+     * 判断是否存在重复房间
+     */
+    int repeatRoom(Map<String,Object> param);
+    /**
+     * 删除房间
+     */
+    void DelRoom(Map<String,Object> param);
 }

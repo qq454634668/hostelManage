@@ -103,4 +103,8 @@ public interface LiveMapper {
      * 是否存在正在使用床位
      */
     int ExistRoomRz(Map<String,Object> param);
+    /**
+     * 判断是否存在重复房间
+     */
+    int repeatRoom(Map<String,Object> param);
 }

@@ -175,4 +175,7 @@
             select count(*) from bed_info
               where loubh = #{loubh} and fjbh=#{fjbh} and zt = '2'
         </select>
+        <select id="repeatRoom" parameterType="java.util.Map" resultType="int">
+            select count(*) from room_info where loubh =#{loubh} and fjbh =#{fjbhs}
+        </select>
 </mapper>

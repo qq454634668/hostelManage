@@ -533,6 +533,59 @@ public class LiveController {
         }
         return result;
     }
+
+    /**
+     * 判断是否存在重复房间
+     * loubh 楼编号
+     * fjbh  房间编号
+     */
+    @RequestMapping("/repeatRoom")
+    @ResponseBody
+    public Map<String,Object> repeatRoom(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String loubh = request.getParameter("loubh");
+            String fjbh = request.getParameter("fjbh");
+            param.put("loubh",loubh);
+            param.put("fjbh",fjbh);
+            result.put("data",liveService.repeatRoom(param));
+            result.put("message","判断是否存在重复房间查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","判断是否存在重复房间查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * 判断该楼该房间下床位是否都是空置或者停用状态（没有入住状态）
+     * 房间编号 fjbh
+     * 楼  loubh
+     * data结果大于0，表示是有入住状态的床位，不允许修改
+     */
+    @RequestMapping("/ExistRoomRz")
+    @ResponseBody
+    public Map<String,Object> ExistRoomRz(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String loubh = request.getParameter("loubh");
+            String fjbh = request.getParameter("fjbh");
+            param.put("loubh",loubh);
+            param.put("fjbh",fjbh);
+            result.put("data",liveService.ExistRoomRz(param));
+            result.put("message","判断该楼该房间下床位是否都是空置或者停用状态查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","判断该楼该房间下床位是否都是空置或者停用状态查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
     /**
      * 修改房间 ---可以修改房间标准
      * xqbh  校区编号
@@ -577,15 +630,13 @@ public class LiveController {
         return result;
     }
     /**
-     * 判断该楼该房间下床位是否都是空置或者停用状态（没有入住状态）
-     *
-     * 房间编号 fjbh
-     * 楼  loubh
-     * data结果大于0，表示是有入住状态的床位，不允许修改
+     * 删除房间
+     * loubh 楼编号
+     * fjbh  房间编号
      */
-    @RequestMapping("/ExistRoomRz")
+    @RequestMapping("/DelRoom")
     @ResponseBody
-    public Map<String,Object> ExistRoomRz(HttpServletRequest request){
+    public Map<String,Object> DelRoom(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
@@ -593,15 +644,19 @@ public class LiveController {
             String fjbh = request.getParameter("fjbh");
             param.put("loubh",loubh);
             param.put("fjbh",fjbh);
-            result.put("data",liveService.ExistRoomRz(param));
-            result.put("message","判断该楼该房间下床位是否都是空置或者停用状态查询成功");
+            liveService.DelRoom(param);
+            result.put("data",null);
+            result.put("message","停用楼操作成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","判断该楼该房间下床位是否都是空置或者停用状态查询失败");
+            result.put("message","停用楼操作失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }
         return result;
     }
+    /**
+     * 停用房间
+     */
     /**--------------------------------房间管理 end----------------------------------------*/
 }
