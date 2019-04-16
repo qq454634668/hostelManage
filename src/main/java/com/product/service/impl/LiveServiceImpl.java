@@ -200,4 +200,49 @@ public class LiveServiceImpl implements LiveService {
 
         }
     }
+
+    @Override
+    @Transactional
+    public void EditRoom(Map<String, Object> param) {
+        int del1 = liveMapper.DelRoom(param);
+        if(del1 <= 0){
+            throw new RuntimeException("删除失败");
+        }else{
+            int del2 = liveMapper.DelBed(param);
+            if(del2 <= 0){
+                throw new RuntimeException("删除失败");
+            }else{
+                //先新增房间，再根据房间标准创建房间床位
+                int flag = liveMapper.AddRoom(param);
+                if(flag <= 0){
+                    throw new RuntimeException("再次添加失败");
+                }else{
+                    //根据房间标准，确定循环次数，生成床位编号，
+                    //获得房间最终编号，再拼床的状态
+                    String roomzzbh = (String) param.get("bh");    //房间最终编号
+                    String louzt = (String) param.get("louzt");    //房间最终编号
+                    String fjbz = (String) param.get("fjbz");
+                    for(int a=1;a<Integer.parseInt(fjbz)+1;a++){
+                        String cwbh = CodeMakeUtils.decade(""+a);
+                        param.put("cwbh",cwbh);
+                        String bh =roomzzbh+cwbh+louzt;
+                        param.put("bh",bh);
+                        int flag2 =liveMapper.AddBed(param);
+                        if(flag2 <= 0){
+                            throw new RuntimeException("再次添加失败");
+                        }
+                    }
+
+
+                }
+            }
+
+        }
+
+    }
+
+    @Override
+    public int ExistRoomRz(Map<String, Object> param) {
+        return 0;
+    }
 }

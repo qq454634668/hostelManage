@@ -154,6 +154,9 @@
                 <if test="loubh!=null and loubh !=''">
                     and loubh =#{loubh}
                 </if>
+                <if test="fjbh!=null and fjbh !=''">
+                    and fjbh =#{fjbh}
+                </if>
             </where>
         </select>
         <insert id="AddRoom" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
@@ -162,4 +165,14 @@
         <insert id="AddBed" parameterType="java.util.Map">
             insert into bed_info (fjbh,fjbz,xqbh,gybh,loubh,bh,louzt,cwbh,rksj) VALUES (#{fjbh},#{fjbz},#{xqbh},#{gybh},#{loubh},#{bh},#{louzt},#{cwbh},#{rksj})
         </insert>
+        <delete id="DelRoom" parameterType="java.util.Map">
+            DELETE from room_info where  fjbh =#{fjbh} and loubh=#{loubh}
+        </delete>
+        <delete id="DelBed" parameterType="java.util.Map">
+            DELETE from bed_info where  fjbh =#{fjbh} and loubh=#{loubh}
+        </delete>
+        <select id="ExistRoomRz" parameterType="java.util.Map" resultType="int">
+            select count(*) from bed_info
+              where loubh = #{loubh} and fjbh=#{fjbh} and zt = '2'
+        </select>
 </mapper>

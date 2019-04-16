@@ -91,5 +91,16 @@ public interface LiveMapper {
      * 添加床位
      */
     int AddBed(Map<String,Object> param);
-
+    /**
+     * 删除房间
+     */
+    int DelRoom(Map<String,Object> param);
+    /**
+     * 删除床位
+     */
+    int DelBed(Map<String,Object> param);
+    /**
+     * 是否存在正在使用床位
+     */
+    int ExistRoomRz(Map<String,Object> param);
 }

@@ -460,6 +460,7 @@ public class LiveController {
      * xqbh  校区编号（可以为空）
      * gybh  公寓编号（可以为空）
      * loubh 楼编号（可以为空）
+     * fjbh 房间编号（可以为空）
      */
     @RequestMapping("/QueryRoomList")
     @ResponseBody
@@ -471,9 +472,11 @@ public class LiveController {
             String xqbh =request.getParameter("xqbh");
             String gybh =request.getParameter("gybh");
             String loubh =request.getParameter("loubh");
+            String fjbh =request.getParameter("fjbh");
             param.put("xqbh",xqbh);
             param.put("gybh",gybh);
             param.put("loubh",loubh);
+            param.put("fjbh",fjbh);
             list = liveService.QueryRoomList(param,pageNum,pageSize);
             PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
             result.put("data",pageList);
@@ -530,6 +533,74 @@ public class LiveController {
         }
         return result;
     }
-
+    /**
+     * 修改房间 ---可以修改房间标准
+     * xqbh  校区编号
+     * gybh  公寓编号
+     * loubh 楼编号
+     * fjbh  房间编号（房间编号输入完就应该检测房间编号是否重复）
+     * fjbz  房间标准
+     * louzt  楼的状态
+     */
+    @RequestMapping("/EditRoom")
+    @ResponseBody
+    public Map<String,Object> EditRoom(HttpServletRequest request){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String created_time = sdf.format(date);
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String xqbh = request.getParameter("xqbh");
+            String gybh = request.getParameter("gybh");
+            String loubh = request.getParameter("loubh");
+            String fjbh = request.getParameter("fjbh");
+            String fjbz = request.getParameter("fjbz");
+            String louzt = request.getParameter("louzt");
+            param.put("rksj",created_time);
+            param.put("xqbh",xqbh);
+            param.put("gybh",gybh);
+            param.put("loubh",loubh);
+            param.put("fjbh",fjbh);
+            param.put("fjbz",fjbz);
+            param.put("bh",xqbh+gybh+loubh+fjbh);
+            param.put("louzt",louzt);
+            liveService.EditRoom(param);
+            result.put("data",null);
+            result.put("message","楼修改成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","楼修改失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**
+     * 判断该楼该房间下床位是否都是空置或者停用状态（没有入住状态）
+     * 房间编号 fjbh
+     * 楼  loubh
+     * data结果大于0，表示是有入住状态的床位，不允许修改
+     */
+    @RequestMapping("/ExistRoomRz")
+    @ResponseBody
+    public Map<String,Object> ExistRoomRz(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String loubh = request.getParameter("loubh");
+            String fjbh = request.getParameter("fjbh");
+            param.put("loubh",loubh);
+            param.put("fjbh",fjbh);
+            result.put("data",liveService.ExistRoomRz(param));
+            result.put("message","判断该楼该房间下床位是否都是空置或者停用状态查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","判断该楼该房间下床位是否都是空置或者停用状态查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
     /**--------------------------------房间管理 end----------------------------------------*/
 }

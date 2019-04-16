@@ -73,4 +73,12 @@ public interface LiveService {
      * 新增房间
      */
     void AddRoom(Map<String,Object> param);
+    /**
+     * 修改房间
+     */
+    void EditRoom(Map<String,Object> param);
+    /**
+     * 该楼该房间下是否有入住
+     */
+    int ExistRoomRz(Map<String,Object> param);
 }
