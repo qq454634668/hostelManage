@@ -402,7 +402,7 @@ public class LiveController {
     }
 
     /**
-     * 删除楼
+     * 删除楼栋
      * id
      */
     @RequestMapping("/DelFloor")
@@ -413,12 +413,12 @@ public class LiveController {
         try{
             String id = request.getParameter("id");
             param.put("id",id);
-            liveService.DeleteApartment(param);
+            liveService.DelFloor(param);
             result.put("data",null);
-            result.put("message","公寓区删除成功");
+            result.put("message","停用楼操作成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","公寓区删除失败");
+            result.put("message","停用楼操作失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }

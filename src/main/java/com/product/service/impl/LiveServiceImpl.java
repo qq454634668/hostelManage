@@ -152,4 +152,13 @@ public class LiveServiceImpl implements LiveService {
             throw new RuntimeException("删除失败");
         }
     }
+
+    @Override
+    @Transactional
+    public void DelFloor(Map<String, Object> param) {
+        int flag = liveMapper.DelFloor(param);
+        if(flag <= 0){
+            throw new RuntimeException("删除失败");
+        }
+    }
 }

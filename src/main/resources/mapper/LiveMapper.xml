@@ -105,4 +105,7 @@
         <update id="EditFloor" parameterType="java.util.Map">
              update floor_info set name = #{name},rksj=#{rksj} where id = #{id}
         </update>
+        <delete id="DelFloor" parameterType="java.util.Map">
+            delete from floor_info where id = #{id}
+        </delete>
 </mapper>

@@ -56,4 +56,8 @@ public interface LiveService {
      * 修改公寓区
      */
     void EditFloor(Map<String,Object> param);
+    /**
+     * 删除楼栋
+     */
+    void DelFloor(Map<String,Object> param);
 }

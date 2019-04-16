@@ -70,5 +70,9 @@ public interface LiveMapper {
      * 修改楼 通过ID修改name
      */
     int EditFloor(Map<String,Object> param);
+    /**
+     * 删除楼栋
+     */
+    int DelFloor(Map<String,Object> param);
 
 }
