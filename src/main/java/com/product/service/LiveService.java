@@ -52,6 +52,7 @@ public interface LiveService {
      * 新增楼区
      */
     void AddFloor(Map<String,Object> param);
+
     /**
      * 修改公寓区
      */
@@ -68,4 +69,8 @@ public interface LiveService {
      *房间列表
      */
     List<Map<String, Object>> QueryRoomList(Map<String,Object> param,int pageNum,int pageSize);
+    /**
+     * 新增房间
+     */
+    void AddRoom(Map<String,Object> param);
 }

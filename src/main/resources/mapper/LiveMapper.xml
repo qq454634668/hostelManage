@@ -32,6 +32,7 @@
         </resultMap>
         <resultMap id="RoomList" type="java.util.Map">
             <result column="ID" property="id"/>
+            <result column="BH" property="bh"/>
             <result column="FJBH" property="fjbh"/>
             <result column="FJBZ" property="fjbz"/>
             <result column="FJBZNAME" property="fjbzname"/>
@@ -41,6 +42,8 @@
             <result column="XQNAME" property="xqname"/>
             <result column="GYBH" property="gybh"/>
             <result column="GYNAME" property="gyname"/>
+            <result column="LOUZT" property="louzt"/>
+            <result column="LOUNAME" property="louname"/>
             <result column="RKSJ" property="rksj"/>
         </resultMap>
         <insert id="AddCampus" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
@@ -127,6 +130,7 @@
         </select>
         <select id="QueryRoomList" parameterType="java.util.Map" resultMap="RoomList">
             select id,
+            bh,
             fjbh,
             fjbz,
             (select name from dictionary a where a.lx='room' and t.fjbz = a.code) fjbzname,
@@ -136,6 +140,8 @@
             (select name from campus_info c where  t.xqbh = c.bh) xqname,
             gybh,
             (select name from apartment_info d where  t.gybh = d.gybh) gyname,
+            louzt,
+            (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louname,
             rksj
             from room_info t
             <where>
@@ -150,4 +156,10 @@
                 </if>
             </where>
         </select>
+        <insert id="AddRoom" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
+            insert into room_info (fjbh,fjbz,xqbh,gybh,loubh,bh,louzt,rksj) VALUES (#{fjbh},#{fjbz},#{xqbh},#{gybh},#{loubh},#{bh},#{louzt},#{rksj})
+        </insert>
+        <insert id="AddBed" parameterType="java.util.Map">
+            insert into bed_info (fjbh,fjbz,xqbh,gybh,loubh,bh,louzt,cwbh,rksj) VALUES (#{fjbh},#{fjbz},#{xqbh},#{gybh},#{loubh},#{bh},#{louzt},#{cwbh},#{rksj})
+        </insert>
 </mapper>

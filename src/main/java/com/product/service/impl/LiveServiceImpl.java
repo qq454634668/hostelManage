@@ -172,4 +172,24 @@ public class LiveServiceImpl implements LiveService {
         PageHelper.startPage(pageNum,pageSize);
         return liveMapper.QueryRoomList(param);
     }
+
+    @Override
+    @Transactional
+    public void AddRoom(Map<String, Object> param) {
+        //先新增房间，再根据房间标准创建房间床位
+        int flag = liveMapper.AddRoom(param);
+        if(flag <= 0){
+            throw new RuntimeException("添加失败");
+        }else{
+            //根据房间标准，确定循环次数，生成床位编号，
+            //获得房间最终编号，再拼床的状态
+            String bh = (String) param.get("bh");
+//            String loubh = CodeMakeUtils.decade(id);
+            param.put("bh",bh);
+            int flag2 = liveMapper.AddFloor2(param);
+            if(flag2 <= 0){
+                throw new RuntimeException("修改失败");
+            }
+        }
+    }
 }

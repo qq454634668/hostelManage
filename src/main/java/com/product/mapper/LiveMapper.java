@@ -82,5 +82,14 @@ public interface LiveMapper {
      * 房间列表
      */
     List<Map<String, Object>> QueryRoomList(Map<String,Object> param);
+    /**
+     * 添加房间
+     */
+    int AddRoom(Map<String,Object> param);
+
+    /**
+     * 添加床位
+     */
+    int AddBed(Map<String,Object> param);
 
 }
