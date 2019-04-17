@@ -178,4 +178,7 @@
         <select id="repeatRoom" parameterType="java.util.Map" resultType="int">
             select count(*) from room_info where loubh =#{loubh} and fjbh =#{fjbhs}
         </select>
+        <update id="StopRoom" parameterType="java.util.Map">
+            update bed_info set zt = #{zt},rksj=#{rksj} where loubh =#{loubh} and fjbh =#{fjbh}
+        </update>
 </mapper>

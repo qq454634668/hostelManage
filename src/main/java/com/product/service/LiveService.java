@@ -90,4 +90,8 @@ public interface LiveService {
      * 删除房间
      */
     void DelRoom(Map<String,Object> param);
+    /**
+     * 删除房间
+     */
+    void StopRoom(Map<String,Object> param);
 }

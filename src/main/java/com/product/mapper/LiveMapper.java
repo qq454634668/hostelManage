@@ -107,4 +107,9 @@ public interface LiveMapper {
      * 判断是否存在重复房间
      */
     int repeatRoom(Map<String,Object> param);
+
+    /**
+     * 停用房间
+     */
+    int StopRoom(Map<String,Object> param);
 }

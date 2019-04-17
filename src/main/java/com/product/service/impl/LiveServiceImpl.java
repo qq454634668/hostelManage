@@ -265,4 +265,13 @@ public class LiveServiceImpl implements LiveService {
         }
 
     }
+
+    @Override
+    @Transactional
+    public void StopRoom(Map<String, Object> param) {
+        int flag = liveMapper.StopRoom(param);
+        if(flag <= 0){
+            throw new RuntimeException("停用失败");
+        }
+    }
 }
