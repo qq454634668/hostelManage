@@ -732,5 +732,41 @@ public class LiveController {
         return result;
     }
 
+    /**
+     * 停用床位/启用床位
+     * fjbh 房间编号
+     * loubh 楼编号
+     * cwbh 楼编号
+     * zt (1----启用  3---禁用)
+     */
+    @RequestMapping("/StopBed")
+    @ResponseBody
+    public Map<String,Object> StopBed(HttpServletRequest request){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String created_time = sdf.format(date);
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String loubh = request.getParameter("loubh");
+            String fjbh = request.getParameter("fjbh");
+            String zt = request.getParameter("zt");
+            String cwbh = request.getParameter("cwbh");
+            param.put("loubh",loubh);
+            param.put("fjbh",fjbh);
+            param.put("zt",zt);
+            param.put("cwbh",cwbh);
+            param.put("rksj",created_time);
+            liveService.StopBed(param);
+            result.put("data",null);
+            result.put("message","停用床位/启用床位操作成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","停用床位/启用床位操作失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
     /**--------------------------------床位管理 end----------------------------------------*/
 }
