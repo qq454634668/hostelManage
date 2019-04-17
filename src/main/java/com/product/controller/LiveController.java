@@ -657,6 +657,7 @@ public class LiveController {
     }
 
     /**
+     * 先判断房间内是否有人入住
      * 停用房间/启用房间
      * fjbh 房间编号
      * loubh 楼编号
@@ -689,5 +690,47 @@ public class LiveController {
         }
         return result;
     }
+
     /**--------------------------------房间管理 end----------------------------------------*/
+
+    /**--------------------------------床位管理 start----------------------------------------*/
+
+    /**
+     * 床位列表
+     * pageNum
+     * pageSize
+     * xqbh  校区编号（可以为空）
+     * gybh  公寓编号（可以为空）
+     * loubh 楼编号（可以为空）
+     * fjbh 房间编号（可以为空）
+     */
+    @RequestMapping("/QueryBedList")
+    @ResponseBody
+    public Map<String,Object> QueryBedList(HttpServletRequest request,int pageNum,int pageSize){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        List<Map<String,Object>> list=new ArrayList<>();
+        try{
+            String xqbh =request.getParameter("xqbh");
+            String gybh =request.getParameter("gybh");
+            String loubh =request.getParameter("loubh");
+            String fjbh =request.getParameter("fjbh");
+            param.put("xqbh",xqbh);
+            param.put("gybh",gybh);
+            param.put("loubh",loubh);
+            param.put("fjbh",fjbh);
+            list = liveService.QueryBedList(param,pageNum,pageSize);
+            PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
+            result.put("data",pageList);
+            result.put("message","床位列表查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","床位列表查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+    /**--------------------------------床位管理 end----------------------------------------*/
 }

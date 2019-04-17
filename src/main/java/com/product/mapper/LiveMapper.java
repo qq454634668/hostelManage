@@ -112,4 +112,12 @@ public interface LiveMapper {
      * 停用房间
      */
     int StopRoom(Map<String,Object> param);
+    /**
+     * 床位列表
+     */
+    List<Map<String, Object>> QueryBedList(Map<String,Object> param);
+    /**
+     * 停用床位/启用床位
+     */
+    int StopBed(Map<String,Object> param);
 }

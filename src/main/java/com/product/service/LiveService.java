@@ -91,7 +91,15 @@ public interface LiveService {
      */
     void DelRoom(Map<String,Object> param);
     /**
-     * 删除房间
+     * 停用房间/启用房间
      */
     void StopRoom(Map<String,Object> param);
+    /**
+     * 床位列表
+     */
+    List<Map<String, Object>> QueryBedList(Map<String,Object> param,int pageNum,int pageSize);
+    /**
+     * 停用床位/启用床位
+     */
+    void StopBed(Map<String,Object> param);
 }

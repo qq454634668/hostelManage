@@ -45,6 +45,9 @@
             <result column="LOUZT" property="louzt"/>
             <result column="LOUNAME" property="louname"/>
             <result column="RKSJ" property="rksj"/>
+            <result column="CWBH" property="cwbh"/>
+            <result column="ZT" property="zt"/>
+            <result column="ZTNAME" property="ztname"/>
         </resultMap>
         <insert id="AddCampus" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
               insert into campus_info (name,rksj) VALUES (#{name},#{rksj})
@@ -180,5 +183,43 @@
         </select>
         <update id="StopRoom" parameterType="java.util.Map">
             update bed_info set zt = #{zt},rksj=#{rksj} where loubh =#{loubh} and fjbh =#{fjbh}
+        </update>
+        <select id="QueryBedList" parameterType="java.util.Map" resultMap="RoomList">
+            select t.id,
+                t.bh,
+                t.fjbh,
+                t.fjbz,
+                (select name from dictionary a where a.lx='room' and t.fjbz = a.code) fjbzname,
+                t.loubh,
+                (select name from floor_info b where  t.loubh = b.loubh) louname,
+                t.xqbh,
+                (select name from campus_info c where  t.xqbh = c.bh) xqname,
+                t.gybh,
+                (select name from apartment_info d where  t.gybh = d.gybh) gyname,
+                t.louzt,
+                (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louname,
+                t.rksj,
+                t.cwbh,
+                t.zt,
+                (select name from dictionary a where a.lx='bed_state' and t.zt = a.code) ztname
+                from bed_info t
+                <where>
+                <if test="xqbh!=null and xqbh !=''">
+                    and xqbh =#{xqbh}
+                </if>
+                <if test="gybh!=null and gybh !=''">
+                    and gybh =#{gybh}
+                </if>
+                <if test="loubh!=null and loubh !=''">
+                    and loubh =#{loubh}
+                </if>
+                <if test="fjbh!=null and fjbh !=''">
+                    and fjbh =#{fjbh}
+                </if>
+            </where>
+        </select>
+        <update id="StopBed" parameterType="java.util.Map">
+            update bed_info set zt = #{zt},rksj=#{rksj} where loubh =#{loubh}
+                                   and fjbh =#{fjbh} and cwbh =#{cwbh}
         </update>
 </mapper>

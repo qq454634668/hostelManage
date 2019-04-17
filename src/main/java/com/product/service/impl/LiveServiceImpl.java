@@ -274,4 +274,19 @@ public class LiveServiceImpl implements LiveService {
             throw new RuntimeException("停用失败");
         }
     }
+
+    @Override
+    public List<Map<String, Object>> QueryBedList(Map<String, Object> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return liveMapper.QueryBedList(param);
+    }
+
+    @Override
+    @Transactional
+    public void StopBed(Map<String, Object> param) {
+        int flag = liveMapper.StopBed(param);
+        if(flag <= 0){
+            throw new RuntimeException("停用失败");
+        }
+    }
 }
