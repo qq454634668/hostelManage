@@ -16,6 +16,7 @@
             <result column="GYBH" property="gybh"/>
             <result column="RKSJ" property="rksj"/>
             <result column="XQNAME" property="xqname"/>
+            <result column="LOUZTNAME" property="louztname"/>
         </resultMap>
         <resultMap id="FloorList" type="java.util.Map">
             <result column="ID" property="id"/>
@@ -43,7 +44,7 @@
             <result column="GYBH" property="gybh"/>
             <result column="GYNAME" property="gyname"/>
             <result column="LOUZT" property="louzt"/>
-            <result column="LOUNAME" property="louname"/>
+            <result column="LOUZTNAME" property="louztname"/>
             <result column="RKSJ" property="rksj"/>
             <result column="CWBH" property="cwbh"/>
             <result column="ZT" property="zt"/>
@@ -98,7 +99,7 @@
                    t.bh,
                    t.name,
                    t.louzt,
-                   (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louname,
+                   (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louztname,
                    xqbh,
                    (select name from campus_info b where  t.xqbh = b.bh) xqname,
                    gybh,
@@ -144,7 +145,7 @@
             gybh,
             (select name from apartment_info d where  t.gybh = d.gybh) gyname,
             louzt,
-            (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louname,
+            (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louztname,
             rksj
             from room_info t
             <where>
@@ -197,7 +198,7 @@
                 t.gybh,
                 (select name from apartment_info d where  t.gybh = d.gybh) gyname,
                 t.louzt,
-                (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louname,
+                (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louztname,
                 t.rksj,
                 t.cwbh,
                 t.zt,
