@@ -26,4 +26,11 @@ public interface DailyMapper {
      */
     int MoveInto2(Map<String,Object> param);
 
+    /**
+     * 退宿
+     * *
+     */
+    int QuitSs1(Map<String,Object> param);
+    int QuitSs2(Map<String,Object> param);
+
 }

@@ -56,4 +56,18 @@ public class DailyServiceImpl implements DailyService {
             }
         }
     }
+
+    @Override
+    @Transactional
+    public void QuitSs(Map<String, Object> param) {
+        int flag = dailyMapper.QuitSs1(param);
+        if(flag <= 0){
+            throw new RuntimeException("退宿失败");
+        }else{
+            int flag2 = dailyMapper.QuitSs2(param);
+            if(flag2 <= 0){
+                throw new RuntimeException("退宿失败");
+            }
+        }
+    }
 }

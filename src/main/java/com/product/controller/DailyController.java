@@ -117,7 +117,30 @@ public class DailyController {
 
         return result;
     }
+    /**
+     *退宿
+     *cwbh 床位编号
+     */
+    @RequestMapping("/QuitSs")
+    @ResponseBody
+    public Map<String,Object> QuitSs(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try {
+            String cwbh = request.getParameter("cwbh");
+            param.put("cwbh",cwbh);
+            dailyService.QuitSs(param);
+            result.put("data",null);
+            result.put("message","退宿操作成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","退宿操作失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
 
+        return result;
+    }
     /**--------------------------------入住管理 end----------------------------------------*/
 
 

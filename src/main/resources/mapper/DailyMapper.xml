@@ -145,4 +145,10 @@
     <update id="MoveInto2" parameterType="java.util.Map">
         update bed_info set zt = '2' where bh = #{cwbh}
     </update>
+    <update id="QuitSs1" parameterType="java.util.Map">
+        update user_student set zszt = '1',cwbh='' where cwbh = #{cwbh}
+    </update>
+    <update id="QuitSs2" parameterType="java.util.Map">
+        update bed_info set zt = '1' where bh = #{cwbh}
+    </update>
 </mapper>

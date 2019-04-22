@@ -16,4 +16,8 @@ public interface DailyService {
      * 入住/换宿
      */
     void MoveInto(Map<String,Object> param);
+    /**
+     * 退宿
+     */
+    void QuitSs(Map<String,Object> param);
 }
