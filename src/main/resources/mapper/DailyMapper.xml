@@ -2,5 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.product.mapper.DailyMapper">
-
+    <resultMap id="BedList" type="java.util.Map">
+        <result column="ID" property="id"/>
+        <result column="BH" property="bh"/>
+        <result column="FJBH" property="fjbh"/>
+        <result column="FJBZ" property="fjbz"/>
+        <result column="FJBZNAME" property="fjbzname"/>
+        <result column="LOUBH" property="loubh"/>
+        <result column="LOUNAME" property="louname"/>
+        <result column="XQBH" property="xqbh"/>
+        <result column="XQNAME" property="xqname"/>
+        <result column="GYBH" property="gybh"/>
+        <result column="GYNAME" property="gyname"/>
+        <result column="LOUZT" property="louzt"/>
+        <result column="LOUNAME" property="louname"/>
+        <result column="RKSJ" property="rksj"/>
+        <result column="CWBH" property="cwbh"/>
+        <result column="ZT" property="zt"/>
+        <result column="ZTNAME" property="ztname"/>
+        <result column="REALNAME" property="realname"/>
+    </resultMap>
+    <select id="FjbhList" parameterType="java.util.Map" resultMap="BedList">
+        select t.fjbh from bed_info t where
+              t.loubh = #{loubh}
+              <if test="xqbh!=null and xqbh !=''">
+                  and t.xqbh =#{xqbh}
+              </if>
+              <if test="gybh!=null and gybh !=''">
+                  and t.gybh =#{gybh}
+              </if>
+              group by t.fjbh
+    </select>
+    <select id="BedList" parameterType="java.util.Map" resultMap="BedList">
+        select t.*,t1.realname from (select t.id,
+        t.bh,
+        t.fjbh,
+        t.fjbz,
+        (select name from dictionary a where a.lx='room' and t.fjbz = a.code) fjbzname,
+        t.loubh,
+        (select name from floor_info b where  t.loubh = b.loubh) louname,
+        t.xqbh,
+        (select name from campus_info c where  t.xqbh = c.bh) xqname,
+        t.gybh,
+        (select name from apartment_info d where  t.gybh = d.gybh) gyname,
+        t.louzt,
+        (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louztname,
+        t.rksj,
+        t.cwbh,
+        t.zt,
+        (select name from dictionary a where a.lx='bed_state' and t.zt = a.code) ztname
+        from bed_info t
+        <where>
+            <if test="xqbh!=null and xqbh !=''">
+                and xqbh =#{xqbh}
+            </if>
+            <if test="gybh!=null and gybh !=''">
+                and gybh =#{gybh}
+            </if>
+            <if test="loubh!=null and loubh !=''">
+                and loubh =#{loubh}
+            </if>
+            <if test="fjbh!=null and fjbh !=''">
+                and fjbh =#{fjbh}
+            </if>
+        </where>) t LEFT JOIN user_student t1 ON t.bh = t1.cwbh
+    </select>
 </mapper>

@@ -19,4 +19,22 @@ public class DailyServiceImpl implements DailyService {
     private DailyMapper dailyMapper;
 
 
+    @Override
+    public List<Map<String, Object>> BedListMap(Map<String, Object> param) {
+        List<Map<String,Object>> list = dailyMapper.FjbhList(param);
+        List<Map<String,Object>> result = new ArrayList<>();
+        System.out.println(list.size());
+        list.forEach(bedMap->{
+            Map<String,Object> map = new HashMap<>();
+            Object fjbh = bedMap.get("fjbh");
+            map.put("fjbh",fjbh);
+            param.put("fjbh",fjbh);
+            map.put("fjList",dailyMapper.BedList(param));
+            result.add(map);
+
+        });
+        System.out.println("查询结束");
+        return result;
+    }
+
 }
