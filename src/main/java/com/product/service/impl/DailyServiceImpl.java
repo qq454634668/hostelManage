@@ -43,4 +43,17 @@ public class DailyServiceImpl implements DailyService {
         return dailyMapper.StuList(param);
     }
 
+    @Override
+    @Transactional
+    public void MoveInto(Map<String, Object> param) {
+        int flag = dailyMapper.MoveInto(param);
+        if(flag <= 0){
+            throw new RuntimeException("入住失败");
+        }else{
+            int flag2 = dailyMapper.MoveInto2(param);
+            if(flag2 <= 0){
+                throw new RuntimeException("入住失败");
+            }
+        }
+    }
 }

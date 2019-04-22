@@ -139,4 +139,10 @@
             </where>
 
     </select>
+    <update id="MoveInto" parameterType="java.util.Map">
+        update user_student set zszt = '2',cwbh=#{cwbh} where xh = #{xh}
+    </update>
+    <update id="MoveInto2" parameterType="java.util.Map">
+        update bed_info set zt = '2' where bh = #{cwbh}
+    </update>
 </mapper>

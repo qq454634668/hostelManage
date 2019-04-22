@@ -90,16 +90,34 @@ public class DailyController {
         return result;
     }
     /**
-     *点击床位入住
+     *点击床位入住/换宿
+     * xh  学号
+     * cwbh 床位编号
+     *020301101011   191116
      */
     @RequestMapping("/MoveInto")
     @ResponseBody
     public Map<String,Object> MoveInto(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
+        try {
+            String xh = request.getParameter("xh");
+            String cwbh = request.getParameter("cwbh");
+            param.put("xh",xh);
+            param.put("cwbh",cwbh);
+            dailyService.MoveInto(param);
+            result.put("data",null);
+            result.put("message","床位入住/换宿操作成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","床位入住/换宿操作失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
 
         return result;
     }
+
     /**--------------------------------入住管理 end----------------------------------------*/
 
 

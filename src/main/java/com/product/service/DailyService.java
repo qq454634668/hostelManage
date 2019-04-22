@@ -12,4 +12,8 @@ public interface DailyService {
      *学生list
      */
     List<Map<String, Object>> StuList(Map<String,Object> param,int pageNum,int pageSize);
+    /**
+     * 入住/换宿
+     */
+    void MoveInto(Map<String,Object> param);
 }

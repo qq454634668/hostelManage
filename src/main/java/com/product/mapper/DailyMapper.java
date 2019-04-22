@@ -17,4 +17,13 @@ public interface DailyMapper {
      */
     List<Map<String,Object>> StuList(Map<String,Object> param);
 
+    /**
+     * 入住/换宿   更改用户床位信息
+     */
+    int MoveInto(Map<String,Object> param);
+    /**
+     * 入住/换宿2  更改床位住宿信息
+     */
+    int MoveInto2(Map<String,Object> param);
+
 }
