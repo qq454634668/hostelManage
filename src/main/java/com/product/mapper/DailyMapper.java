@@ -9,8 +9,12 @@ public interface DailyMapper {
      */
     List<Map<String,Object>> FjbhList(Map<String,Object> param);
     /**
-     *
+     *根据房间号和楼号  查出该房间的床位list
      */
     List<Map<String,Object>> BedList(Map<String,Object> param);
+    /**
+     *学生list
+     */
+    List<Map<String,Object>> StuList(Map<String,Object> param);
 
 }

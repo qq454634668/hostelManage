@@ -22,6 +22,32 @@
         <result column="ZTNAME" property="ztname"/>
         <result column="REALNAME" property="realname"/>
     </resultMap>
+    <resultMap id="StuList" type="java.util.Map">
+        <result column="ID" property="id"/>
+        <result column="USERNAME" property="username"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="ZSZT" property="zszt"/>
+        <result column="ZSZTNAME" property="zsztname"/>
+        <result column="QJZT" property="qjzt"/>
+        <result column="QJZTNAME" property="qjztname"/>
+        <result column="PATRIARCHID" property="patriarchid"/>
+        <result column="LXDH" property="lxdh"/>
+        <result column="JZLXDH" property="jzlxdh"/>
+        <result column="XH" property="xh"/>
+        <result column="REALNAME" property="realname"/>
+        <result column="XB" property="xb"/>
+        <result column="LB" property="lb"/>
+        <result column="XY" property="xy"/>
+        <result column="ZY" property="zy"/>
+        <result column="NJ" property="nj"/>
+        <result column="BJ" property="bj"/>
+        <result column="XQ" property="xq"/>
+        <result column="SFZH" property="sfzh"/>
+        <result column="JG" property="jg"/>
+        <result column="CWBH" property="cwbh"/>
+        <result column="FPZT" property="fpzt"/>
+        <result column="RKSJ" property="rksj"/>
+    </resultMap>
     <select id="FjbhList" parameterType="java.util.Map" resultMap="BedList">
         select t.fjbh from bed_info t where
               t.loubh = #{loubh}
@@ -66,5 +92,51 @@
                 and fjbh =#{fjbh}
             </if>
         </where>) t LEFT JOIN user_student t1 ON t.bh = t1.cwbh
+    </select>
+    <select id="StuList" parameterType="java.util.Map" resultMap="StuList">
+        SELECT
+            t.id,
+            t.username,
+            t.password,
+            t.zszt,
+            (select name from dictionary a where a.code = t.zszt and a.lx='stay_stste') zsztname,
+            t.qjzt,
+            (select name from dictionary a where a.code = t.qjzt and a.lx='qjzt') qjztname,
+            t.patriarch_id patriarchid,
+            t.lxdh,
+            t.jzlxdh,
+            t.xh,
+            t.realname,
+            (select name from dictionary a where a.code = t.xb and a.lx='xb') xb,
+            (select name from dictionary a where a.code = t.lb and a.lx='studylb') lb,
+            (select name from dictionary a where a.code = t.xy and a.lx='xy') xy,
+            xy xycode,
+            (select name from dictionary a where a.code = t.zy and a.lx='zy') zy,
+            zy zycode,
+            t.nj,
+            t.bj,
+            t.xq,
+            t.sfzh,
+            t.jg,
+            t.cwbh,
+            (select name from dictionary a where a.code = t.fpzt and a.lx='allot_state') fpzt,
+            t.rksj
+            from user_student t
+            <where>
+                t.zszt = #{zszt}
+                <if test="xy!=null and xy!=''">
+                    and xy =#{xy}
+                </if>
+                <if test="zy!=null and zy!=''">
+                    and zy =#{zy}
+                </if>
+                <if test="nj!=null and nj!=''">
+                    and nj =#{nj}
+                </if>
+                <if test="bj!=null and bj!=''">
+                    and bj =#{bj}
+                </if>
+            </where>
+
     </select>
 </mapper>
