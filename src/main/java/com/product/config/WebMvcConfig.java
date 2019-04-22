@@ -13,6 +13,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Resource
     private UserInterceptor userInterceptor;
 
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
@@ -21,6 +22,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     public void addInterceptors(InterceptorRegistry registry){
         //拦截器，使用时去掉注释
-        //registry.addInterceptor(userInterceptor).addPathPatterns("/**");
+//        registry.addInterceptor()
+//        registry.addInterceptor(userInterceptor).addPathPatterns("/**");
     }
 }

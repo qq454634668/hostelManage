@@ -1,22 +1,26 @@
 package com.product;
 
+
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
 @MapperScan("com.product.mapper")
-public class ProductApplication {
+//@ServletComponentScan
+public class ProductApplication  {
 //public class GcwtpApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(ProductApplication.class, args);
+
+
 	}
 
 
@@ -32,6 +36,6 @@ public class ProductApplication {
 //	}
 //	@Override
 //	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//		return application.sources(GcwtpApplication.class);
+//		return application.sources(ProductApplication.class);
 //	}
 }
