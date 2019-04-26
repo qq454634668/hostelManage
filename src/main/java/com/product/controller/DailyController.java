@@ -235,17 +235,16 @@ public class DailyController {
             param.put("ycwbh",ycwbh);
             String sqcwbh = request.getParameter("sqcwbh");
             param.put("sqcwbh",sqcwbh);
-            
-//            dailyService.verifyAsk(sqrxh,ycwbh,sqcwbh,sqlx);
+            param.put("zxzt","1");//执行状态 申请中
+            dailyService.applyForAsk(param);
             result.put("data",null);
-            result.put("message","退宿操作成功");
+            result.put("message","申请操作成功");
             result.put("code","200");
-        }catch (Exception e){
-            result.put("message","退宿操作失败");
-            result.put("code","500");
-            result.put("data",e.getMessage());
+        }catch (Exception e) {
+            result.put("message", "申请操作失败");
+            result.put("code", "500");
+            result.put("data", e.getMessage());
         }
-
         return result;
     }
     /**--------------------------------宿舍管理 end----------------------------------------*/

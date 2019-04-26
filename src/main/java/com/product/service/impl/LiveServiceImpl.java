@@ -189,7 +189,7 @@ public class LiveServiceImpl implements LiveService {
             for(int i=1;i<Integer.parseInt(fjbz)+1;i++){
                 String cwbh = CodeMakeUtils.decade(""+i);
                 param.put("cwbh",cwbh);
-                String bh =roomzzbh+cwbh+louzt;
+                String bh =roomzzbh+cwbh;
                 param.put("bh",bh);
                 int flag2 =liveMapper.AddBed(param);
                 if(flag2 <= 0){
@@ -225,7 +225,7 @@ public class LiveServiceImpl implements LiveService {
                     for(int a=1;a<Integer.parseInt(fjbz)+1;a++){
                         String cwbh = CodeMakeUtils.decade(""+a);
                         param.put("cwbh",cwbh);
-                        String bh =roomzzbh+cwbh+louzt;
+                        String bh =roomzzbh+cwbh;
                         param.put("bh",bh);
                         int flag2 =liveMapper.AddBed(param);
                         if(flag2 <= 0){

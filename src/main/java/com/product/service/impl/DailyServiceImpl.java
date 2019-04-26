@@ -102,5 +102,11 @@ public class DailyServiceImpl implements DailyService {
 
     }
 
+    @Override
+    @Transactional
+    public void applyForAsk(Map<String, Object> param) {
+
+    }
+
 
 }
