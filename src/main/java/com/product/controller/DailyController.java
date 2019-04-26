@@ -147,18 +147,27 @@ public class DailyController {
     //入住流程----先根据楼展示床位列表----点击床位进行申请--生成申请记录
     /**
      * 入住/换宿/退宿申请记录List
+     * zxzt   ---1申请中  ---2申请成功   ---3申请失败
+     * sqlx   ---1入住    --2换宿        ---3退宿
      */
     @RequestMapping("/applyForList")
     @ResponseBody
-    public Map<String,Object> applyForList(HttpServletRequest request){
+    public Map<String,Object> applyForList(HttpServletRequest request,int pageNum,int pageSize){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
+        List<Map<String,Object>> list=new ArrayList<>();
         try {
-            result.put("data",null);
-            result.put("message","申请记录List操作成功");
+            String zxzt = request.getParameter("zxzt");
+            String sqlx = request.getParameter("sqlx");
+            param.put("zxzt",zxzt);
+            param.put("sqlx",sqlx);
+            list = dailyService.applyForList(param,pageNum,pageSize);
+            PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
+            result.put("data",pageList);
+            result.put("message","入住/换宿/退宿申请记录List操作成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","申请记录List操作失败");
+            result.put("message","入住/换宿/退宿申请记录List操作失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }
@@ -168,11 +177,14 @@ public class DailyController {
 
     /**
      * 审批申请-----同意/不同意申请，同意自动更换或者入住
-     * sqrxh 申请人学号
      * id
+     * sqrxh 申请人学号
      * ycwbh原床位编号
      * sqcwbh申请床位编号
      * sqlx  申请类型
+     * sqlx  申请类型
+     * zxzt  申请状态成功---2/申请状态失败---3
+     * zxjgyy  执行结果原因
      */
     @RequestMapping("/verifyAsk")
     @ResponseBody
@@ -189,7 +201,9 @@ public class DailyController {
             String ycwbh = request.getParameter("ycwbh");
             String sqcwbh = request.getParameter("sqcwbh");
             String sqlx = request.getParameter("sqlx");
-            dailyService.verifyAsk(sqrxh,ycwbh,sqcwbh,sqlx);
+            String zxzt = request.getParameter("zxzt");
+            String zxjgyy = request.getParameter("zxjgyy");
+            dailyService.verifyAsk(sqrxh,ycwbh,sqcwbh,sqlx,zxzt,zxjgyy,id);
             result.put("data",null);
             result.put("message","退宿操作成功");
             result.put("code","200");

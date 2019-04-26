@@ -22,6 +22,19 @@
         <result column="ZTNAME" property="ztname"/>
         <result column="REALNAME" property="realname"/>
     </resultMap>
+    <resultMap id="ApplyAsk" type="java.util.Map">
+        <result column="ID" property="id"/>
+        <result column="BH" property="sqrxm"/>
+        <result column="FJBH" property="sqrxh"/>
+        <result column="FJBZ" property="sqsj"/>
+        <result column="FJBZNAME" property="sqlx"/>
+        <result column="LOUBH" property="zxzt"/>
+        <result column="LOUNAME" property="sqyy"/>
+        <result column="XQBH" property="zxjgyy"/>
+        <result column="XQNAME" property="sqcwbh"/>
+        <result column="GYBH" property="ycwbh"/>
+        <result column="GYNAME" property="spsj"/>
+    </resultMap>
     <resultMap id="StuList" type="java.util.Map">
         <result column="ID" property="id"/>
         <result column="USERNAME" property="username"/>
@@ -157,4 +170,34 @@
     <update id="UpdateStudent" parameterType="java.util.Map">
         update user_student set zszt = #{zt},cwbh=#{cwbh} where xh = #{sqrxh}
     </update>
+    <insert id="applyForAsk" parameterType="java.util.Map">
+        insert into apply_ask(sqrxm,sqrxh,sqsj,sqlx,zxzt,sqyy,sqcwbh,ycwbh)
+					 VALUES (#{sqrxm},#{sqrxh},#{rksj},#{sqlx},#{zxzt},#{sqyy},#{sqcwbh},#{ycwbh})
+    </insert>
+    <update id="updateApply" parameterType="java.util.Map">
+        update apply_ask set zxzt = #{zxzt},zxjgyy=#{zxjgyy},spsj=#{rksj} where  id =#{id}
+    </update>
+    <select id="applyForList" parameterType="java.util.Map" resultMap="ApplyAsk">
+        select t.id,
+               t.sqrxm,
+               t.sqrxh,
+               t.sqsj,
+			  (select name from dictionary a where t.sqlx=a.code and a.lx='sqlx') sqlx,
+			  (select name from dictionary a where t.zxzt=a.code and a.lx='sqzt') zxzt,
+			   t.sqyy,
+               t.zxjgyy,
+               t.sqcwbh,
+               t.ycwbh,
+			   t.spsj
+	from apply_ask t
+	<where>
+        <if test="zxzt!=null and zxzt!=''">
+            and zxzt = #{zxzt}
+        </if>
+        <if test="sqlx!=null and sqlx!=''">
+            and sqlx = #{sqlx}
+        </if>
+
+    </where>
+    </select>
 </mapper>

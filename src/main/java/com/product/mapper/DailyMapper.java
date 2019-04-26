@@ -42,4 +42,19 @@ public interface DailyMapper {
      */
     int UpdateStudent(Map<String,Object> param);
 
+    /**
+     * 生成申请记录
+     */
+    int applyForAsk(Map<String,Object> param);
+
+    /**
+     * 审批申请
+     */
+    int updateApply(Map<String,Object> param);
+
+    /**
+     * 申请列表
+     */
+    List<Map<String,Object>> applyForList(Map<String,Object> param);
+
 }

@@ -73,39 +73,57 @@ public class DailyServiceImpl implements DailyService {
 
     @Override
     @Transactional
-    public void verifyAsk(String sqrxh, String ycwbh, String sqcwbh, String sqlx) {
+    public void verifyAsk(String sqrxh, String ycwbh, String sqcwbh, String sqlx,String zxzt,String zxjgyy,String id) {
         Map<String,Object> param = new HashMap<>();
         param.put("sqrxh",sqrxh);
-        if(sqlx=="1"){
-            //申请入住
-            param.put("zt","2");
-            param.put("cwbh",sqcwbh);
-            dailyMapper.UpdateBed(param);
-            dailyMapper.UpdateStudent(param);
-        }else if(sqlx=="2"){
-            //申请换宿
-            param.put("zt","1");
-            param.put("cwbh",ycwbh);
-            dailyMapper.UpdateBed(param);
-            param.put("zt","2");
-            param.put("cwbh",sqcwbh);
-            dailyMapper.UpdateBed(param);
-            dailyMapper.UpdateStudent(param);
-        }else if(sqlx=="3"){
-            //申请退宿
-            param.put("zt","1");
-            param.put("cwbh",ycwbh);
-            dailyMapper.UpdateBed(param);
-            param.put("cwbh","");
-            dailyMapper.UpdateStudent(param);
+        if(zxzt=="2"){
+            //同意申请
+            if(sqlx=="1"){
+                //申请入住
+                param.put("zt","2");
+                param.put("cwbh",sqcwbh);
+                dailyMapper.UpdateBed(param);
+                dailyMapper.UpdateStudent(param);
+            }else if(sqlx=="2"){
+                //申请换宿
+                param.put("zt","1");
+                param.put("cwbh",ycwbh);
+                dailyMapper.UpdateBed(param);
+                param.put("zt","2");
+                param.put("cwbh",sqcwbh);
+                dailyMapper.UpdateBed(param);
+                dailyMapper.UpdateStudent(param);
+            }else if(sqlx=="3"){
+                //申请退宿
+                param.put("zt","1");
+                param.put("cwbh",ycwbh);
+                dailyMapper.UpdateBed(param);
+                param.put("cwbh","");
+                dailyMapper.UpdateStudent(param);
+            }
+        }else{
+            //不同意申请
         }
-
+        param.put("id",zxzt);
+        param.put("zxzt",zxzt);
+        param.put("zxjgyy",zxjgyy);
+        dailyMapper.updateApply(param);
     }
 
     @Override
     @Transactional
     public void applyForAsk(Map<String, Object> param) {
+        int flag = dailyMapper.applyForAsk(param);
+        if(flag <= 0){
+            throw new RuntimeException("申请记录添加失败");
+        }
 
+    }
+
+    @Override
+    public List<Map<String, Object>> applyForList(Map<String, Object> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return dailyMapper.applyForList(param);
     }
 
 
