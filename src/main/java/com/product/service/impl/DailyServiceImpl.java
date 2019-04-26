@@ -70,4 +70,37 @@ public class DailyServiceImpl implements DailyService {
             }
         }
     }
+
+    @Override
+    @Transactional
+    public void verifyAsk(String sqrxh, String ycwbh, String sqcwbh, String sqlx) {
+        Map<String,Object> param = new HashMap<>();
+        param.put("sqrxh",sqrxh);
+        if(sqlx=="1"){
+            //申请入住
+            param.put("zt","2");
+            param.put("cwbh",sqcwbh);
+            dailyMapper.UpdateBed(param);
+            dailyMapper.UpdateStudent(param);
+        }else if(sqlx=="2"){
+            //申请换宿
+            param.put("zt","1");
+            param.put("cwbh",ycwbh);
+            dailyMapper.UpdateBed(param);
+            param.put("zt","2");
+            param.put("cwbh",sqcwbh);
+            dailyMapper.UpdateBed(param);
+            dailyMapper.UpdateStudent(param);
+        }else if(sqlx=="3"){
+            //申请退宿
+            param.put("zt","1");
+            param.put("cwbh",ycwbh);
+            dailyMapper.UpdateBed(param);
+            param.put("cwbh","");
+            dailyMapper.UpdateStudent(param);
+        }
+
+    }
+
+
 }

@@ -145,7 +145,7 @@ public class DailyController {
 
     /**--------------------------------宿舍管理 start----------------------------------------*/
     //入住流程----先根据楼展示床位列表----点击床位进行申请--生成申请记录
-    /**  applyForAsk--申请
+    /**
      * 入住/换宿/退宿申请记录List
      */
     @RequestMapping("/applyForList")
@@ -167,18 +167,76 @@ public class DailyController {
     }
 
     /**
-     * 申请(入住/换宿/退宿)----同意/不同意申请，同意自动更换或者入住
+     * 审批申请-----同意/不同意申请，同意自动更换或者入住
      * sqrxh 申请人学号
      * id
      * ycwbh原床位编号
      * sqcwbh申请床位编号
+     * sqlx  申请类型
+     */
+    @RequestMapping("/verifyAsk")
+    @ResponseBody
+    public Map<String,Object> verifyAsk(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String created_time = sdf.format(date);
+        param.put("rksj",created_time);
+        try {
+            String id = request.getParameter("id");
+            String sqrxh = request.getParameter("sqrxh");
+            String ycwbh = request.getParameter("ycwbh");
+            String sqcwbh = request.getParameter("sqcwbh");
+            String sqlx = request.getParameter("sqlx");
+            dailyService.verifyAsk(sqrxh,ycwbh,sqcwbh,sqlx);
+            result.put("data",null);
+            result.put("message","退宿操作成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","退宿操作失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+
+        return result;
+    }
+    /**
+     * 申请(入住/换宿/退宿)---生成申请记录
+     * sqrxm 申请人姓名
+     * sqrxh 申请人学号
+     * sqlx  申请类型
+     * sqyy  申请原因
+     * zxjgyy  执行结果原因
+     * ycwbh  原床位编号
+     * sqcwbh  申请床位编号
      */
     @RequestMapping("/applyForAsk")
     @ResponseBody
     public Map<String,Object> applyForAsk(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String created_time = sdf.format(date);
+        param.put("rksj",created_time);
         try {
+            String sqrxm = request.getParameter("sqrxm");
+            param.put("sqrxm",sqrxm);
+            String sqrxh = request.getParameter("sqrxh");
+            param.put("sqrxh",sqrxh);
+            String sqlx = request.getParameter("sqlx");
+            param.put("sqlx",sqlx);
+            String sqyy = request.getParameter("sqyy");
+            param.put("sqyy",sqyy);
+            String zxjgyy = request.getParameter("zxjgyy");
+            param.put("zxjgyy",zxjgyy);
+            String ycwbh = request.getParameter("ycwbh");
+            param.put("ycwbh",ycwbh);
+            String sqcwbh = request.getParameter("sqcwbh");
+            param.put("sqcwbh",sqcwbh);
+            
+//            dailyService.verifyAsk(sqrxh,ycwbh,sqcwbh,sqlx);
             result.put("data",null);
             result.put("message","退宿操作成功");
             result.put("code","200");

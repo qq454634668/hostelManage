@@ -20,4 +20,12 @@ public interface DailyService {
      * 退宿
      */
     void QuitSs(Map<String,Object> param);
+    /**
+     * 同意/不同意申请，同意自动更换或者入住
+     */
+    void verifyAsk(String sqrxh,String ycwbh,String sqcwbh,String sqlx);
+    /**
+     * 入住/换宿/退宿申请
+     */
+    void applyForAsk(Map<String,Object> param);
 }

@@ -33,4 +33,13 @@ public interface DailyMapper {
     int QuitSs1(Map<String,Object> param);
     int QuitSs2(Map<String,Object> param);
 
+    /**
+     *更改床的状态
+     */
+    int UpdateBed(Map<String,Object> param);
+    /**
+     *更改学生入住状态
+     */
+    int UpdateStudent(Map<String,Object> param);
+
 }
