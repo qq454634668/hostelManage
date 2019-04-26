@@ -136,7 +136,7 @@ public class LiveServiceImpl implements LiveService {
             param.put("gybh",gybh);
             param.put("xqbh",xqbh);
             param.put("loubh",loubh);
-            param.put("bh",xqbh+gybh+loubh);
+            param.put("bh",gybh+loubh);
             int flag2 = liveMapper.AddFloor2(param);
             if(flag2 <= 0){
                 throw new RuntimeException("修改失败");

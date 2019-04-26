@@ -9,4 +9,7 @@
     <select id="DicCampus" parameterType="java.util.Map" resultMap="DicMb">
         select bh code,name from campus_info
     </select>
+    <select id="DicApartment" parameterType="java.util.Map" resultMap="DicMb">
+        select bh code,name from apartment_info where xqbh = #{xqbh}
+    </select>
 </mapper>

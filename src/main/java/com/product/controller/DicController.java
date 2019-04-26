@@ -43,10 +43,23 @@ public class DicController {
     }
     /**
      * 公寓字典
-     * xqbh 校区编号
+     * code 校区编号(页面菜单获取下级菜单统一都用code标示编码)
      */
+    @RequestMapping("/DicApartment")
+    @ResponseBody
     public Map<String,Object> DicApartment(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String xqbh = request.getParameter("code");  //校区编号
+            result.put("data",dicService.DicCampus(param));
+            result.put("message","公寓字典查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","公寓字典查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
         return result;
     }
 

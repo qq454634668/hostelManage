@@ -520,7 +520,7 @@ public class LiveController {
             param.put("loubh",loubh);
             param.put("fjbh",fjbh);
             param.put("fjbz",fjbz);
-            param.put("bh",xqbh+gybh+loubh+fjbh);
+            param.put("bh",loubh+fjbh);
             param.put("louzt",louzt);
             liveService.AddRoom(param);
             result.put("data",null);
@@ -616,7 +616,7 @@ public class LiveController {
             param.put("loubh",loubh);
             param.put("fjbh",fjbh);
             param.put("fjbz",fjbz);
-            param.put("bh",xqbh+gybh+loubh+fjbh);
+            param.put("bh",loubh+fjbh);
             param.put("louzt",louzt);
             liveService.EditRoom(param);
             result.put("data",null);
