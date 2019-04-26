@@ -22,4 +22,24 @@ public class DicServiceImpl implements DicService {
     public List<Map<String, Object>> DicCampus(Map<String, Object> param) {
         return dicMapper.DicCampus(param);
     }
+
+    @Override
+    public List<Map<String, Object>> DicApartment(Map<String, Object> param) {
+        return dicMapper.DicApartment(param);
+    }
+
+    @Override
+    public List<Map<String, Object>> DicFloor(Map<String, Object> param) {
+        return dicMapper.DicFloor(param);
+    }
+
+    @Override
+    public List<Map<String, Object>> DicRoom(Map<String, Object> param) {
+        return dicMapper.DicRoom(param);
+    }
+
+    @Override
+    public List<Map<String, Object>> DicGet(Map<String, Object> param) {
+        return dicMapper.DicGet(param);
+    }
 }

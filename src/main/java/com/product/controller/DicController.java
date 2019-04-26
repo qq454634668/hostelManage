@@ -52,11 +52,78 @@ public class DicController {
         Map<String,Object> param = new HashMap<>();
         try{
             String xqbh = request.getParameter("code");  //校区编号
-            result.put("data",dicService.DicCampus(param));
+            param.put("xqbh",xqbh);
+            result.put("data",dicService.DicApartment(param));
             result.put("message","公寓字典查询成功");
             result.put("code","200");
         }catch (Exception e){
             result.put("message","公寓字典查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**
+     * 楼字典
+     * code公寓编号(页面菜单获取下级菜单统一都用code标示编码)
+     */
+    @RequestMapping("/DicFloor")
+    @ResponseBody
+    public Map<String,Object> DicFloor(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String gybh = request.getParameter("code");  //公寓编号
+            param.put("gybh",gybh);
+            result.put("data",dicService.DicFloor(param));
+            result.put("message","楼字典查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","楼字典查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**
+     * 房间字典
+     * code 楼编号(页面菜单获取下级菜单统一都用code标示编码)
+     */
+    @RequestMapping("/DicRoom")
+    @ResponseBody
+    public Map<String,Object> DicRoom(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String loubh = request.getParameter("code");  //公寓编号
+            param.put("loubh",loubh);
+            result.put("data",dicService.DicRoom(param));
+            result.put("message","房间字典查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","房间字典查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**
+     * 字典表字典查询
+     * lx 字典类型（ 对应文件  字典.xlsx）
+     */
+    @RequestMapping("/DicGet")
+    @ResponseBody
+    public Map<String,Object> DicGet(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String lx = request.getParameter("lx");  //公寓编号
+            param.put("lx",lx);
+            result.put("data",dicService.DicGet(param));
+            result.put("message","字典表字典查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","字典表字典查询失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }

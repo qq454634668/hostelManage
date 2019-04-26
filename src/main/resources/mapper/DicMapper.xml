@@ -12,4 +12,13 @@
     <select id="DicApartment" parameterType="java.util.Map" resultMap="DicMb">
         select bh code,name from apartment_info where xqbh = #{xqbh}
     </select>
+    <select id="DicFloor" parameterType="java.util.Map" resultMap="DicMb">
+        select bh code,name from floor_info where gybh =#{gybh}
+    </select>
+    <select id="DicRoom" parameterType="java.util.Map" resultMap="DicMb">
+        select bh code,name from room_info where loubh =#{loubh}
+    </select>
+    <select id="DicGet" parameterType="java.util.Map" resultMap="DicMb">
+       SELECT  code,name from dictionary where lx =#{lx}
+    </select>
 </mapper>
