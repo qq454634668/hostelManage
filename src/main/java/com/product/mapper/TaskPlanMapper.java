@@ -13,7 +13,7 @@ public interface TaskPlanMapper {
      **/
     int InsTaskDet(Map<String,Object> param);
     /**
-     * 更新学生分配状态为未分配
+     * 更新学生分配状态成分配中
      **/
     int UpStuFpzt(Map<String,Object> param);
 
@@ -25,4 +25,25 @@ public interface TaskPlanMapper {
      *可划分选择人群---选择学生
      */
     List<Map<String,Object>> ChooseStu(Map<String,Object> param);
+    /**
+     *更新学生分配状态成未分配
+     */
+    int UpStuFpztW(Map<String,Object> param);
+    /**
+     *删除详情任务表
+     */
+    int DelTaskDe(Map<String,Object> param);
+    /**
+     *删除基础任务表
+     */
+    int DelTaskBa(Map<String,Object> param);
+
+    /**
+     * 任务表
+     */
+    List<Map<String,Object>> taskBaseList(Map<String,Object> param);
+    /**
+     * 任务对应学生信息
+     */
+    List<Map<String,Object>> taskDeStu(Map<String,Object> param);
 }

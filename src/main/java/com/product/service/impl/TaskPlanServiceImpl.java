@@ -1,6 +1,7 @@
 package com.product.service.impl;
 
 
+import com.github.pagehelper.PageHelper;
 import com.product.mapper.TaskPlanMapper;
 import com.product.service.TaskPlanService;
 import org.springframework.stereotype.Service;
@@ -60,5 +61,28 @@ public class TaskPlanServiceImpl implements TaskPlanService {
     @Override
     public List<Map<String, Object>> ChooseStu(Map<String, Object> param) {
         return taskPlanMapper.ChooseStu(param);
+    }
+
+    @Override
+    @Transactional
+    public void DelTaskPlan(Map<String, Object> param) {
+        //更新学生任务状态为未分配
+        taskPlanMapper.UpStuFpztW(param);
+        //删除基础任务表
+        taskPlanMapper.DelTaskBa(param);
+        //删除详情任务表
+        taskPlanMapper.DelTaskDe(param);
+    }
+
+    @Override
+    public List<Map<String, Object>> taskBaseList(Map<String, Object> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return taskPlanMapper.taskBaseList(param);
+    }
+
+    @Override
+    public List<Map<String, Object>> taskDeStu(Map<String, Object> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return taskPlanMapper.taskDeStu(param);
     }
 }

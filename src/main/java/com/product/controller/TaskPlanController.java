@@ -1,5 +1,6 @@
 package com.product.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.product.service.DicService;
 import com.product.service.TaskPlanService;
 import org.springframework.stereotype.Controller;
@@ -9,9 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 任务计划
@@ -105,7 +104,6 @@ public class TaskPlanController {
      * nj 年级（默认为空）
      * bj 班级（默认为空）
      *
-     * http://localhost:8080/taskPlan/EmptyBed?hfgz=2&hfbh=02
      */
     @RequestMapping("/ChooseStus")
     @ResponseBody
@@ -134,4 +132,85 @@ public class TaskPlanController {
         return result;
     }
 
+
+
+    /**
+     * 删除计划     ***可以删除未执行的任务/执行完的任务不能删除
+     * rwbh  任务编号
+     */
+    @RequestMapping("/DelTaskPlan")
+    @ResponseBody
+    public Map<String,Object> DelTaskPlan(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String rwbh = request.getParameter("rwbh");
+            param.put("rwbh",rwbh);
+            taskPlanService.DelTaskPlan(param);
+            result.put("data",null);
+            result.put("message","删除计划成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","删除计划失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**
+     * 任务计划列表List
+     * zt  1-任务中 2-任务完成  3--任务失败
+     * pageSize
+     * pageNum
+     */
+    @RequestMapping("/taskBaseList")
+    @ResponseBody
+    public Map<String,Object> taskBaseList(HttpServletRequest request,int pageNum,int pageSize){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        List<Map<String,Object>> list=new ArrayList<>();
+        try {
+            String zt = request.getParameter("zt");
+            param.put("zt",zt);
+            list = taskPlanService.taskBaseList(param,pageNum,pageSize);
+            PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
+            result.put("data",pageList);
+            result.put("message","任务计划列表List查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","任务计划列表List查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+
+        return result;
+    }
+    /**
+     * 任务对应学生信息List
+     * rwbh   任务编号
+     * pageSize
+     * pageNum
+     */
+    @RequestMapping("/taskDeStu")
+    @ResponseBody
+    public Map<String,Object> taskDeStu(HttpServletRequest request,int pageNum,int pageSize){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        List<Map<String,Object>> list=new ArrayList<>();
+        try {
+            String rwbh = request.getParameter("rwbh");
+            param.put("rwbh",rwbh);
+            list = taskPlanService.taskDeStu(param,pageNum,pageSize);
+            PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
+            result.put("data",pageList);
+            result.put("message","任务计划列表List查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","任务计划列表List查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+
+        return result;
+    }
 }
