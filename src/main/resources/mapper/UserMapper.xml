@@ -11,4 +11,10 @@
     <select id="existUser" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(1) from t_customer t1 where t1.c_userid = #{c_userid}
     </select>
+    <update id="">
+        <foreach collection="userList" item="item" index="index" separator=";"  open="" close="">
+            update user_student <set>fpzt='2'</set>
+            <where> id= #{item.user_student_id}</where>
+        </foreach>
+    </update>
 </mapper>

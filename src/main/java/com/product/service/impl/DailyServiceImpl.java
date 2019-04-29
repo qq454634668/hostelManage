@@ -82,6 +82,7 @@ public class DailyServiceImpl implements DailyService {
                 //申请入住
                 param.put("zt","2");
                 param.put("cwbh",sqcwbh);
+                param.put("fpzt","3");
                 dailyMapper.UpdateBed(param);
                 dailyMapper.UpdateStudent(param);
             }else if(sqlx=="2"){
@@ -91,6 +92,7 @@ public class DailyServiceImpl implements DailyService {
                 dailyMapper.UpdateBed(param);
                 param.put("zt","2");
                 param.put("cwbh",sqcwbh);
+                param.put("fpzt","3");
                 dailyMapper.UpdateBed(param);
                 dailyMapper.UpdateStudent(param);
             }else if(sqlx=="3"){
@@ -99,6 +101,7 @@ public class DailyServiceImpl implements DailyService {
                 param.put("cwbh",ycwbh);
                 dailyMapper.UpdateBed(param);
                 param.put("cwbh","");
+                param.put("fpzt","1");
                 dailyMapper.UpdateStudent(param);
             }
         }else{
