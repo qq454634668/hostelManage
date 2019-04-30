@@ -3,11 +3,13 @@ package com.product.controller;
 import com.product.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,19 +38,21 @@ public class UserController {
     }
 
     /**
+     * @RequestParam 必填/@RequestParam(required=flase) 非必填
      * 登录
+     * username   用户名
+     * password   密码
      */
     @RequestMapping("/login")
     @ResponseBody
-    public Map<String,Object> login(HttpServletRequest request, HttpServletResponse response){
+    public Map<String,Object> login(HttpSession session,
+                                    @RequestParam String username,
+                                    @RequestParam String password){
         Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        param.put("username",username);
+        param.put("password",password);
         return result;
     }
-
-
-
-
-
-
 
 }
