@@ -3,12 +3,12 @@ package com.product.pojo;
 
 public class UserStudent {
 
-  private int id;
+  private long id;
   private String username;
   private String password;
   private String zszt;
   private String qjzt;
-  private int parentId;
+  private long patriarchId;
   private String lxdh;
   private String jzlxdh;
   private String xh;
@@ -19,7 +19,6 @@ public class UserStudent {
   private String zy;
   private String nj;
   private String bj;
-  private String bjbh;
   private String xq;
   private String sfzh;
   private String jg;
@@ -32,7 +31,7 @@ public class UserStudent {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -73,12 +72,12 @@ public class UserStudent {
   }
 
 
-  public long getParentId() {
-    return parentId;
+  public long getPatriarchId() {
+    return patriarchId;
   }
 
-  public void setParentId(int parentId) {
-    this.parentId = parentId;
+  public void setPatriarchId(long patriarchId) {
+    this.patriarchId = patriarchId;
   }
 
 
@@ -169,15 +168,6 @@ public class UserStudent {
 
   public void setBj(String bj) {
     this.bj = bj;
-  }
-
-
-  public String getBjbh() {
-    return bjbh;
-  }
-
-  public void setBjbh(String bjbh) {
-    this.bjbh = bjbh;
   }
 
 

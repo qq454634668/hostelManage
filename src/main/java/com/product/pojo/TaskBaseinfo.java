@@ -4,14 +4,22 @@ package com.product.pojo;
 public class TaskBaseinfo {
 
   private int id;
-  private String taskId;
+  private String rwbh;
   private String taskName;
   private String kssj;
   private String jssj;
   private String zt;
   private String hfgz;
+  private String hfbh;
   private String rksj;
 
+  public String getHfbh() {
+    return hfbh;
+  }
+
+  public void setHfbh(String hfbh) {
+    this.hfbh = hfbh;
+  }
 
   public int getId() {
     return id;
@@ -22,14 +30,13 @@ public class TaskBaseinfo {
   }
 
 
-  public String getTaskId() {
-    return taskId;
+  public String getRwbh() {
+    return rwbh;
   }
 
-  public void setTaskId(String taskId) {
-    this.taskId = taskId;
+  public void setRwbh(String rwbh) {
+    this.rwbh = rwbh;
   }
-
 
   public String getTaskName() {
     return taskName;

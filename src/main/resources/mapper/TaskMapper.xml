@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.product.mapper.TaskMapper">
+    <resultMap id="TaskBaseinfoMap" type="com.product.pojo.TaskBaseinfo">
+        <result column="id" property="id"/>
+        <result column="task_id" property="taskId"/>
+        <result column="task_name" property="taskName"/>
+        <result column="kssj" property="kssj"/>
+        <result column="jssj" property="jssj"/>
+        <result column="zt" property="zt"/>
+        <result column="hfgz" property="hfgz"/>
+        <result column="hfbh" property="hfbh"/>
+        <result column="rksj" property="rksj"/>
+    </resultMap>
+
+    <resultMap id="TaskDetailedMap" type="com.product.pojo.TaskDetailed">
+        <result column="id" property="id"/>
+        <result column="rwbh" property="rwbh"/>
+        <result column="task_name" property="taskName"/>
+        <result column="zt" property="zt"/>
+        <result column="rksj" property="rksj"/>
+        <association property="userStudent"   javaType="com.product.pojo.UserStudent" >
+            <id column="id" property="id"/>
+            <result column="xh" property="xh" />
+        </association>
+    </resultMap>
+    <resultMap id="BedInfoMap" type="com.product.pojo.BedInfo">
+        <id column="id" property="id"/>
+        <result column="bh" property="bh"/>
+        <result column="louzt" property="louzt" />
+    </resultMap>
+    <select id="getTaskBaseinfoList" resultMap="TaskBaseinfoMap" parameterType="java.util.Map">
+        select * from task_baseinfo
+            <where>
+                <if test="task_zt!=null and task_zt!=''">
+                    and zt = #{task_zt}
+                </if>
+                <if test="task_now!=null and task_now!=''">
+                    and  kssj <![CDATA[ <= ]]>  #{task_now} and  #{task_now}  <![CDATA[ <= ]]>  jssj
+                </if>
+            </where>
+                    <!--||'%' mysql 不能这么拼-->
+    </select>
+
+    <select id="getTaskDetailedList" resultMap="TaskDetailedMap" parameterType="java.util.Map">
+        select td.*,us.xh from task_detailed td join user_student us on td.user_student_id= us.id
+        <where>
+            <if test="task_rwbh!=null and task_rwbh!=''">
+                and td.rwbh = #{task_rwbh}
+            </if>
+            <if test="task_student_zt !=null">
+                and td.zt = #{task_student_zt}
+            </if>
+            <if test="student_xb!=null and student_xb!=''">
+                and us.xb = #{student_xb}
+            </if>
+            order by us.bj
+        </where>
+
+    </select>
+
+    <select id="getBedInfoList" resultMap="BedInfoMap" parameterType="java.util.Map">
+        select * from bed_info
+        <where>
+            <if test="bed_zt!=null and bed_zt!=''">
+               and zt=#{bed_zt}
+            </if>
+            <if test="bed_lx =='1'">
+               and loubh=#{bed_bh}
+            </if>
+            <if test="bed_lx =='2'">
+                and xqbh=#{bed_bh}
+            </if>
+            <if  test = "bed_louzt!=null and bed_louzt!=''">
+                and louzt=#{bed_louzt}
+            </if>
+        </where>
+        order by bh
+    </select>
+    <update id="updateBedInfo" parameterType="java.util.Map">
+        <foreach collection="list" item="bed"  index="index" separator=";">
+            update bed_info
+            <set>
+                zt=${bed_zt}
+            </set>
+            <where>
+                bh=${bed.bh}
+            </where>
+        </foreach>
+    </update>
+    <update id="updateTaskBaseInfo" parameterType="java.util.Map">
+        update  task_baseinfo
+        <set>
+            <if test="task_zt!=null and task_zt!=null">
+                zt = #{task_zt}
+            </if>
+        </set>
+        where rwbh=#{task_bh}
+    </update>
+    <update id="updateTaskDetailed" parameterType="java.util.Map">
+        <foreach collection="list" item="task" index="index" separator=";">
+            update task_detailed
+            <set>
+                <if test="task_detailed_zt!=null and task_detailed_zt!=''">
+                    zt = #{task_detailed_zt}
+                </if>
+            </set>
+            <where>
+                id = #{task.id}
+            </where>
+
+        </foreach>
+    </update>
+
+
+    <!--
+    <update id="updateTaskDetailed" parameterType="java.util.Map">
+         <foreach collection="list" separator=";" item="taskdetail">
+            update task_detailed
+        <set>
+            <if test="task_detailed_zt!=null and task_detailed_zt!=''">
+                zt = #{task_detailed_zt}
+            </if>
+        </set>
+        where id = #{task_detailed_id}
+         </foreach>
+
+
+    </update>
+    <update id="updateBedInfo" parameterType="java.util.Map">
+        update bed_info
+        <set>
+            <if test="bed_zt!=null and bed_zt!=''">
+                zt = #{bed_zt}
+            </if>
+        </set>
+        where bh = #{bed_bh}
+    </update>
+    <update id="updateUserSutdent" parameterType="java.util.Map">
+
+        <foreach collection="list" separator=";" item="stu">
+            update user_student
+            <set>
+                <if test="user_student_fpzt!=null and user_student_fpzt!=''">
+                    fpzt=#{user_student_fpzt}
+                </if>
+                <if test="user_student_cwbh!=null and user_student_cwbh!=''">
+                    cwbh=#{user_student_cwbh}
+                </if>
+                <if test="user_student_zszt!= null and user_student_zszt!=''">
+                    zszt=#{user_student_zszt}
+                </if>
+            </set>
+            where xh=#{stu.xh}
+        </foreach>
+    </update>
+
+-->
+    <update id="updateUserSutdent" parameterType="java.util.Map">
+        <foreach collection="list" item="stu" index="index" separator=";">
+        update user_student
+        <set>
+            <if test="user_student_fpzt!=null and user_student_fpzt!=''">
+                fpzt=#{user_student_fpzt},
+            </if>
+            <if test="stu.cwbh!=null and stu.cwbh!=''">
+                cwbh=#{stu.cwbh},
+            </if>
+            <if test="stu.cwbh==null or stu.cwbh==''">
+                cwbh=null,
+            </if>
+
+            <if test="user_student_zszt!= null and user_student_zszt!=''">
+                zszt=#{user_student_zszt}
+            </if>
+        </set>
+        where xh=#{stu.xh}
+        </foreach>
+    </update>
+
+</mapper>
