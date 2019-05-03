@@ -59,6 +59,8 @@ public class DailyController {
      * zy 专业
      * nj 年级
      * bj  班级
+     *  pageSize
+     *  pageNum
      */
     @RequestMapping("/StudentList")
     @ResponseBody
@@ -149,6 +151,8 @@ public class DailyController {
      * 入住/换宿/退宿申请记录List
      * zxzt   ---1申请中  ---2申请成功   ---3申请失败
      * sqlx   ---1入住    --2换宿        ---3退宿
+     *  pageSize
+     *  pageNum
      */
     @RequestMapping("/applyForList")
     @ResponseBody

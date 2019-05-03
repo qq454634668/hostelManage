@@ -24,4 +24,8 @@ public interface DicService {
      * 字典查询
      **/
     List<Map<String,Object>> DicGet(Map<String,Object> param);
+    /**
+     * 字典子查询
+     **/
+    List<Map<String,Object>> DicGetS(Map<String,Object> param);
 }

@@ -21,4 +21,7 @@
     <select id="DicGet" parameterType="java.util.Map" resultMap="DicMb">
        SELECT  code,name from dictionary where lx =#{lx}
     </select>
+    <select id="DicGetS" parameterType="java.util.Map" resultMap="DicMb">
+       SELECT  code,name from dictionary where lx =#{lx} and parent_id =#{id}
+    </select>
 </mapper>

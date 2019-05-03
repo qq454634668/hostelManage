@@ -153,13 +153,13 @@
 
     </select>
     <update id="MoveInto" parameterType="java.util.Map">
-        update user_student set zszt = '2',cwbh=#{cwbh} where xh = #{xh}
+        update user_student set zszt = '2',cwbh=#{cwbh},fpzt='3' where xh = #{xh}
     </update>
     <update id="MoveInto2" parameterType="java.util.Map">
         update bed_info set zt = '2' where bh = #{cwbh}
     </update>
     <update id="QuitSs1" parameterType="java.util.Map">
-        update user_student set zszt = '1',cwbh='' where cwbh = #{cwbh}
+        update user_student set zszt = '1',cwbh='',fpzt='1' where cwbh = #{cwbh}
     </update>
     <update id="QuitSs2" parameterType="java.util.Map">
         update bed_info set zt = '1' where bh = #{cwbh}
@@ -168,7 +168,7 @@
             update bed_info set zt = #{zt},rksj=#{rksj} where  bh =#{cwbh}
     </update>
     <update id="UpdateStudent" parameterType="java.util.Map">
-        update user_student set zszt = #{zt},cwbh=#{cwbh} where xh = #{sqrxh}
+        update user_student set zszt = #{zt},cwbh=#{cwbh},fpzt=#{fpzt} where xh = #{sqrxh}
     </update>
     <insert id="applyForAsk" parameterType="java.util.Map">
         insert into apply_ask(sqrxm,sqrxh,sqsj,sqlx,zxzt,sqyy,sqcwbh,ycwbh)

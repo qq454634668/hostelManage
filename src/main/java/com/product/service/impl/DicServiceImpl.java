@@ -42,4 +42,8 @@ public class DicServiceImpl implements DicService {
     public List<Map<String, Object>> DicGet(Map<String, Object> param) {
         return dicMapper.DicGet(param);
     }
+    @Override
+    public List<Map<String, Object>> DicGetS(Map<String, Object> param) {
+        return dicMapper.DicGet(param);
+    }
 }

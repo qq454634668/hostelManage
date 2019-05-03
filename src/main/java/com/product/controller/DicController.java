@@ -108,7 +108,7 @@ public class DicController {
         return result;
     }
     /**
-     * 字典表字典查询
+     * 字典表字典查询---1级菜单
      * lx 字典类型（ 对应文件  字典.xlsx）
      */
     @RequestMapping("/DicGet")
@@ -129,5 +129,29 @@ public class DicController {
         }
         return result;
     }
-
+    /**
+     * 字典表字典查询---下（子）级菜单
+     * lx 字典类型（ 对应文件  字典.xlsx）
+     * id 上级菜单ID
+     */
+    @RequestMapping("/DicGetS")
+    @ResponseBody
+    public Map<String,Object> DicGetS(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            String lx = request.getParameter("lx");  //公寓编号
+            String id = request.getParameter("id");  //公寓编号
+            param.put("lx",lx);
+            param.put("id",id);
+            result.put("data",dicService.DicGetS(param));
+            result.put("message","字典表字典查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","字典表字典查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
 }

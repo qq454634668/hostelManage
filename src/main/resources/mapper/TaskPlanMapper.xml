@@ -6,6 +6,46 @@
         <result column="CODE" property="code"/>
         <result column="NAME" property="name"/>
     </resultMap>
+    <resultMap id="ValueMb" type="java.util.Map">
+        <result column="NUM" property="num"/>
+        <result column="NAME" property="name"/>
+    </resultMap>
+    <resultMap id="taskBaseList" type="java.util.Map">
+        <result column="ID" property="id"/>
+        <result column="RWBH" property="rwbh"/>
+        <result column="TASK_NAME" property="task_name"/>
+        <result column="KSSJ" property="kssj"/>
+        <result column="JSSJ" property="jssj"/>
+        <result column="HFBH" property="hfbh"/>
+        <result column="ZT" property="zt"/>
+        <result column="HFGZ" property="hfgz"/>
+    </resultMap>
+    <resultMap id="StuList" type="java.util.Map">
+        <result column="ID" property="id"/>
+        <result column="USERNAME" property="username"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="ZSZT" property="zszt"/>
+        <result column="ZSZTNAME" property="zsztname"/>
+        <result column="QJZT" property="qjzt"/>
+        <result column="QJZTNAME" property="qjztname"/>
+        <result column="PATRIARCHID" property="patriarchid"/>
+        <result column="LXDH" property="lxdh"/>
+        <result column="JZLXDH" property="jzlxdh"/>
+        <result column="XH" property="xh"/>
+        <result column="REALNAME" property="realname"/>
+        <result column="XB" property="xb"/>
+        <result column="LB" property="lb"/>
+        <result column="XY" property="xy"/>
+        <result column="ZY" property="zy"/>
+        <result column="NJ" property="nj"/>
+        <result column="BJ" property="bj"/>
+        <result column="XQ" property="xq"/>
+        <result column="SFZH" property="sfzh"/>
+        <result column="JG" property="jg"/>
+        <result column="CWBH" property="cwbh"/>
+        <result column="FPZT" property="fpzt"/>
+        <result column="RKSJ" property="rksj"/>
+    </resultMap>
     <select id="DicCampus" parameterType="java.util.Map" resultMap="DicMb">
         select bh code,name from campus_info
     </select>
@@ -24,4 +64,77 @@
                                     )
                                 </foreach>
     </insert>
+    <update id="UpStuFpzt" parameterType="java.util.Map">
+        update user_student set fpzt='2',zszt='2'
+        <where> id in
+            <foreach collection="users" item="item" index="index" separator=","  open="(" close=")">
+                #{item}
+            </foreach>
+        </where>
+    </update>
+    <select id="EmptyBed" parameterType="java.util.Map" resultMap="ValueMb">
+        <if test="hfgz==1">
+            select a.name,a.num from (
+            select  count(*) num,'男' name from bed_info t where loubh =#{hfbh} and t.louzt='1'
+            union all
+            select  count(*) num,'女' name from bed_info t where loubh =#{hfbh} and t.louzt='2'
+            ) a
+        </if>
+        <if test="hfgz==2">
+            select a.name,a.num from (
+            select  count(*) num,'男' name from bed_info t where xqbh =#{hfbh} and t.louzt='1'
+            union all
+            select  count(*) num,'女' name from bed_info t where xqbh =#{hfbh} and t.louzt='2'
+            ) a
+        </if>
+    </select>
+    <select id="ChooseStu" parameterType="java.util.Map" resultMap="StuList">
+        select t.id,t.username,t.realname,t.lxdh,t.xh,
+        (select name from dictionary a where a.code = t.xb and a.lx='xb') xb,
+        (select name from dictionary a where a.code = t.lb and a.lx='studylb') lb,
+        (select name from dictionary a where a.code = t.xy and a.lx='xy') xy,
+        (select name from dictionary a where a.code = t.zy and a.lx='zy') zy
+        from
+        user_student t
+        <where>
+            t.zszt = '1'
+            and t.fpzt ='1'
+            <if test="xy!=null and xy!=''">
+                and xy =#{xy}
+            </if>
+            <if test="zy!=null and zy!=''">
+                and zy =#{zy}
+            </if>
+            <if test="nj!=null and nj!=''">
+                and nj =#{nj}
+            </if>
+            <if test="bj!=null and bj!=''">
+                and bj =#{bj}
+            </if>
+        </where>
+    </select>
+    <update id="UpStuFpztW" parameterType="java.util.Map">
+        update user_student t set fpzt = '1',zszt='1'
+          where t.id in (select user_student_id from task_detailed a where a.rwbh = #{rwbh})
+    </update>
+    <delete id="DelTaskDe" parameterType="java.util.Map">
+        delete from task_detailed where rwbh = #{rwbh}
+    </delete>
+    <delete id="DelTaskBa" parameterType="java.util.Map">
+        delete from task_baseinfo where rwbh = #{rwbh}
+    </delete>
+    <select id="taskBaseList" parameterType="java.util.Map" resultMap="taskBaseList">
+        select t.id,t.rwbh,t.task_name,t.kssj,t.jssj,hfbh
+			(select name from dictionary a where a.code = t.zt and a.lx='task') zt,
+			(select name from dictionary a where a.code = t.hfgz and a.lx='allocation') hfgz
+			 from task_baseinfo t where t.zt =#{zt}
+    </select>
+    <select id="taskDeStu" parameterType="java.util.Map" resultMap="StuList">
+        select  t.id,t.username,t.realname,t.lxdh,t.xh,
+        (select name from dictionary a where a.code = t.xb and a.lx='xb') xb,
+        (select name from dictionary a where a.code = t.lb and a.lx='studylb') lb,
+        (select name from dictionary a where a.code = t.xy and a.lx='xy') xy,
+        (select name from dictionary a where a.code = t.zy and a.lx='zy') zy
+      from task_detailed t1,user_student t where t1.rwbh = #{rwbh} and t1.user_student_id=t.id
+    </select>
 </mapper>
