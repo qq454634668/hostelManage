@@ -1,35 +1,32 @@
 package com.product.config;
 
+import com.product.pojo.TaskBaseinfo;
+import com.product.pojo.TaskDetailed;
+import com.product.pojo.UserStudent;
+import com.product.service.TaskService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import javax.annotation.Resource;
-import java.util.Date;
+
+
 
 @Configuration
 @EnableScheduling
 public class TimeTask {
 
-    /**
-     * 更新票数
-     * 每天0时更新
-     */
-//    @Scheduled(cron = "0 0 0 * * ?")
-//    @Scheduled(cron = "0 0/1 * * * ?")
-    public void gxPs(){
-        Date date = new Date();
-        System.out.println(date+"定时任务，更新票数成功");
-    }
 
-    /**
-     * 更新排名
-     * 5分钟更新一次
-     */
+    @Autowired
+    private TaskService taskService;
 
-//    @Scheduled(cron = "0 0/5 * * * ?")
-    public void gxPm(){
-        Date date = new Date();
-        System.out.println("更新排名开始时间"+date);
+
+    @Scheduled(cron = "0/30 * * * * ?")
+    public void autoMode(){
+
+        taskService.rwfp();
+
     }
 }

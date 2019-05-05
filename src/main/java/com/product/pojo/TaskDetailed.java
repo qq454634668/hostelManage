@@ -1,11 +1,11 @@
 package com.product.pojo;
-
+import com.product.pojo.UserStudent;
 
 public class TaskDetailed {
 
   private int id;
   private String rwbh;
-  private int userStudentId;
+  private UserStudent userStudent;
   private String rksj;
   private String zt;
 
@@ -28,14 +28,6 @@ public class TaskDetailed {
   }
 
 
-  public int getUserStudentId() {
-    return userStudentId;
-  }
-
-  public void setUserStudentId(int userStudentId) {
-    this.userStudentId = userStudentId;
-  }
-
 
   public String getRksj() {
     return rksj;
@@ -54,4 +46,11 @@ public class TaskDetailed {
     this.zt = zt;
   }
 
+  public UserStudent getUserStudent() {
+    return userStudent;
+  }
+
+  public void setUserStudent(UserStudent userStudent) {
+    this.userStudent = userStudent;
+  }
 }
