@@ -22,20 +22,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    // customer用户端
-    /**
-     *
-     * @param c_userid  登录用户名
-     * @return   返回结果   返回0是用户不存在，1是用户存在
-     */
-    @RequestMapping("/customer/existUser")
-    @ResponseBody
-    public int existUser(String c_userid){
-        Map<String,Object> param = new HashMap<>();
-        param.put("c_userid",c_userid);
-        int exist = userService.existUser(param);
-        return exist;
-    }
 
     @RequestMapping("/test")
     @ResponseBody
@@ -128,7 +114,7 @@ public class UserController {
             Object rolename = session.getAttribute("rolename");
             Object username = session.getAttribute("username");
             Object xy = session.getAttribute("xy");
-            if(id!=""&&id!=null){
+            if(id==""||id==null){
                 //如果ID为空,直接返回空userInfo
                 return userInfo;
             }else{
