@@ -72,4 +72,9 @@ public interface PurviewService {
      *可选择菜单
      */
     List<Map<String, Object>> SelectMenu(Map<String,Object> param);
+
+    /**
+     * 权限列表
+     */
+    List<Map<String, Object>> RoleList(Map<String,Object> param);
 }

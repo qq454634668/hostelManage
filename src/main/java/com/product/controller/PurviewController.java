@@ -329,6 +329,25 @@ public class PurviewController {
         return result;
     }
 
+    /**
+     * 角色列表
+     */
+    @RequestMapping("/RoleList")
+    @ResponseBody
+    public Map<String,Object> RoleList(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            result.put("data",purviewService.RoleList(param));
+            result.put("message","角色列表查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","角色列表查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
     /**--------------------------------角色 end--------------------------------------*/
 
     /**--------------------------------用户 start--------------------------------------*/
@@ -516,7 +535,12 @@ public class PurviewController {
         List<Map<String,Object>> list=new ArrayList<>();
         try{
             String key = request.getParameter("key");
-            param.put("key",'%'+key+'%');
+            if(key!=null &&key!=""){
+                param.put("key",'%'+key+'%');
+            }else{
+                param.put("key","");
+            }
+
             list = purviewService.QueryUserList(param,pageNum,pageSize);
             PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
             result.put("data",pageList);

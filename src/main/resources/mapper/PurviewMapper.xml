@@ -29,6 +29,10 @@
         <result column="PX" property="px"/>
         <result column="ROLE_ID" property="role_id"/>
     </resultMap>
+    <resultMap id="RoleList" type="java.util.Map">
+        <result column="ID" property="id"/>
+        <result column="ROLE_NAME" property="role_name"/>
+    </resultMap>
     <insert id="AddMenu" parameterType="java.util.Map">
          insert into menu_info (name,parent_id,url,icon,px) VALUES (#{name},#{parent_id},#{url},#{icon},#{px})
     </insert>
@@ -104,6 +108,9 @@
     </select>
     <select id="SelectMenu" parameterType="java.util.Map" resultMap="MenuList">
           select t1.*,t.role_id from role_menu t,menu_info t1 where
-              t1.parent_id= '0' and t.menu_id = t1.id
+              t1.parent_id= '0' and t.menu_id = t1.id order by px
+    </select>
+    <select id="RoleList" parameterType="java.util.Map" resultMap="RoleList">
+          select t.id,t.role_name from role_info t
     </select>
 </mapper>

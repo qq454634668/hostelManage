@@ -79,4 +79,9 @@ public interface PurviewMapper {
      */
     List<Map<String, Object>> SelectMenu(Map<String,Object> param);
 
+    /**
+     *权限列表
+     */
+    List<Map<String, Object>> RoleList(Map<String,Object> param);
+
 }

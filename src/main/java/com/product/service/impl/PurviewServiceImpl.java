@@ -207,4 +207,9 @@ public class PurviewServiceImpl implements PurviewService {
     public List<Map<String, Object>> SelectMenu(Map<String, Object> param) {
         return purviewMapper.SelectMenu(param);
     }
+
+    @Override
+    public List<Map<String, Object>> RoleList(Map<String, Object> param) {
+        return purviewMapper.RoleList(param);
+    }
 }
