@@ -99,7 +99,7 @@
                 and gybh =#{gybh}
             </if>
             <if test="loubh!=null and loubh !=''">
-                and loubh =#{loubh}
+                and bh =#{loubh}
             </if>
             <if test="fjbh!=null and fjbh !=''">
                 and fjbh =#{fjbh}
