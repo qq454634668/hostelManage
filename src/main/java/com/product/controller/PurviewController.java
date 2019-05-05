@@ -176,10 +176,26 @@ public class PurviewController {
 
 
     /**--------------------------------角色 start--------------------------------------*/
+
     /**
      * 可选择菜单列表
      */
-
+    @RequestMapping("/SelectMenu")
+    @ResponseBody
+    public Map<String,Object> SelectMenu(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            result.put("data",purviewService.SelectMenu(param));
+            result.put("message","可选择菜单列表查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","可选择菜单列表查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
 
     /**
      * 创建角色

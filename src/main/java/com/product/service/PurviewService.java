@@ -68,4 +68,8 @@ public interface PurviewService {
      *用户列表
      */
     List<Map<String, Object>> QueryUserList(Map<String,Object> param,int pageNum,int pageSize);
+    /**
+     *可选择菜单
+     */
+    List<Map<String, Object>> SelectMenu(Map<String,Object> param);
 }

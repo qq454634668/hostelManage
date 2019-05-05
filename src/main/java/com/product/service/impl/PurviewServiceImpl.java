@@ -202,4 +202,9 @@ public class PurviewServiceImpl implements PurviewService {
         PageHelper.startPage(pageNum,pageSize);
         return purviewMapper.QueryUserList(param);
     }
+
+    @Override
+    public List<Map<String, Object>> SelectMenu(Map<String, Object> param) {
+        return purviewMapper.SelectMenu(param);
+    }
 }

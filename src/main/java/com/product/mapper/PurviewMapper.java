@@ -74,5 +74,9 @@ public interface PurviewMapper {
      */
     List<Map<String, Object>> QueryUserList(Map<String,Object> param);
 
+    /**
+     * 可选择菜单
+     */
+    List<Map<String, Object>> SelectMenu(Map<String,Object> param);
 
 }
