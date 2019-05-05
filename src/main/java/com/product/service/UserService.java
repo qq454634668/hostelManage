@@ -17,4 +17,5 @@ public interface UserService {
      */
     List<Map<String,Object>> menuInfo(Map<String,Object> param);
 
+
 }

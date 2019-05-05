@@ -22,17 +22,17 @@ public interface TaskService {
     public void rwfp();
 
     //查询xb=1的空闲床位
-    public List<BedInfo> getValidBedInfoMaleList(String lx,String bh);
+    public List<BedInfo> getValidBedInfoMaleList(String lx, String bh);
     //查询xb=2的空闲床位
-    public List<BedInfo> getValidBedInfoFeMaleList(String lx,String bh);
+    public List<BedInfo> getValidBedInfoFeMaleList(String lx, String bh);
 
-    public void updateUserSutdent(String fpzt,String cwbh,String zszt,String xh);
-    public void updateTaskDetailed(String taskDetailedZt,long taskDetailedId);
-    public void updateTaskBaseInfo(String zt,String bh);
-    public void updateBedInfo(String zt,String bh);
-    public void updateBedInfo(String zt,List<BedInfo> bedInfos);
-    public void updateTaskDetailed(String taskDetailedZt,List<TaskDetailed> taskDetaileds);
-    public void updateUserSutdent(String fpzt,String zszt,List<BedInfo> bedInfos ,List<TaskDetailed> taskDetaileds);
+    public void updateUserSutdent(String fpzt, String cwbh, String zszt, String xh);
+    public void updateTaskDetailed(String taskDetailedZt, long taskDetailedId);
+    public void updateTaskBaseInfo(String zt, String bh);
+    public void updateBedInfo(String zt, String bh);
+    public void updateBedInfo(String zt, List<BedInfo> bedInfos);
+    public void updateTaskDetailed(String taskDetailedZt, List<TaskDetailed> taskDetaileds);
+    public void updateUserSutdent(String fpzt, String zszt, List<BedInfo> bedInfos, List<TaskDetailed> taskDetaileds);
 
 
 }
