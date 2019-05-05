@@ -165,12 +165,25 @@ public class TaskPlanController {
      */
     @RequestMapping("/taskBaseList")
     @ResponseBody
-    public Map<String,Object> taskBaseList(HttpServletRequest request,int pageNum,int pageSize){
+    public Map<String,Object> taskBaseList(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         List<Map<String,Object>> list=new ArrayList<>();
         try {
+            String pageNumS =request.getParameter("pageNum");
+            String pageSizeS=request.getParameter("pageSize");
+            int pageNum =1;
+            int pageSize =10;
+            if(pageNumS!=null){
+                pageNum = Integer.parseInt(pageNumS);
+            }
+            if(pageSizeS!=null){
+                pageSize= Integer.parseInt(pageSizeS);
+            }
             String zt = request.getParameter("zt");
+            if(zt==null){
+                zt= "1";
+            }
             param.put("zt",zt);
             list = taskPlanService.taskBaseList(param,pageNum,pageSize);
             PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);

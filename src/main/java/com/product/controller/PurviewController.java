@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.product.service.PurviewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -529,12 +530,12 @@ public class PurviewController {
      */
     @RequestMapping("/QueryUserList")
     @ResponseBody
-        public Map<String,Object> QueryUserList(HttpServletRequest request,int pageNum,int pageSize){
+        public Map<String,Object> QueryUserList(@RequestParam(required=false) String key, HttpServletRequest request, int pageNum, int pageSize){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         List<Map<String,Object>> list=new ArrayList<>();
         try{
-            String key = request.getParameter("key");
+//            String key = request.getParameter("key");
             if(key!=null &&key!=""){
                 param.put("key",'%'+key+'%');
             }else{

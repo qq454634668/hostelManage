@@ -33,7 +33,7 @@ public class UserController {
         return result;
     }
     /**
-     * @RequestParam 必填/@RequestParam(required=flase) 非必填
+     * @RequestParam 必填/@RequestParam(required=false) 非必填
      * 登录
      * username   用户名
      * password   密码

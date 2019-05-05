@@ -5,6 +5,7 @@ import com.product.service.LiveService;
 import com.product.util.CodeMakeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -137,11 +138,21 @@ public class LiveController {
      */
     @RequestMapping("/QueryCampusList")
     @ResponseBody
-    public Map<String,Object> QueryUserList(HttpServletRequest request,int pageNum,int pageSize){
+    public Map<String,Object> QueryUserList(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         List<Map<String,Object>> list=new ArrayList<>();
         try{
+            String pageNumS =request.getParameter("pageNum");
+            String pageSizeS=request.getParameter("pageSize");
+            int pageNum =1;
+            int pageSize =10;
+            if(pageNumS!=null){
+                pageNum = Integer.parseInt(pageNumS);
+            }
+            if(pageSizeS!=null){
+                pageSize= Integer.parseInt(pageSizeS);
+            }
             list = liveService.QueryCampusList(param,pageNum,pageSize);
             PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
             result.put("data",pageList);
@@ -166,11 +177,21 @@ public class LiveController {
      */
     @RequestMapping("/QueryApartmentList")
     @ResponseBody
-    public Map<String,Object> QueryApartmentList(HttpServletRequest request,int pageNum,int pageSize){
+    public Map<String,Object> QueryApartmentList(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         List<Map<String,Object>> list=new ArrayList<>();
         try{
+            String pageNumS =request.getParameter("pageNum");
+            String pageSizeS=request.getParameter("pageSize");
+            int pageNum =1;
+            int pageSize =10;
+            if(pageNumS!=null){
+                pageNum = Integer.parseInt(pageNumS);
+            }
+            if(pageSizeS!=null){
+                pageSize= Integer.parseInt(pageSizeS);
+            }
             String xqbh =request.getParameter("xqbh");
             param.put("xqbh",xqbh);
             list = liveService.QueryApartmentList(param,pageNum,pageSize);
@@ -311,11 +332,21 @@ public class LiveController {
      */
     @RequestMapping("/QueryFloorList")
     @ResponseBody
-    public Map<String,Object> QueryFloorList(HttpServletRequest request,int pageNum,int pageSize){
+    public Map<String,Object> QueryFloorList(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         List<Map<String,Object>> list=new ArrayList<>();
         try{
+            String pageNumS =request.getParameter("pageNum");
+            String pageSizeS=request.getParameter("pageSize");
+            int pageNum =1;
+            int pageSize =10;
+            if(pageNumS!=null){
+                pageNum = Integer.parseInt(pageNumS);
+            }
+            if(pageSizeS!=null){
+                pageSize= Integer.parseInt(pageSizeS);
+            }
             String xqbh =request.getParameter("xqbh");
             String gybh =request.getParameter("gybh");
             param.put("xqbh",xqbh);
@@ -464,11 +495,21 @@ public class LiveController {
      */
     @RequestMapping("/QueryRoomList")
     @ResponseBody
-    public Map<String,Object> QueryRoomList(HttpServletRequest request,int pageNum,int pageSize){
+    public Map<String,Object> QueryRoomList(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         List<Map<String,Object>> list=new ArrayList<>();
         try{
+            String pageNumS =request.getParameter("pageNum");
+            String pageSizeS=request.getParameter("pageSize");
+            int pageNum =1;
+            int pageSize =10;
+            if(pageNumS!=null){
+                pageNum = Integer.parseInt(pageNumS);
+            }
+            if(pageSizeS!=null){
+                pageSize= Integer.parseInt(pageSizeS);
+            }
             String xqbh =request.getParameter("xqbh");
             String gybh =request.getParameter("gybh");
             String loubh =request.getParameter("loubh");
@@ -706,11 +747,21 @@ public class LiveController {
      */
     @RequestMapping("/QueryBedList")
     @ResponseBody
-    public Map<String,Object> QueryBedList(HttpServletRequest request,int pageNum,int pageSize){
+    public Map<String,Object> QueryBedList(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         List<Map<String,Object>> list=new ArrayList<>();
         try{
+            String pageNumS =request.getParameter("pageNum");
+            String pageSizeS=request.getParameter("pageSize");
+            int pageNum =1;
+            int pageSize =10;
+            if(pageNumS!=null){
+                pageNum = Integer.parseInt(pageNumS);
+            }
+            if(pageSizeS!=null){
+                pageSize= Integer.parseInt(pageSizeS);
+            }
             String xqbh =request.getParameter("xqbh");
             String gybh =request.getParameter("gybh");
             String loubh =request.getParameter("loubh");
