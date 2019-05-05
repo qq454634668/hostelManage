@@ -8,13 +8,42 @@
         <result column="D_JLDWMC" property="d_jldwmc"/>
         <result column="COMPANY_ID" property="company_id"/>
     </resultMap>
+    <resultMap id="MenuList" type="java.util.Map">
+        <result column="ID" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="PARENT_ID" property="parent_id"/>
+        <result column="URL" property="url"/>
+        <result column="ICON" property="icon"/>
+        <result column="PX" property="px"/>
+        <result column="ROLE_ID" property="role_id"/>
+    </resultMap>
+    <resultMap id="UserList" type="java.util.Map">
+        <result column="ID" property="id"/>
+        <result column="USERNAME" property="username"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="REALNAME" property="realname"/>
+        <result column="LXDH" property="lxdh"/>
+        <result column="XY" property="xy"/>
+        <result column="NJ" property="nj"/>
+        <result column="RKSJ" property="rksj"/>
+        <result column="ROLE_ID" property="role_id"/>
+        <result column="ROLENAME" property="rolename"/>
+    </resultMap>
     <select id="existUser" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(1) from t_customer t1 where t1.c_userid = #{c_userid}
     </select>
-    <update id="">
-        <foreach collection="userList" item="item" index="index" separator=";"  open="" close="">
-            update user_student <set>fpzt='2'</set>
-            <where> id= #{item.user_student_id}</where>
-        </foreach>
-    </update>
+    <select id="UserInfo" parameterType="java.util.Map" resultMap="UserList">
+          select  t.id,t.username,t.realname,t.lxdh,
+          (select name from dictionary a where a.code = t.xy and a.lx='xy') xy,
+          t.nj,t.rksj,
+        (select a.role_name from role_info a where t1.role_id=a.id) rolename,t1.role_id
+        from (select t.* from user_teacher t where t.username =#{username} and t.password = #{password}) t left JOIN user_role t1 on t.id = t1.user_id
+    </select>
+    <select id="MainMenu" parameterType="java.util.Map" resultMap="MenuList">
+          select t1.*,t.role_id from role_menu t,menu_info t1 where
+              t.role_id = #{roleId} and t.menu_id = t1.id
+    </select>
+    <select id="UnderMenu" parameterType="java.util.Map" resultMap="MenuList">
+          select t.* from menu_info t where  t.parent_id = #{id}
+    </select>
 </mapper>
