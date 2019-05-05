@@ -41,7 +41,7 @@
     </select>
     <select id="MainMenu" parameterType="java.util.Map" resultMap="MenuList">
           select t1.*,t.role_id from role_menu t,menu_info t1 where
-              t.role_id = #{roleId} and t.menu_id = t1.id
+              t.role_id = #{roleId} and t.menu_id = t1.id order by px
     </select>
     <select id="UnderMenu" parameterType="java.util.Map" resultMap="MenuList">
           select t.* from menu_info t where  t.parent_id = #{id} order by px
