@@ -539,6 +539,8 @@ public class LiveController {
      * fjbh  房间编号（房间编号输入完就应该检测房间编号是否重复）
      * fjbz  房间标准
      * louzt  楼的状态
+     *
+     * 需要测试
      */
     @RequestMapping("/AddRoom")
     @ResponseBody

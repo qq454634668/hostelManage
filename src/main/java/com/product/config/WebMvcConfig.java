@@ -18,6 +18,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/tz").setViewName("tz");
+        registry.addViewController("/zsgl").setViewName("zsgl");
     }
 
     public void addInterceptors(InterceptorRegistry registry){

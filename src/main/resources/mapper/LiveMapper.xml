@@ -49,6 +49,7 @@
             <result column="CWBH" property="cwbh"/>
             <result column="ZT" property="zt"/>
             <result column="ZTNAME" property="ztname"/>
+            <result column="FJH" property="fjh"/>
         </resultMap>
         <insert id="AddCampus" parameterType="java.util.Map" keyProperty="id" useGeneratedKeys="true">
               insert into campus_info (name,rksj) VALUES (#{name},#{rksj})
@@ -103,7 +104,7 @@
                    xqbh,
                    (select name from campus_info b where  t.xqbh = b.bh) xqname,
                    gybh,
-                   (select name from apartment_info c where  t.gybh = c.gybh) gyname,
+                   (select name from apartment_info c where  t.gybh = c.bh) gyname,
                    loubh,
                    rksj
                from floor_info t
@@ -139,11 +140,11 @@
             fjbz,
             (select name from dictionary a where a.lx='room' and t.fjbz = a.code) fjbzname,
             loubh,
-            (select name from floor_info b where  t.loubh = b.loubh) louname,
+            (select name from floor_info b where  t.loubh = b.bh) louname,
             xqbh,
             (select name from campus_info c where  t.xqbh = c.bh) xqname,
             gybh,
-            (select name from apartment_info d where  t.gybh = d.gybh) gyname,
+            (select name from apartment_info d where  t.gybh = d.bh) gyname,
             louzt,
             (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louztname,
             rksj
@@ -167,7 +168,9 @@
             insert into room_info (fjbh,fjbz,xqbh,gybh,loubh,bh,louzt,rksj) VALUES (#{fjbh},#{fjbz},#{xqbh},#{gybh},#{loubh},#{bh},#{louzt},#{rksj})
         </insert>
         <insert id="AddBed" parameterType="java.util.Map">
-            insert into bed_info (fjbh,fjbz,xqbh,gybh,loubh,bh,louzt,cwbh,rksj) VALUES (#{fjbh},#{fjbz},#{xqbh},#{gybh},#{loubh},#{bh},#{louzt},#{cwbh},#{rksj})
+            insert into bed_info
+            (fjbh,fjbz,xqbh,gybh,loubh,bh,louzt,cwbh,rksj,fjh) VALUES
+            (#{fjbh},#{fjbz},#{xqbh},#{gybh},#{loubh},#{bh},#{louzt},#{cwbh},#{rksj},#{fjh})
         </insert>
         <delete id="DelRoom" parameterType="java.util.Map">
             DELETE from room_info where  fjbh =#{fjbh} and loubh=#{loubh}
@@ -192,17 +195,18 @@
                 t.fjbz,
                 (select name from dictionary a where a.lx='room' and t.fjbz = a.code) fjbzname,
                 t.loubh,
-                (select name from floor_info b where  t.loubh = b.loubh) louname,
+                (select name from floor_info b where  t.loubh = b.bh) louname,
                 t.xqbh,
                 (select name from campus_info c where  t.xqbh = c.bh) xqname,
                 t.gybh,
-                (select name from apartment_info d where  t.gybh = d.gybh) gyname,
+                (select name from apartment_info d where  t.gybh = d.bh) gyname,
                 t.louzt,
                 (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louztname,
                 t.rksj,
                 t.cwbh,
                 t.zt,
-                (select name from dictionary a where a.lx='bed_state' and t.zt = a.code) ztname
+                (select name from dictionary a where a.lx='bed_state' and t.zt = a.code) ztname,
+                fjh
                 from bed_info t
                 <where>
                 <if test="xqbh!=null and xqbh !=''">
