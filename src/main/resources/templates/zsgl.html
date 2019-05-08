@@ -16,7 +16,7 @@
 <script src="plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
 <script src="plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
 <body>
-    <div style="height:auto;width:auto;">
+    <div style="height:auto;width:auto;position:relative;">
         <button id="zsgl_xqgl">校区管理</button>&nbsp;&nbsp;
         <button id="zsgl_gyqgl" type="text">公寓区管理</button>&nbsp;&nbsp;
         <button id="zsgl_ldgl" type="text">楼栋管理</button>&nbsp;&nbsp;
@@ -25,6 +25,26 @@
     </div>
     <div id="tableList">
 
+    </div>
+    <div id="zsgl_xqgl_model" class="hidden_model" hidden="true" style="position:absolute;">
+        <h3>添加校区</h3>
+        校区名称:<input type="text" id="xqgl_name"/>
+        <button id="xqgl_insert_button">新建提交</button>
+    </div>
+    <div id="zsgl_gyqgl_model" class="hidden_model" hidden="true" style="position:absolute;">
+        <div style="margin-left:30px;">
+            <h3>添加公寓</h3>
+            <table >
+                <tr>
+                    <td>校区名:<select  id="gyqgl_xqname" class="log-tk-input"></select></td>
+                </tr>
+                <tr>
+                    <td>公寓名:<input type="text" id="gyqgl_gyname"/></td>
+                </tr>
+
+            </table>
+            <button id="gyqgl_insert_button">新建提交</button>
+        </div>
     </div>
 </body>
 </html>

@@ -183,7 +183,8 @@ var zsgl = {
             align: 'center',
             valign: 'middle'
         }
-    ],zsgl_cwgl_List:[
+    ],
+    zsgl_cwgl_List:[
         // {
         //     field: 'ROW_ID',
         //     title: '序号',
@@ -238,25 +239,68 @@ var zsgl = {
     ],
 }
 var clickFunction = function(){
-    //校区管理
+    //校区管理点击菜单列表
     $('#zsgl_xqgl').click(function(){
         zsgl.tabPageInit("/live/QueryCampusList", {pageSize:10,pageNum:1},"tableList",zsgl.zsgl_xqgl_List, 20);
+        $(".hidden_model").attr("hidden",true);
+        $("#zsgl_xqgl_model").attr("hidden",false);
     });
-    //公寓区管理
+    //公寓区管理点击菜单列表
     $('#zsgl_gyqgl').click(function(){
         zsgl.tabPageInit("/live/QueryApartmentList", {pageSize:10,pageNum:1},"tableList",zsgl.zsgl_gyqgl_List, 20);
+        $(".hidden_model").attr("hidden",true);
+        ajax_Object('/dic/DicCampus',{},function(data){
+            var data = data.data;
+            console.log(data);
+            var option = '<option value="">请选择校区</option>';
+            for (var i = 0;i<data.length;i++){
+                // if(type == data[i].dm){
+                //     option +=   '<option value="'+data[i].dm+'" selected="selected">'+data[i].mc+'</option>'
+                // }else{
+                option +=   '<option value="'+data[i].code+'">'+data[i].name+'</option>'
+                // }
+            };
+            $('#gyqgl_xqname').html(option);
+        });
+        $("#zsgl_gyqgl_model").attr("hidden",false);
     });
-    //楼栋管理
+    //楼栋管理点击菜单列表
     $('#zsgl_ldgl').click(function(){
+        $(".hidden_model").attr("hidden",true);
         zsgl.tabPageInit("/live/QueryFloorList", {pageSize:10,pageNum:1},"tableList",zsgl.zsgl_ldgl_List, 20);
     });
-    //房间管理
+    //房间管理点击菜单列表
     $('#zsgl_fjgl').click(function(){
+        $(".hidden_model").attr("hidden",true);
         zsgl.tabPageInit("/live/QueryRoomList", {pageSize:10,pageNum:1},"tableList",zsgl.zsgl_fjgl_List, 20);
     });
-    //床位管理
+    //床位管理点击菜单列表
     $('#zsgl_cwgl').click(function(){
+        $(".hidden_model").attr("hidden",true);
         zsgl.tabPageInit("/live/QueryBedList", {pageSize:10,pageNum:1},"tableList",zsgl.zsgl_cwgl_List, 20);
+    });
+    //校区管理新建创建
+    $('#xqgl_insert_button').click(function(){
+        var xqgl_name=$("#xqgl_name").val();
+        ajax_Object(
+            '/live/AddCampus',
+            {name:xqgl_name},
+            function(data){
+            alert(data.message);
+        });
+    });
+    //公寓区管理新建创建时间
+    $('#gyqgl_insert_button').click(function(){
+        var gyqgl_xqname=$("#gyqgl_xqname").val();
+        var gyqgl_gyname=$("#gyqgl_gyname").val();
+        alert(gyqgl_xqname);
+        alert(gyqgl_gyname);
+        ajax_Object(
+            '/live/AddApartment',
+            {xqbh:gyqgl_xqname, name:gyqgl_gyname},
+            function(data){
+            alert(data.message);
+        });
     });
 }
 $(function(){

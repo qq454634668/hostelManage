@@ -209,7 +209,7 @@ public class LiveController {
 
     /**
      * 新增公寓区
-     * name  校区名称
+     * name  公寓名称
      * xqbh  校区编号
      */
     @RequestMapping("/AddApartment")
