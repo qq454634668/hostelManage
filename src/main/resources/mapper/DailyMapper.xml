@@ -92,15 +92,6 @@
         (select name from dictionary a where a.lx='bed_state' and t.zt = a.code) ztname
         from bed_info t
         <where>
-            <if test="xqbh!=null and xqbh !=''">
-                and xqbh =#{xqbh}
-            </if>
-            <if test="gybh!=null and gybh !=''">
-                and gybh =#{gybh}
-            </if>
-            <if test="loubh!=null and loubh !=''">
-                and bh =#{loubh}
-            </if>
             <if test="fjbh!=null and fjbh !=''">
                 and fjbh =#{fjbh}
             </if>

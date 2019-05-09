@@ -28,7 +28,7 @@ public class DailyController {
      * 床位按楼的一个根据fjbh分组的list
      * xqbh 校区编号（可以为空,默认查询传空）
      * gybh 公寓编号（可以为空,默认查询传空）
-     *loubh 楼编号  （默认选中第一个，传第一个） 01
+     *loubh 楼编号  （默认选中第一个，传第一个）
      */
     @RequestMapping("/BedListMap")
     @ResponseBody
