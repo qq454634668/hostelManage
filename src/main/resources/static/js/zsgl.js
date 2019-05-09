@@ -311,8 +311,61 @@ var clickFunction = function(){
     });
     //房间管理点击菜单列表
     $('#zsgl_fjgl').click(function(){
-        $(".hidden_model").attr("hidden",true);
         zsgl.tabPageInit("/live/QueryRoomList", {pageSize:10,pageNum:1},"tableList",zsgl.zsgl_fjgl_List, 20);
+        $(".hidden_model").attr("hidden",true);
+        ajax_Object('/dic/DicCampus',{},function(data){
+            var data = data.data;
+            console.log(data);
+            var option = '<option value="">请选择校区</option>';
+            for (var i = 0;i<data.length;i++){
+                // if(type == data[i].dm){
+                //     option +=   '<option value="'+data[i].dm+'" selected="selected">'+data[i].mc+'</option>'
+                // }else{
+                option +=   '<option value="'+data[i].code+'">'+data[i].name+'</option>'
+                // }
+            };
+            $('#fjgl_xqname').html(option);
+        });
+        ajax_Object('/dic/DicApartment',{code:"02"},function(data){
+            var data = data.data;
+            console.log(data);
+            var option = '<option value="">请选择公寓区</option>';
+            for (var i = 0;i<data.length;i++){
+                // if(type == data[i].dm){
+                //     option +=   '<option value="'+data[i].dm+'" selected="selected">'+data[i].mc+'</option>'
+                // }else{
+                option +=   '<option value="'+data[i].code+'">'+data[i].name+'</option>'
+                // }
+            };
+            $('#fjgl_gyname').html(option);
+        });
+        ajax_Object('/dic/DicFloor',{code:"0203"},function(data){
+            var data = data.data;
+            console.log(data);
+            var option = '<option value="">请选择楼栋</option>';
+            for (var i = 0;i<data.length;i++){
+                // if(type == data[i].dm){
+                //     option +=   '<option value="'+data[i].dm+'" selected="selected">'+data[i].mc+'</option>'
+                // }else{
+                option +=   '<option value="'+data[i].code+'">'+data[i].name+'</option>'
+                // }
+            };
+            $('#fjgl_loubh').html(option);
+        });
+        ajax_Object('/dic/DicGet',{lx:"room"},function(data){
+            var data = data.data;
+            console.log(data);
+            var option = '<option value="">请选择房间标准</option>';
+            for (var i = 0;i<data.length;i++){
+                // if(type == data[i].dm){
+                //     option +=   '<option value="'+data[i].dm+'" selected="selected">'+data[i].mc+'</option>'
+                // }else{
+                option +=   '<option value="'+data[i].code+'">'+data[i].name+'</option>'
+                // }
+            };
+            $('#fjgl_fjbz').html(option);
+        });
+        $("#zsgl_fjgl_model").attr("hidden",false);
     });
     //床位管理点击菜单列表
     $('#zsgl_cwgl').click(function(){
@@ -354,6 +407,20 @@ var clickFunction = function(){
             function(data){
             alert(data.message);
         });
+    });
+    //房间管理新建创建时间
+    $('#fjgl_insert_button').click(function(){
+        var fjgl_xqname=$("#fjgl_xqname").val();
+        var fjgl_gyname=$("#fjgl_gyname").val();
+        var fjgl_loubh=$("#fjgl_loubh").val();
+        var fjgl_fjbh=$("#fjgl_fjbh").val();
+        var fjgl_fjbz=$("#fjgl_fjbz").val();
+        ajax_Object(
+            '/live/AddRoom',
+            {xqbh:fjgl_xqname, gybh:fjgl_gyname,loubh:fjgl_loubh,fjbh:fjgl_fjbh,fjbz:fjgl_fjbz},
+            function(data){
+                alert(data.message);
+            });
     });
 }
 $(function(){

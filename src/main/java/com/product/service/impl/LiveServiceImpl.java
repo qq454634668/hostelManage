@@ -176,6 +176,9 @@ public class LiveServiceImpl implements LiveService {
     @Override
     @Transactional
     public void AddRoom(Map<String, Object> param) {
+        //根据楼编号loubh查询楼状态。。。
+        String louzt = (String) liveMapper.GetLouzt(param).get(0).get("louzt");
+        param.put("louzt",louzt);
         //先新增房间，再根据房间标准创建房间床位
         int flag = liveMapper.AddRoom(param);
         if(flag <= 0){
@@ -184,7 +187,7 @@ public class LiveServiceImpl implements LiveService {
             //根据房间标准，确定循环次数，生成床位编号，
             //获得房间最终编号，再拼床的状态
             String roomzzbh = (String) param.get("bh");    //房间最终编号
-            String louzt = (String) param.get("louzt");    //房间最终编号
+            param.put("fjzzbh",roomzzbh);
             String fjbz = (String) param.get("fjbz");
             for(int i=1;i<Integer.parseInt(fjbz)+1;i++){
                 String cwbh = CodeMakeUtils.decade(""+i);

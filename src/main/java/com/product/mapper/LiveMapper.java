@@ -86,7 +86,10 @@ public interface LiveMapper {
      * 添加房间
      */
     int AddRoom(Map<String,Object> param);
-
+    /**
+     * 根据楼状态（男/女）
+     */
+    List<Map<String, Object>> GetLouzt(Map<String,Object> param);
     /**
      * 添加床位
      */

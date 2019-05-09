@@ -170,7 +170,7 @@
         <insert id="AddBed" parameterType="java.util.Map">
             insert into bed_info
             (fjbh,fjbz,xqbh,gybh,loubh,bh,louzt,cwbh,rksj,fjh) VALUES
-            (#{fjbh},#{fjbz},#{xqbh},#{gybh},#{loubh},#{bh},#{louzt},#{cwbh},#{rksj},#{fjh})
+            (#{fjzzbh},#{fjbz},#{xqbh},#{gybh},#{loubh},#{bh},#{louzt},#{cwbh},#{rksj},#{fjbh})
         </insert>
         <delete id="DelRoom" parameterType="java.util.Map">
             DELETE from room_info where  fjbh =#{fjbh} and loubh=#{loubh}
@@ -227,4 +227,7 @@
             update bed_info set zt = #{zt},rksj=#{rksj} where loubh =#{loubh}
                                    and fjbh =#{fjbh} and cwbh =#{cwbh}
         </update>
+        <select id="GetLouzt" parameterType="java.util.Map" resultMap="FloorList">
+            select louzt from floor_info t where t.bh =#{loubh}
+        </select>
 </mapper>

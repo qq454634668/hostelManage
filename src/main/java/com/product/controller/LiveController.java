@@ -538,7 +538,6 @@ public class LiveController {
      * loubh 楼编号
      * fjbh  房间编号（房间编号输入完就应该检测房间编号是否重复）
      * fjbz  房间标准
-     * louzt  楼的状态
      *
      * 需要测试
      */
@@ -556,7 +555,7 @@ public class LiveController {
             String loubh = request.getParameter("loubh");
             String fjbh = request.getParameter("fjbh");
             String fjbz = request.getParameter("fjbz");
-            String louzt = request.getParameter("louzt");
+//            String louzt = request.getParameter("louzt");
             param.put("rksj",created_time);
             param.put("xqbh",xqbh);
             param.put("gybh",gybh);
@@ -564,7 +563,7 @@ public class LiveController {
             param.put("fjbh",fjbh);
             param.put("fjbz",fjbz);
             param.put("bh",loubh+fjbh);
-            param.put("louzt",louzt);
+//            param.put("louzt",louzt);
             liveService.AddRoom(param);
             result.put("data",null);
             result.put("message","房间添加成功");
