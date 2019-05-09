@@ -79,6 +79,11 @@ var clickFunction = function(){
         // $(".hidden_model").attr("hidden",true);
         // $("#zsgl_xqgl_model").attr("hidden",false);
     });
+    $('#rcgl_xslb').click(function(){
+        rcgl.tabPageInit("/daily/StudentList", {zszt:"1",xy:"",zy:"",nj:"",bj:""},"rcgl_tableList",rcgl.zsgl_xqgl_List, 20);
+        // $(".hidden_model").attr("hidden",true);
+        // $("#zsgl_xqgl_model").attr("hidden",false);
+    });
     //校区管理新建创建
     $('#xqgl_insert_button').click(function(){
         var xqgl_name=$("#xqgl_name").val();

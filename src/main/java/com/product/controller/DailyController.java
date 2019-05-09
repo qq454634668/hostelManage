@@ -57,8 +57,8 @@ public class DailyController {
      *学生列表
      * zszt：住宿状态   1---未入住(入住)   2---已入住（--换宿/退宿）
      * xy  学院
-     * zy 专业
-     * nj 年级
+     * zy  专业
+     * nj  年级
      * bj  班级
      */
     @RequestMapping("/StudentList")
@@ -94,7 +94,7 @@ public class DailyController {
      *点击床位入住/换宿
      * xh  学号
      * cwbh 床位编号
-     *020301101011   191116
+     *191116   020301101011
      */
     @RequestMapping("/MoveInto")
     @ResponseBody
