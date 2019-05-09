@@ -702,7 +702,6 @@ public class LiveController {
      * 先判断房间内是否有人入住
      * 停用房间/启用房间
      * fjbh 房间编号
-     * loubh 楼编号
      * zt (1----启用  3---禁用)
      */
     @RequestMapping("/StopRoom")
@@ -714,10 +713,8 @@ public class LiveController {
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
-            String loubh = request.getParameter("loubh");
             String fjbh = request.getParameter("fjbh");
             String zt = request.getParameter("zt");
-            param.put("loubh",loubh);
             param.put("fjbh",fjbh);
             param.put("zt",zt);
             param.put("rksj",created_time);
@@ -787,8 +784,6 @@ public class LiveController {
     /**
      * 停用床位/启用床位
      * fjbh 房间编号
-     * loubh 楼编号
-     * cwbh 楼编号
      * zt (1----启用  3---禁用)
      */
     @RequestMapping("/StopBed")
@@ -800,14 +795,10 @@ public class LiveController {
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
-            String loubh = request.getParameter("loubh");
             String fjbh = request.getParameter("fjbh");
             String zt = request.getParameter("zt");
-            String cwbh = request.getParameter("cwbh");
-            param.put("loubh",loubh);
             param.put("fjbh",fjbh);
             param.put("zt",zt);
-            param.put("cwbh",cwbh);
             param.put("rksj",created_time);
             liveService.StopBed(param);
             result.put("data",null);
