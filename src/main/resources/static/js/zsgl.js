@@ -266,8 +266,48 @@ var clickFunction = function(){
     });
     //楼栋管理点击菜单列表
     $('#zsgl_ldgl').click(function(){
-        $(".hidden_model").attr("hidden",true);
         zsgl.tabPageInit("/live/QueryFloorList", {pageSize:10,pageNum:1},"tableList",zsgl.zsgl_ldgl_List, 20);
+        $(".hidden_model").attr("hidden",true);
+        ajax_Object('/dic/DicCampus',{},function(data){
+            var data = data.data;
+            console.log(data);
+            var option = '<option value="">请选择校区</option>';
+            for (var i = 0;i<data.length;i++){
+                // if(type == data[i].dm){
+                //     option +=   '<option value="'+data[i].dm+'" selected="selected">'+data[i].mc+'</option>'
+                // }else{
+                option +=   '<option value="'+data[i].code+'">'+data[i].name+'</option>'
+                // }
+            };
+            $('#ldgl_xqname').html(option);
+        });
+        ajax_Object('/dic/DicApartment',{code:"02"},function(data){
+            var data = data.data;
+            console.log(data);
+            var option = '<option value="">请选择公寓区</option>';
+            for (var i = 0;i<data.length;i++){
+                // if(type == data[i].dm){
+                //     option +=   '<option value="'+data[i].dm+'" selected="selected">'+data[i].mc+'</option>'
+                // }else{
+                option +=   '<option value="'+data[i].code+'">'+data[i].name+'</option>'
+                // }
+            };
+            $('#ldgl_gyname').html(option);
+        });
+        ajax_Object('/dic/DicGet',{lx:"xb"},function(data){
+            var data = data.data;
+            console.log(data);
+            var option = '<option value="">男/女</option>';
+            for (var i = 0;i<data.length;i++){
+                // if(type == data[i].dm){
+                //     option +=   '<option value="'+data[i].dm+'" selected="selected">'+data[i].mc+'</option>'
+                // }else{
+                option +=   '<option value="'+data[i].code+'">'+data[i].name+'</option>'
+                // }
+            };
+            $('#ldgl_louzt').html(option);
+        });
+        $("#zsgl_ldgl_model").attr("hidden",false);
     });
     //房间管理点击菜单列表
     $('#zsgl_fjgl').click(function(){
@@ -298,6 +338,19 @@ var clickFunction = function(){
         ajax_Object(
             '/live/AddApartment',
             {xqbh:gyqgl_xqname, name:gyqgl_gyname},
+            function(data){
+            alert(data.message);
+        });
+    });
+    //楼栋管理新建创建时间
+    $('#ldgl_insert_button').click(function(){
+        var ldgl_xqname=$("#ldgl_xqname").val();
+        var ldgl_gyname=$("#ldgl_gyname").val();
+        var ldgl_louname=$("#ldgl_louname").val();
+        var ldgl_louzt=$("#ldgl_louzt").val();
+        ajax_Object(
+            '/live/AddFloor',
+            {name:ldgl_louname, louzt:ldgl_louzt,xqbh:ldgl_xqname,gybh:ldgl_gyname},
             function(data){
             alert(data.message);
         });
