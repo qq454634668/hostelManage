@@ -37,8 +37,8 @@ public class DailyServiceImpl implements DailyService {
     }
 
     @Override
-    public List<Map<String, Object>> StuList(Map<String, Object> param, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+    public List<Map<String, Object>> StuList(Map<String, Object> param) {
+//        PageHelper.startPage(pageNum,pageSize);
         return dailyMapper.StuList(param);
     }
 

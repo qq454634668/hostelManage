@@ -60,12 +60,10 @@ public class DailyController {
      * zy 专业
      * nj 年级
      * bj  班级
-     *  pageSize
-     *  pageNum
      */
     @RequestMapping("/StudentList")
     @ResponseBody
-    public Map<String,Object> StudentList(HttpServletRequest request,int pageNum,int pageSize){
+    public Map<String,Object> StudentList(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         List<Map<String,Object>> list=new ArrayList<>();
@@ -80,7 +78,7 @@ public class DailyController {
             param.put("zy",zy);
             param.put("nj",nj);
             param.put("bj",bj);
-            list = dailyService.StuList(param,pageNum,pageSize);
+            list = dailyService.StuList(param);
             PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
             result.put("data",pageList);
             result.put("message","学生列表查询成功");
