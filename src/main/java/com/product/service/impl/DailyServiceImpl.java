@@ -32,7 +32,6 @@ public class DailyServiceImpl implements DailyService {
             map.put("fjList",dailyMapper.BedList(param));
             result.add(map);
         });
-        System.out.println("查询结束");
         return result;
     }
 

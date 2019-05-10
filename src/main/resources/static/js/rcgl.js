@@ -82,7 +82,7 @@ var clickFunction = function(){
             var ulList ="";
             for (var i = 0;i<data.length;i++){
                 var fjList= data[i].fjList;
-                console.log(fjList)
+                // console.log(fjList)
                 for (var a = 0;a<fjList.length;a++){
                     var fhMap = fjList[a];
                     if(a==0){
@@ -110,7 +110,9 @@ var clickFunction = function(){
 
     });
     $('#rcgl_xslb').click(function(){
-        rcgl.tabPageInit("/daily/StudentList", {zszt:"1",xy:"",zy:"",nj:"",bj:""},"rcgl_tableList",rcgl.zsgl_xqgl_List, 20);
+        ajax_Object('/daily/StudentList',{zszt:"1",xy:"",zy:"",nj:"",bj:""},function(data){
+            var data = data.data;
+        });
         // $(".hidden_model").attr("hidden",true);
         // $("#zsgl_xqgl_model").attr("hidden",false);
     });

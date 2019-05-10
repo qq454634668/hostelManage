@@ -79,8 +79,8 @@ public class DailyController {
             param.put("nj",nj);
             param.put("bj",bj);
             list = dailyService.StuList(param);
-            PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
-            result.put("data",pageList);
+//            PageInfo<Map<String,Object>> pageList = new PageInfo<>(list);
+            result.put("data",list);
             result.put("message","学生列表查询成功");
             result.put("code","200");
         }catch (Exception e){

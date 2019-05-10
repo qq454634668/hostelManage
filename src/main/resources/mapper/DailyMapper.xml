@@ -61,6 +61,7 @@
         <result column="CWBH" property="cwbh"/>
         <result column="FPZT" property="fpzt"/>
         <result column="RKSJ" property="rksj"/>
+        <result column="FPZTZH" property="fpztzh"/>
     </resultMap>
     <select id="FjbhList" parameterType="java.util.Map" resultMap="BedList">
         select t.fjbh from bed_info t where
@@ -107,7 +108,7 @@
             (select name from dictionary a where a.code = t.zszt and a.lx='stay_stste') zsztname,
             t.qjzt,
             (select name from dictionary a where a.code = t.qjzt and a.lx='qjzt') qjztname,
-            t.patriarch_id patriarchid,BedList
+            t.patriarch_id patriarchid,
             t.lxdh,
             t.jzlxdh,
             t.xh,
@@ -124,11 +125,12 @@
             t.sfzh,
             t.jg,
             t.cwbh,
-            (select name from dictionary a where a.code = t.fpzt and a.lx='allot_state') fpzt,
+            (select name from dictionary a where a.code = t.fpzt and a.lx='allot_state') fpztzh,
+            t.fpzt,
             t.rksj
             from user_student t
             <where>
-                t.zszt = #{zszt}
+                t.zszt = #{zszt} and t.fpzt ="1"
                 <if test="xy!=null and xy!=''">
                     and xy =#{xy}
                 </if>
