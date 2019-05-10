@@ -75,14 +75,49 @@ var rcgl = {
 var clickFunction = function(){
     //校区管理点击菜单列表
     $('#rcgl_rzgl').click(function(){
-        rcgl.tabPageInit("/daily/BedListMap", {xqbh:"",gybh:"",loubh:"020301",pageSize:10,pageNum:1},"rcgl_tableList",rcgl.zsgl_xqgl_List, 20);
-        // $(".hidden_model").attr("hidden",true);
-        // $("#zsgl_xqgl_model").attr("hidden",false);
+        $(".hidden_model").attr("hidden",true);
+        //床表格
+        ajax_Object('/daily/BedListMap',{xqbh:"",gybh:"",loubh:"020301"},function(data){
+            var data = data.data;
+            var ulList ="";
+            for (var i = 0;i<data.length;i++){
+                var fjList= data[i].fjList;
+                console.log(fjList)
+                for (var a = 0;a<fjList.length;a++){
+                    var fhMap = fjList[a];
+                    if(a==0){
+                        if(fhMap.realname==""||fhMap.realname==null){
+                            ulList=ulList+"<ul style='float: left'><li>闲置中</li>";
+                        }else{
+                            ulList=ulList+"<ul style='float: left'><li>"+fhMap.realname+"</li>";
+                        }
+                    }else{
+                        if(fhMap.realname==""||fhMap.realname==null){
+                            ulList=ulList+"<li>"+fhMap.ztname+"</li>";
+                        }else{
+                            ulList=ulList+"<li>"+fhMap.realname+"</li>";
+                        }
+                    }
+                    if(a==fjList.length-1){
+                        ulList=ulList+"</ul>";
+                    }
+                };
+            };
+            $("#rcgl_bed").html(ulList);
+        });
+        $("#rcgl_bed").attr("hidden",false);
+        // rcgl.tabPageInit("/daily/BedListMap", {xqbh:"",gybh:"",loubh:"020301"},"rcgl_tableList",rcgl.zsgl_xqgl_List, 20);
+
     });
     $('#rcgl_xslb').click(function(){
         rcgl.tabPageInit("/daily/StudentList", {zszt:"1",xy:"",zy:"",nj:"",bj:""},"rcgl_tableList",rcgl.zsgl_xqgl_List, 20);
         // $(".hidden_model").attr("hidden",true);
         // $("#zsgl_xqgl_model").attr("hidden",false);
+    });
+    //申请添加
+    $('#rcgl_sqtj').click(function(){
+        $(".hidden_model").attr("hidden",true);
+        $("#rcgl_sqtj_model").attr("hidden",false);
     });
     //校区管理新建创建
     $('#xqgl_insert_button').click(function(){

@@ -21,6 +21,7 @@
         <result column="ZT" property="zt"/>
         <result column="ZTNAME" property="ztname"/>
         <result column="REALNAME" property="realname"/>
+        <result column="XH" property="xh"/>
     </resultMap>
     <resultMap id="ApplyAsk" type="java.util.Map">
         <result column="ID" property="id"/>
@@ -73,7 +74,7 @@
               group by t.fjbh
     </select>
     <select id="BedList" parameterType="java.util.Map" resultMap="BedList">
-        select t.*,t1.realname from (select t.id,
+        select t.*,t1.realname,t1.xh from (select t.id,
         t.bh,
         t.fjbh,
         t.fjbz,
@@ -106,7 +107,7 @@
             (select name from dictionary a where a.code = t.zszt and a.lx='stay_stste') zsztname,
             t.qjzt,
             (select name from dictionary a where a.code = t.qjzt and a.lx='qjzt') qjztname,
-            t.patriarch_id patriarchid,
+            t.patriarch_id patriarchid,BedList
             t.lxdh,
             t.jzlxdh,
             t.xh,
