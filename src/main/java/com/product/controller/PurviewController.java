@@ -253,7 +253,7 @@ public class PurviewController {
         return result;
     }
     /**
-     * 修改角色  --修改角色菜单
+     * 修改角色  --修改角色菜单（权限）
      * role_id
      * menu_id
      */

@@ -110,11 +110,21 @@ var clickFunction = function(){
 
     });
     $('#rcgl_xslb').click(function(){
+        $(".hidden_model").attr("hidden",true);
         ajax_Object('/daily/StudentList',{zszt:"1",xy:"",zy:"",nj:"",bj:""},function(data){
             var data = data.data;
+            var html = "<table border='1' >";
+            for(var i=0;i<data.length;i++){
+                if(i==data.length-1){
+                    html +="<tr><td>"+data[i].realname+"</td><td>"+data[i].xb+"</td></tr></table>";
+                }else{
+                    html +="<tr><td>"+data[i].realname+"</td><td>"+data[i].xb+"</td></tr>";
+                }
+            }
+            $("#rcgl_stu").html(html);
         });
-        // $(".hidden_model").attr("hidden",true);
-        // $("#zsgl_xqgl_model").attr("hidden",false);
+
+        $("#rcgl_stu").attr("hidden",false);
     });
     //申请添加
     $('#rcgl_sqtj').click(function(){
