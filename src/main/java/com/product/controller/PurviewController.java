@@ -309,6 +309,7 @@ public class PurviewController {
     /**
      * 角色是否存在关联用户
      * id
+     * data等于0没有相关用户可以删除，大于0有相关用户不允许删除
      */
     @RequestMapping("/ExistRoleUser")
     @ResponseBody
