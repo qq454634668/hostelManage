@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.product.service.DicService;
 import com.product.service.TaskPlanService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,6 +18,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/taskPlan")
+@CrossOrigin
 public class TaskPlanController {
     @Resource
     private TaskPlanService taskPlanService;

@@ -3,6 +3,7 @@ package com.product.controller;
 import com.github.pagehelper.PageInfo;
 import com.product.service.DailyService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,6 +17,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/daily")
+@CrossOrigin
 public class DailyController {
     @Resource
     private DailyService dailyService;
