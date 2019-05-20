@@ -16,6 +16,18 @@ public interface UserService {
      * 菜单信息
      */
     List<Map<String,Object>> menuInfo(Map<String,Object> param);
+    /**
+     * 用户信息
+     */
+    List<Map<String,Object>> userInfoId(Map<String,Object> param);
+    /**
+     *获取userId
+     */
+    List<Map<String,Object>> getUserInfoId(Map<String,Object> param);
+    /**
+     * 添加token
+     */
+    void insertToken(Map<String,Object> param);
 
 
 }

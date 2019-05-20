@@ -1,6 +1,8 @@
 package com.product.controller;
 
 import com.product.service.UserService;
+import com.product.util.AESUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +27,8 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    private String userInfoKey="zsxt";
 
 
     @RequestMapping("/test")
@@ -56,14 +62,22 @@ public class UserController {
                 Map a = userInfo.get(0);
                 Object roleId = a.get("role_id");
                 if(roleId!=null&&roleId!=""){
-                    map.put("userInfo",userInfo.get(0));
+//                    map.put("userInfo",userInfo.get(0));
                     //查询权限下菜单
 //                    param.put("roleId",roleId);
 //                    List<Map<String, Object>> menuInfo = userService.menuInfo(param);
 //                    map.put("menuInfo",menuInfo);
                     //用户信息存缓存
-                    this.saveSessionUserInfo(session,userInfo.get(0));
-                    result.put("data",map);
+//                    this.saveSessionUserInfo(session,userInfo.get(0));
+                    String token = this.makeToken(a);
+                    Date date = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                    String created_time = sdf.format(date);
+                    param.put("token",token);
+                    param.put("scsj",created_time);
+                    param.put("user_id",a.get("id"));
+                    userService.insertToken(param);
+                    result.put("data",token);
                     result.put("message","登录成功");
                     result.put("code","200");
                 }else{
@@ -86,7 +100,21 @@ public class UserController {
         }
         return result;
     }
-
+    private String makeToken(Map<String, Object> userInfo){
+        String id = userInfo.get("id").toString();
+        String username = userInfo.get("username").toString();
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String created_time = sdf.format(date);
+        String token = id+username+created_time;
+        return AESUtil.getInstance().encode(token,userInfoKey);
+    }
+    private String getUserId(String token){
+        //        解码后的token
+        String jmtoken = AESUtil.getInstance().decode(token,userInfoKey);
+        String[] tokenList  =jmtoken.split("#");
+        return tokenList[0];
+    }
     private void saveSessionUserInfo(HttpSession session,Map<String, Object> userInfo){
         Object id = userInfo.get("id");
         Object lxdh = userInfo.get("lxdh");
@@ -139,28 +167,76 @@ public class UserController {
     /**
      * 初始化登录，取用户缓存信息，活的菜单
      */
+//    @RequestMapping("/InitInfo")
+//    @ResponseBody
+//    public Map<String,Object> InitInfo(HttpSession session){
+//        Map<String,Object> result = new HashMap<>();
+//        Map<String,Object> map = new HashMap<>();
+//        Map<String,Object> param = new HashMap<>();
+//        try{
+//
+//            Map<String, Object> userInfo = this.getSessionUserInfo(session);
+//            if(userInfo.isEmpty()){
+//                result.put("data",null);
+//                result.put("message","用户信息不存在,请重新登录");
+//                result.put("code","201");
+//            }else{
+//                Object roleId = userInfo.get("role_id");
+//                map.put("userInfo",userInfo);
+//                //查询权限下菜单
+//                param.put("roleId",roleId);
+//                List<Map<String, Object>> menuInfo = userService.menuInfo(param);
+//                map.put("menuInfo",menuInfo);
+//                result.put("data",map);
+//                result.put("message","用户信息获取成功");
+//                result.put("code","200");
+//            }
+//        }catch (Exception e){
+//            result.put("data",null);
+//            result.put("message","登录异常");
+//            result.put("code","500");
+//        }
+//        return result;
+//    }
+    /**
+     * 初始化登录，取用户缓存信息，活的菜单
+     * token
+     */
     @RequestMapping("/InitInfo")
     @ResponseBody
-    public Map<String,Object> InitInfo(HttpSession session){
+    public Map<String,Object> InitInfo(String token){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
-            Map<String, Object> userInfo = this.getSessionUserInfo(session);
-            if(userInfo.isEmpty()){
+            if(token.isEmpty()){
                 result.put("data",null);
                 result.put("message","用户信息不存在,请重新登录");
                 result.put("code","201");
             }else{
-                Object roleId = userInfo.get("role_id");
-                map.put("userInfo",userInfo);
-                //查询权限下菜单
-                param.put("roleId",roleId);
-                List<Map<String, Object>> menuInfo = userService.menuInfo(param);
-                map.put("menuInfo",menuInfo);
-                result.put("data",map);
-                result.put("message","用户信息获取成功");
-                result.put("code","200");
+                param.put("token",token);
+//                String userId = this.getUserId(token);
+                List<Map<String,Object>> list = userService.getUserInfoId(param);
+                if(list.size()!=0){
+                    Object userId = list.get(0).get("user_id");
+                    param.put("userId",userId);
+                    List<Map<String,Object>> userInfoList = userService.userInfoId(param);
+                    Map<String,Object> userInfo = userInfoList.get(0);
+                    Object roleId = userInfo.get("role_id");
+                    map.put("userInfo",userInfo);
+                    //查询权限下菜单
+                    param.put("roleId",roleId);
+                    List<Map<String, Object>> menuInfo = userService.menuInfo(param);
+                    map.put("menuInfo",menuInfo);
+                    result.put("data",map);
+                    result.put("message","用户信息获取成功");
+                    result.put("code","200");
+                }else{
+                    result.put("data",null);
+                    result.put("message","用户信息获取失败");
+                    result.put("code","201");
+                }
+
             }
         }catch (Exception e){
             result.put("data",null);

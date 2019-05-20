@@ -45,5 +45,20 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    @Override
+    public List<Map<String, Object>> userInfoId(Map<String, Object> param) {
+        return userMapper.UserInfoId(param);
+    }
+
+    @Override
+    public List<Map<String, Object>> getUserInfoId(Map<String, Object> param) {
+        return userMapper.getUserInfoId(param);
+    }
+
+    @Override
+    public void insertToken(Map<String, Object> param) {
+         userMapper.insertToken(param);
+    }
+
 
 }

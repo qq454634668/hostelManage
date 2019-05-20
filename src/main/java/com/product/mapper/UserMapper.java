@@ -13,6 +13,8 @@ public interface UserMapper {
      * 用户信息
      */
     List<Map<String,Object>> UserInfo(Map<String, Object> param);
+    List<Map<String,Object>> UserInfoId(Map<String, Object> param);
+    void insertToken(Map<String, Object> param);
     /**
      * 主菜单
      */
@@ -21,4 +23,5 @@ public interface UserMapper {
      * 下级菜单
      */
     List<Map<String,Object>> UnderMenu(Map<String, Object> param);
+    List<Map<String,Object>> getUserInfoId(Map<String, Object> param);
 }
