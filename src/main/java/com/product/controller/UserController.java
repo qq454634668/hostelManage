@@ -197,6 +197,7 @@ public class UserController {
 //    }
     /**
      * 初始化登录，取用户缓存信息，活的菜单
+     * 验证token时效性
      * token
      */
     @RequestMapping("/InitInfo")
