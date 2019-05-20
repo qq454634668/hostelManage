@@ -56,9 +56,9 @@ public class UserController {
                 if(roleId!=null&&roleId!=""){
                     map.put("userInfo",userInfo.get(0));
                     //查询权限下菜单
-                    param.put("roleId",roleId);
-                    List<Map<String, Object>> menuInfo = userService.menuInfo(param);
-                    map.put("menuInfo",menuInfo);
+//                    param.put("roleId",roleId);
+//                    List<Map<String, Object>> menuInfo = userService.menuInfo(param);
+//                    map.put("menuInfo",menuInfo);
                     //用户信息存缓存
                     this.saveSessionUserInfo(session,userInfo.get(0));
                     result.put("data",map);
@@ -187,4 +187,5 @@ public class UserController {
         }
         return result;
     }
+
 }
