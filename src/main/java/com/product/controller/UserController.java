@@ -247,6 +247,7 @@ public class UserController {
 
     /**
      * 退出登录
+     * 不需要接退出登录
      */
     @RequestMapping("/QuitLogin")
     @ResponseBody
