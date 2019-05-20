@@ -14,10 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -204,11 +201,13 @@ public class UserController {
      */
     @RequestMapping("/InitInfo")
     @ResponseBody
-    public Map<String,Object> InitInfo(String token){
+    public Map<String,Object> InitInfo(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
+            String  token = request.getHeader("token");
+            System.out.print(token);
             if(token.isEmpty()){
                 result.put("data",null);
                 result.put("message","用户信息不存在,请重新登录");
@@ -236,7 +235,6 @@ public class UserController {
                     result.put("message","用户信息获取失败");
                     result.put("code","201");
                 }
-
             }
         }catch (Exception e){
             result.put("data",null);
