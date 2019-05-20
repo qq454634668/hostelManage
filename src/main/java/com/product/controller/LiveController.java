@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.product.service.LiveService;
 import com.product.util.CodeMakeUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/live")
+@CrossOrigin
 public class LiveController {
     @Resource
     private LiveService liveService;
