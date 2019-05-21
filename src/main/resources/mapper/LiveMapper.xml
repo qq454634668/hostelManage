@@ -93,7 +93,7 @@
             delete from apartment_info where id = #{id}
         </delete>
         <select id="ExistFloor" parameterType="java.util.Map" resultType="int">
-            select count(*) from apartment_info where gybh =#{gybh}
+            select count(*) from floor_info where gybh =#{gybh}
         </select>
         <select id="QueryFloorList" parameterType="java.util.Map" resultMap="FloorList">
             select t.id,
