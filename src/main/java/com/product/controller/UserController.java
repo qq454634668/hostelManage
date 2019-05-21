@@ -221,11 +221,11 @@ public class UserController {
                 List<Map<String,Object>> list = userService.getUserInfoId(param);
                 if(list.size()!=0){
                     Map<String,Object> user = list.get(0);
-                    //验证token时效性
-                    Object scsj = user.get("scsj");  //生成时间
-                    Date now = new Date();
-                    Date tmp = DateTimeUtils.timeStringToDate(scsj.toString(),"yyyyMMddHHmmss");
-                    long hour = (now.getTime() - tmp.getTime()) / (1000 * 3600);  //当前时间和token生成时间相差小时
+//                    //验证token时效性
+//                    Object scsj = user.get("scsj");  //生成时间
+//                    Date now = new Date();
+//                    Date tmp = DateTimeUtils.timeStringToDate(scsj.toString(),"yyyyMMddHHmmss");
+//                    long hour = (now.getTime() - tmp.getTime()) / (1000 * 3600);  //当前时间和token生成时间相差小时
                     Object userId = user.get("user_id");
                     param.put("userId",userId);
                     List<Map<String,Object>> userInfoList = userService.userInfoId(param);
