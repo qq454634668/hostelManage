@@ -224,7 +224,7 @@
             </where>
         </select>
         <update id="StopBed" parameterType="java.util.Map">
-            update bed_info set zt = #{zt},rksj=#{rksj} where fjbh =#{fjbh}
+            update bed_info set zt = #{zt},rksj=#{rksj} where bh =#{bh}
         </update>
         <select id="GetLouzt" parameterType="java.util.Map" resultMap="FloorList">
             select louzt from floor_info t where t.bh =#{loubh}
