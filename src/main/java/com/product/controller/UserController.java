@@ -208,8 +208,8 @@ public class UserController {
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
-//            String  token = request.getHeader("token");
-            String  token = "5413FA52ED9B928C64E1A16435FB125807C6E3B97B5F9691E28BFBFA8F2422A6";
+            String  token = request.getHeader("token");
+//            String  token = "5413FA52ED9B928C64E1A16435FB125807C6E3B97B5F9691E28BFBFA8F2422A6";
             System.out.print(token);
             if(token.isEmpty()){
                 result.put("data",null);
