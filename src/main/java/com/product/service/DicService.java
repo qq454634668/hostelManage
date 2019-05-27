@@ -16,6 +16,7 @@ public interface DicService {
      * 楼字典
      **/
     List<Map<String,Object>> DicFloor(Map<String,Object> param);
+    List<Map<String,Object>> DicFloorAll(Map<String,Object> param);
     /**
      * 房间字典
      **/

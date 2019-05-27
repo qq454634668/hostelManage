@@ -77,7 +77,28 @@ public class DicController {
         try{
             String gybh = request.getParameter("code");  //公寓编号
             param.put("gybh",gybh);
-            result.put("data",dicService.DicFloor(param));
+            result.put("data",dicService.DicFloorAll(param));
+            result.put("message","楼字典查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","楼字典查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * 楼字典
+     * code公寓编号(页面菜单获取下级菜单统一都用code标示编码)
+     */
+    @RequestMapping("/DicFloorAll")
+    @ResponseBody
+    public Map<String,Object> DicFloorAll(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            result.put("data",dicService.DicFloorAll(param));
             result.put("message","楼字典查询成功");
             result.put("code","200");
         }catch (Exception e){

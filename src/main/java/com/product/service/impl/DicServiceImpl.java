@@ -32,6 +32,10 @@ public class DicServiceImpl implements DicService {
     public List<Map<String, Object>> DicFloor(Map<String, Object> param) {
         return dicMapper.DicFloor(param);
     }
+    @Override
+    public List<Map<String, Object>> DicFloorAll(Map<String, Object> param) {
+        return dicMapper.DicFloorAll(param);
+    }
 
     @Override
     public List<Map<String, Object>> DicRoom(Map<String, Object> param) {

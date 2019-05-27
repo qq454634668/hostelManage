@@ -16,6 +16,9 @@
     <select id="DicFloor" parameterType="java.util.Map" resultMap="DicMb">
         select bh code,name from floor_info where gybh =#{gybh}
     </select>
+    <select id="DicFloorAll" parameterType="java.util.Map" resultMap="DicMb">
+        select bh code,name from floor_info
+    </select>
     <select id="DicRoom" parameterType="java.util.Map" resultMap="DicMb">
         select bh code,fjbh name from room_info where loubh = #{loubh}
     </select>
