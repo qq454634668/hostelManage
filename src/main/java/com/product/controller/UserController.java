@@ -208,8 +208,8 @@ public class UserController {
         Map<String,Object> map = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
-//            String  token = request.getHeader("token");
-            String  token = "5413FA52ED9B928C64E1A16435FB125807C6E3B97B5F9691E28BFBFA8F2422A6";
+            String  token = request.getHeader("token");
+//            String  token = "5413FA52ED9B928C64E1A16435FB125807C6E3B97B5F9691E28BFBFA8F2422A6";
             System.out.print(token);
             if(token.isEmpty()){
                 result.put("data",null);
@@ -221,11 +221,11 @@ public class UserController {
                 List<Map<String,Object>> list = userService.getUserInfoId(param);
                 if(list.size()!=0){
                     Map<String,Object> user = list.get(0);
-                    //验证token时效性
-                    Object scsj = user.get("scsj");  //生成时间
-                    Date now = new Date();
-                    Date tmp = DateTimeUtils.timeStringToDate(scsj.toString(),"yyyyMMddHHmmss");
-                    long hour = (now.getTime() - tmp.getTime()) / (1000 * 3600);  //当前时间和token生成时间相差小时
+//                    //验证token时效性
+//                    Object scsj = user.get("scsj");  //生成时间
+//                    Date now = new Date();
+//                    Date tmp = DateTimeUtils.timeStringToDate(scsj.toString(),"yyyyMMddHHmmss");
+//                    long hour = (now.getTime() - tmp.getTime()) / (1000 * 3600);  //当前时间和token生成时间相差小时
                     Object userId = user.get("user_id");
                     param.put("userId",userId);
                     List<Map<String,Object>> userInfoList = userService.userInfoId(param);
