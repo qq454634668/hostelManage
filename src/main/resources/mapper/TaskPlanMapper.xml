@@ -124,7 +124,7 @@
         delete from task_baseinfo where rwbh = #{rwbh}
     </delete>
     <select id="taskBaseList" parameterType="java.util.Map" resultMap="taskBaseList">
-        select t.id,t.rwbh,t.task_name,t.kssj,t.jssj,hfbh
+        select t.id,t.rwbh,t.task_name,t.kssj,t.jssj,hfbh,
 			(select name from dictionary a where a.code = t.zt and a.lx='task') zt,
 			(select name from dictionary a where a.code = t.hfgz and a.lx='allocation') hfgz
 			 from task_baseinfo t where t.zt =#{zt}
