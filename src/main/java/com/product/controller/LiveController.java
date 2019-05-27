@@ -785,7 +785,7 @@ public class LiveController {
 
     /**
      * 停用床位/启用床位
-     * fjbh 房间编号
+     * bh 床位编号
      * zt (1----启用  3---禁用)
      */
     @RequestMapping("/StopBed")
@@ -797,9 +797,9 @@ public class LiveController {
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
-            String fjbh = request.getParameter("fjbh");
+            String bh = request.getParameter("bh");
             String zt = request.getParameter("zt");
-            param.put("fjbh",fjbh);
+            param.put("bh",bh);
             param.put("zt",zt);
             param.put("rksj",created_time);
             liveService.StopBed(param);
