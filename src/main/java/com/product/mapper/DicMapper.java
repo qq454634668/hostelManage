@@ -29,4 +29,12 @@ public interface DicMapper {
      * 字典子查询
      **/
     List<Map<String,Object>> DicGetS(Map<String,Object> param);
+    /**
+     * 年级
+     */
+    List<Map<String,Object>> DicNj(Map<String,Object> param);
+    /**
+     * 班级
+     */
+    List<Map<String,Object>> DicBj(Map<String,Object> param);
 }

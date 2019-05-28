@@ -177,4 +177,52 @@ public class DicController {
         }
         return result;
     }
+    /**
+     *年级字典
+     * xy  学院
+     * zy  专业
+     */
+    @RequestMapping("/DicNj")
+    @ResponseBody
+    public Map<String,Object> DicNj(String xy,String zy){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            param.put("xy",xy);
+            param.put("zy",zy);
+            result.put("data",dicService.DicNj(param));
+            result.put("message","年级字典查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","年级字典查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
+    /**
+     *班级字典
+     * xy  学院
+     * zy  专业
+     * nj  年级
+     */
+    @RequestMapping("/DicBj")
+    @ResponseBody
+    public Map<String,Object> DicBj(String xy,String zy,String nj){
+        Map<String,Object> result = new HashMap<>();
+        Map<String,Object> param = new HashMap<>();
+        try{
+            param.put("xy",xy);
+            param.put("zy",zy);
+            param.put("nj",nj);
+            result.put("data",dicService.DicBj(param));
+            result.put("message","班级字典查询成功");
+            result.put("code","200");
+        }catch (Exception e){
+            result.put("message","班级字典查询失败");
+            result.put("code","500");
+            result.put("data",e.getMessage());
+        }
+        return result;
+    }
 }

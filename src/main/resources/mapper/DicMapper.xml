@@ -28,4 +28,10 @@
     <select id="DicGetS" parameterType="java.util.Map" resultMap="DicMb">
        SELECT  code,name from dictionary where lx =#{lx} and parent_id =#{id}
     </select>
+    <select id="DicNj" parameterType="java.util.Map" resultMap="DicMb">
+       SELECT nj from user_student t where t.xy =#{xy} and t.zy =#{zy} GROUP BY nj
+    </select>
+    <select id="DicBj" parameterType="java.util.Map" resultMap="DicMb">
+       SELECT bj from user_student t where t.xy =#{xy} and t.zy =#{zy} and nj =#{nj} GROUP BY bj
+    </select>
 </mapper>
