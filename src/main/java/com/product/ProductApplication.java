@@ -9,14 +9,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
 @MapperScan("com.product.mapper")
-//@ServletComponentScan
-public class ProductApplication  {
-//public class GcwtpApplication extends SpringBootServletInitializer {
+//public class ProductApplication  {
+public class ProductApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(ProductApplication.class, args);
 
@@ -34,8 +34,8 @@ public class ProductApplication  {
 //			}
 //		};
 //	}
-//	@Override
-//	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//		return application.sources(ProductApplication.class);
-//	}
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(ProductApplication.class);
+	}
 }
