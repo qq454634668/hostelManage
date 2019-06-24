@@ -159,41 +159,6 @@ public class UserController {
             return userInfo;
         }
     }
-
-    /**
-     * 初始化登录，取用户缓存信息，活的菜单
-     */
-//    @RequestMapping("/InitInfo")
-//    @ResponseBody
-//    public Map<String,Object> InitInfo(HttpSession session){
-//        Map<String,Object> result = new HashMap<>();
-//        Map<String,Object> map = new HashMap<>();
-//        Map<String,Object> param = new HashMap<>();
-//        try{
-//
-//            Map<String, Object> userInfo = this.getSessionUserInfo(session);
-//            if(userInfo.isEmpty()){
-//                result.put("data",null);
-//                result.put("message","用户信息不存在,请重新登录");
-//                result.put("code","201");
-//            }else{
-//                Object roleId = userInfo.get("role_id");
-//                map.put("userInfo",userInfo);
-//                //查询权限下菜单
-//                param.put("roleId",roleId);
-//                List<Map<String, Object>> menuInfo = userService.menuInfo(param);
-//                map.put("menuInfo",menuInfo);
-//                result.put("data",map);
-//                result.put("message","用户信息获取成功");
-//                result.put("code","200");
-//            }
-//        }catch (Exception e){
-//            result.put("data",null);
-//            result.put("message","登录异常");
-//            result.put("code","500");
-//        }
-//        return result;
-//    }
     /**
      * 初始化登录，取用户缓存信息，活的菜单
      * 验证token时效性
