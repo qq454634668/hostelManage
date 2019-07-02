@@ -37,7 +37,7 @@ public class LicenseFilter implements Filter {
 //		int valid = licenseVertify.vertify();
 //
 //		if(0==valid){
-//			chain.doFilter(request, response);
+			chain.doFilter(request, response);
 //		}else if(1==valid){//过期
 //			request.getRequestDispatcher("overdue.jsp").forward(request,response);
 //		}else if(2==valid){
