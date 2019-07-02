@@ -5,7 +5,7 @@ import Qs from 'qs';
 
 let base = '';
 // TODO
-let hotelBaseUrl = 'http://localhost:8080/'; // 天津公安appcan中连接到企业联络员津公安appcan中连接到企业联络员的地址
+let hotelBaseUrl = 'http://localhost:8080/product'; // 天津公安appcan中连接到企业联络员津公安appcan中连接到企业联络员的地址
 // process.env.NODE_ENV == 'development'
 //     (base = 'localhost:8080'); //域名测试地址
 
