@@ -1,0 +1,339 @@
+/*清除浮动*/
+
+.clearfix:after {
+  display: block;
+  clear: both;
+  content: '';
+  height: 0;
+  line-height: 0;
+  zoom: 1;
+  z-index: 1;
+}
+
+/* 0.5px线*/
+
+.ta-line:after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  content: '';
+  background-color: #c8c7cc;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+/* Vue专用*/
+
+[v-cloak] {
+  display: none;
+}
+
+/*  列表 start*/
+
+.ta-view-table {
+  background-color: #fff;
+}
+
+.ta-view-table:before {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 1px;
+  content: '';
+  background-color: #c8c7cc;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  top: -1px;
+}
+
+.ta-view-table:after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  content: '';
+  background-color: #c8c7cc;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+.ta-view-cell {
+  position: relative;
+  padding: 0.8rem 0.8rem;
+  line-height: 1.4rem;
+  font-size: 16px;
+  color: #000000;
+  /* height: 2.6rem; */
+  box-sizing: border-box;
+}
+
+.ta-view-textarea {
+  position: relative;
+  padding: 0.6rem 0.8rem;
+  line-height: 1.4rem;
+  font-size: 0.853rem;
+  color: #000000;
+  height: 5rem;
+  box-sizing: border-box;
+}
+
+.ta-view-cell:after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 15px;
+  height: 1px;
+  content: '';
+  background-color: #c8c7cc;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+.ta-view-cell:last-child:after {
+  content: '';
+  height: 0px;
+}
+
+.ta-view-cell label {
+  display: -webkit-box;
+  max-width: 70%;
+  color: #333;
+  vertical-align: middle;
+  /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/*  列表 end*/
+
+.ta-badge {
+  display: inline-block;
+  font-size: 0.64rem;
+  line-height: 1;
+  color: #333;
+}
+
+.ta-pull-left {
+  float: left;
+}
+
+.ta-pull-right {
+  float: right;
+}
+
+/*小箭头*/
+
+.ta-navigate-left:before,
+.ta-push-left:before,
+.ta-navigate-right:before,
+.ta-push-right:before {
+  position: absolute;
+  top: 50%;
+  display: inline-block;
+  line-height: 1;
+  color: #bbb;
+  text-decoration: none;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ta-navigate-left:before,
+.ta-push-left:before {
+  left: 15px;
+}
+
+.ta-navigate-right:before,
+.ta-push-right:before {
+  right: 15px;
+}
+
+.ta-margintop {
+  margin-top: 0.8rem;
+}
+
+.ta-margintop10 {
+  margin-top: 0.534rem;
+}
+
+/* 按钮 button*/
+
+.ta-row-button {
+  padding: 0 1.7rem;
+}
+
+button.ta-button-large {
+  display: block;
+  color: #fff;
+  background-color: #4976c9;
+  border-radius: 8px;
+  width: 16.587rem;
+  height: 2.5rem;
+  box-shadow: 2px 2px 1px #888888;
+}
+
+button.ta-button-little {
+  display: block;
+  color: #fff;
+  background-color: #4976c9;
+  border-radius: 4px;
+  width: 6.72rem;
+  height: 2.1333rem;
+}
+/* 企业信息页最小号图标 */
+button.ta-button-little-min {
+  display: block;
+  color: #fff;
+  background-color: #4976c9;
+  border-radius: 5px;
+  min-width: 5rem;
+  height: 2rem;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 0 .5rem;
+}
+button.disabled {
+  background-color: #d1d1d1;
+}
+
+button.ta-margincenter {
+  margin: 0 auto;
+}
+button.ta-button-middle {
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+/* 弹窗内多个按钮位置 */
+button.ta-button-left {
+  display: block;
+  color: #4976c9;
+  background-color: #edeff2;
+  border-radius: 5px;
+  width: 3.8rem;
+  height: 2.2rem;
+  margin: 0 auto;
+  float: left;
+  margin-left: 1.5rem;
+  margin-top: 15px;
+}
+button.ta-button-right {
+  display: block;
+  color: #fff;
+  background-color: #4976c9;
+  border-radius: 5px;
+  width: 3.8rem;
+  height: 2.2rem;
+  margin: 0 auto;
+  float: right;
+  margin-right: 1.5rem;
+  margin-top: 15px;
+}
+/* 弹窗内多个按钮时内容宽度*/
+.ta-alert-p {
+  padding: 0 2.56rem;
+  height: 100%;
+  text-align: center;
+}
+.ta-alert-p-nobutton {
+  text-align: center;
+}
+/*字体排列方向*/
+
+.ta-text-left {
+  text-align: left;
+}
+
+.ta-text-right {
+  text-align: right;
+}
+
+.ta-view-cell input.ta-check {
+  /*display: none;*/
+  /*opacity: 0;*/
+  font-size: 0.746rem;
+  margin-right: 1rem;
+  /*line-height: 0.95rem;*/
+  float: right;
+  position: absolute;
+  top: 21px;
+  right: 0.3rem;
+}
+
+span.check {
+  display: inline-block;
+  position: absolute;
+  right: 1rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  background: url(../../image/postalicon/check.png) no-repeat right;
+  background-size: 1.2rem;
+}
+
+input.ta-check:checked + span.check {
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+  background: url(../../image/postalicon/checked.png) no-repeat right;
+  background-size: 1.2rem;
+}
+
+input.ta-check:checked + span.check:after {
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+  background: url(../../image/postalicon/checked.png) no-repeat right;
+  background-size: 1.2rem;
+}
+
+label.radio {
+  position: relative;
+  padding: 0 10px 0 25px;
+}
+
+.child-view label.radio {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* 通用样式 */
+.ta-cell {
+  min-height: 3rem;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  background-color: #fff;
+}
+
+.ta-cell-wrapper {
+  background-image: linear-gradient(
+    180deg,
+    #d9d9d9,
+    #d9d9d9 50%,
+    transparent 50%
+  );
+  background-size: 120% 1px;
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-origin: content-box;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: flex;
+  font-size: 1rem;
+  line-height: 1;
+  min-height: inherit;
+  overflow: hidden;
+  padding: 0 0.9375rem;
+  width: 100%;
+}
