@@ -1,9 +1,7 @@
 <template>
     <div class="page page-campus">
       <el-container>
-        <el-header class="listName">
-          <h3 class="left">公寓区管理<span>列表</span></h3>
-        </el-header>
+       
         <el-main class="padding-0">
           <div class="content">
             <el-container>
@@ -273,7 +271,6 @@ export default {
             var res = await ApartmentDelete(params);
             console.log(res)
             if(res.code == 200){
-
               this.$message('删除成功');
               this.deletecapmus = false;
               this.tableData();

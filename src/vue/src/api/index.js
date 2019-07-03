@@ -156,3 +156,11 @@ export const studentList = (params, method) => {
 export const EmptyBed = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/taskPlan/EmptyBed`, params, method);
 };
+
+
+
+// 日常管理
+// 入住床位管理
+export const BedListMap = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/daily/BedListMap`, params, method);
+};

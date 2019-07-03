@@ -1,9 +1,7 @@
 <template>
     <div class="page page-campus">
       <el-container>
-        <el-header class="listName">
-          <h3 class="left">校区住宿<span>列表</span></h3>
-        </el-header>
+       
         <el-main class="padding-0">
           <div class="content">
             <el-container>

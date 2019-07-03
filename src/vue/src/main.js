@@ -23,30 +23,30 @@ new Vue({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path == '/login') {
-    localStorage.removeItem('token');
-  }
-  var token = localStorage.getItem('token');
-  // console.log(user)
-  if (!token) {
-      next({ path: '/login' });
-    //未登录时
-    // if (to.path == '/login') {
-    //   next();
-    // } else {
-    //   //若不为登录页或使用说明页，转到登录页
-    //   next({ path: '/login' });
-    // }
-  } else {
-    //已经登录
-    // if (!beginExam && (to.path == '/resgister' || to.path == '/finishExam')) {
-    //   next({ path: '/onlineExam' });
-    // } else {
-    //   next();
-    // }
+  // if (to.path == '/login') {
+  //   localStorage.removeItem('token');
+  // }
+  // var token = localStorage.getItem('token');
+  // // console.log(user)
+  // if (!token) {
+  //     next({ path: '/login' });
+  //   //未登录时
+  //   // if (to.path == '/login') {
+  //   //   next();
+  //   // } else {
+  //   //   //若不为登录页或使用说明页，转到登录页
+  //   //   next({ path: '/login' });
+  //   // }
+  // } else {
+  //   //已经登录
+  //   // if (!beginExam && (to.path == '/resgister' || to.path == '/finishExam')) {
+  //   //   next({ path: '/onlineExam' });
+  //   // } else {
+  //   //   next();
+  //   // }
+  //   next();
+  // }
     next();
-  }
-    // next();
 });
 // 为浏览器环境添加全局变量
 if (process.env.NODE_ENV == 'development') {

@@ -29,7 +29,7 @@
                 Copyright © 2018 天津市第一商业学院
             </el-footer>
         </el-container>
-    
+
     </div>
 </template>
 <script>
@@ -51,9 +51,9 @@ export default {
             this.login()
         },
          async login(){
-             var params = { 
-                username: this.form.username, 
-                password: this.form.password,
+             var params = {
+                username: this.form.username,
+                password: this.form.password
             };
             var res = await requestLogin(params);
             if(res.code == 200){
@@ -61,11 +61,11 @@ export default {
                 localStorage.setItem('token',token);
                 this.$router.push({ path: '/home' });
             }
-         },
+         }
 
     },
     mounted(){
-        
+
     }
 }
 </script>
@@ -111,7 +111,7 @@ export default {
                             background-color: #eb5e00;
                             border: 0px;
                         }
-                        
+
 
                     }
                     .weibup{
@@ -120,9 +120,9 @@ export default {
                     }
                 }
             }
-                
+
             }
         }
-        
+
     }
 </style>

@@ -11,6 +11,7 @@ const  BuildingManage = r => require.ensure([], () => r(require('@/views/accommo
 const  RoomManage = r => require.ensure([], () => r(require('@/views/accommodationManage/roomManage')), 'roomManage'); //房间管理
 const  BedManage = r => require.ensure([], () => r(require('@/views/accommodationManage/bedManage')), 'bedManage'); //床位管理
 const  MissionPlan = r => require.ensure([], () => r(require('@/views/missionPlan/missionPlan')), 'missionPlan'); //任务计划
+const  DailyManage = r => require.ensure([], () => r(require('@/views/dailyManage/dailyManage')), 'dailyManage'); //日常管理
 const  OccupancyManage = r => require.ensure([], () => r(require('@/views/dailyManage/occupancyManage')), 'occupancyManage'); //入住管理
 const  RetirementManage = r => require.ensure([], () => r(require('@/views/dailyManage/retirementManage')), 'retirementManage'); //退宿管理
 const  RelocationManage = r => require.ensure([], () => r(require('@/views/dailyManage/relocationManage')), 'relocationManage'); //换宿管理
@@ -48,38 +49,103 @@ export default new Router({
                   path: '',
                   name: 'campusManage',
                   component: CampusManage,
-                  hidden: true
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"住宿管理",
+                    breadcrumb: '校区住宿'
+                  }
                 },
                 {
                   path: '/campusManage',
                   name: 'campusManage',
                   component: CampusManage,
-                  hidden: true
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"住宿管理",
+                    breadcrumb: '校区住宿'
+                  }
                 },
                 {
                   path: '/apartmentManage',
                   name: 'apartmentManage',
                   component: ApartmentManage,
-                  hidden: true
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"住宿管理",
+                    breadcrumb: '公寓区管理'
+                  }
                 },
                 {
                   path: '/buildingManage',
                   name: 'buildingManage',
                   component: BuildingManage,
-                  hidden: true
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"住宿管理",
+                    breadcrumb: '楼栋管理'
+                  }
                 },
                 {
                   path: '/roomManage',
                   name: 'roomManage',
                   component: RoomManage,
-                  hidden: true
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"住宿管理",
+                    breadcrumb: '房间管理'
+                  }
                 },
                 {
                   path: '/bedManage',
                   name: 'bedManage',
                   component: BedManage,
-                  hidden: true
-                } 
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"住宿管理",
+                    breadcrumb: '床位管理'
+                  }
+                },
+                {
+                  path: '/missionPlan',
+                  name: 'missionPlan',
+                  component: MissionPlan,
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"住宿管理",
+                    breadcrumb: '床位管理'
+                },
+              },
+                {
+                  path: '/occupancyManage',
+                  name: 'occupancyManage',
+                  component: OccupancyManage,
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"日常管理",
+                    breadcrumb: '入住管理'
+                }
+              },
+                {
+                  path: '/retirementManage',
+                  name: 'retirementManage',
+                  component: RetirementManage,
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"日常管理",
+                    breadcrumb: '退宿管理'
+                }
+              },
+                
+                {
+                  path: '/relocationManage',
+                  name: 'relocationManage',
+                  component: RelocationManage,
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"日常管理",
+                    breadcrumb: '换宿管理'
+                },
+                }
               ]
             },
             {
@@ -88,30 +154,8 @@ export default new Router({
               component: AccommodationManage,
               hidden: true
             },
-            {
-              path: '/missionPlan',
-              name: 'missionPlan',
-              component: MissionPlan,
-              hidden: true
-            },
-            {
-              path: '/occupancyManage',
-              name: 'occupancyManage',
-              component: OccupancyManage,
-              hidden: true
-            },
-            {
-              path: '/retirementManage',
-              name: 'retirementManage',
-              component: RetirementManage,
-              hidden: true
-            },
-            {
-              path: '/relocationManage',
-              name: 'relocationManage',
-              component: RelocationManage,
-              hidden: true
-            }
+
+            
           ]
          
         },  
