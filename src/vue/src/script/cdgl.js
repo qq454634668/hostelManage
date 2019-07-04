@@ -48,9 +48,13 @@ export default {
       handleSelectionChange(){
 
       },
-      edit(id,px){
-        this.editform.id = id;
-        this.dialogFormVisible = true;
+      edit(item){
+        this.editform.id = item.id;
+        this.editform.name=item.name;
+        this.editform.px=item.px;
+        this.editform.icon = item.icon;
+        this.editform.url = item.url;
+        this.dialogFormVisible = true
       },
       async addFunction(){
           var params = this.editform;

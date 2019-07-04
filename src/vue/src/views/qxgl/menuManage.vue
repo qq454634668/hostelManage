@@ -11,7 +11,7 @@
                     <li>{{item.parentMenu.name}}</li>
                     <li>{{item.parentMenu.url}}</li>
                     <div class="setMenu">
-                       <i class="iconfont icon-xiugai2" @click="edit(item.parentMenu.parent_id,item.parentMenu.px)"></i>
+                       <i class="iconfont icon-xiugai2" @click="edit(item.parentMenu)"></i>
                     </div>
                   </ul>
                 </div>
