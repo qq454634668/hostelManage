@@ -22,7 +22,7 @@ export default {
             rzsqSelect:[
                 {name:'申请中',code:'1'},
                 {name:'申请成功',code:'2'},
-                {name:'申请失败',code:'3'},
+                {name:'申请失败',code:'3'}
             ],
           }
         

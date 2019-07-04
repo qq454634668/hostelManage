@@ -1,9 +1,9 @@
-import { QueryMenu} from '@/api';
+import { QueryMenu,EditMenu} from '@/api';
 export default {
     data(){
       return{
           tableDataList:[],
-          peopleDataList:[],
+          dataList:[],
           loading:false,
           page:{
              pageNum:1, 
@@ -24,7 +24,15 @@ export default {
                 {name:'申请成功',code:'2'},
                 {name:'申请失败',code:'3'},
             ],
-          }
+          },
+          editform:{
+            name:'',
+            url:'',
+            px:'',
+            id:'',
+            icon:'',
+          },
+          dialogFormVisible:false,
         
           
       }  
@@ -40,7 +48,20 @@ export default {
       handleSelectionChange(){
 
       },
-     
+      edit(id,px){
+        this.editform.id = id;
+        this.dialogFormVisible = true;
+      },
+      async addFunction(){
+          var params = this.editform;
+          var res = await EditMenu(params);
+          if(res.code == 200){
+            console.log(res)
+          }else{
+            this.$message(res.message)
+          }
+
+      },
       // list
       async tableData(){
           this.loading = true;
@@ -48,9 +69,7 @@ export default {
           var res = await QueryMenu(params);
           if(res.code == 200){
               this.loading = false;
-              this.tableDataList = res.data.list;
-              this.startRow = res.data.isFirstPage;
-              this.endRow = res.data.isLastPage;
+              this.dataList= res.data;
                 console.log(res)
           }else{
             this.loading = false;
