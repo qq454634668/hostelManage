@@ -173,8 +173,8 @@ export default {
       // 表格list
       async tableData(){
              var params = {
-               pageNum:this.pageNum,
-               pageSize:this.pageSize,
+               pageNum:this.page.pageNum,
+               pageSize:this.page.pageSize,
              };
             var res = await campusList(params);
             if(res.code == 200){
