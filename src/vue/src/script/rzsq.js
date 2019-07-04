@@ -69,6 +69,7 @@ export default {
               this.startRow = res.data.isFirstPage;
               this.endRow = res.data.isLastPage;
                 console.log(res)
+              
           }else{
             this.loading = false;
             this.$message(res.message)

@@ -38,13 +38,15 @@
                       border
                       style="width: 100%"
                       v-loading="loading">
-                        <el-table-column prop="task_name"  label="姓名" > </el-table-column>
-                        <el-table-column  prop="hfgz"  label="学号"> </el-table-column>
-                        <el-table-column  prop="hfbh" label="申请流程"> </el-table-column>
-                        <el-table-column  prop="rwbh" label="联系方式"> </el-table-column>
-                        <el-table-column  prop="kssj" label="申请时间"> </el-table-column>
-                        <el-table-column  prop="jssj"  label="审批状态">   </el-table-column>
-                        <el-table-column  prop="jssj"  label="审批结果">   </el-table-column>
+                        <el-table-column prop="sqrxm"  label="姓名" > </el-table-column>
+                        <el-table-column  prop="sqrxh"  label="学号"> </el-table-column>
+                        <el-table-column  prop="sqcwbh" label="申请床位编号"> </el-table-column>
+                        <el-table-column  prop="ycwbh"  label="原床位编号">   </el-table-column>
+                        <el-table-column  prop="zxzt" label="执行状态"> </el-table-column>
+                        <el-table-column  prop="sqyy"  label="申请原因">   </el-table-column>
+                        <el-table-column  prop="sqsj"  label="申请时间">   </el-table-column>
+                        <el-table-column  prop="zxjgyy"  label="执行结果原因">   </el-table-column>
+                        <el-table-column  prop="spsj"  label="审批时间">   </el-table-column>
                       <el-table-column label="操作">
                             <template slot-scope="scope">
                               <el-button  size="mini"
