@@ -164,3 +164,28 @@ export const EmptyBed = (params, method) => {
 export const BedListMap = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/daily/BedListMap`, params, method);
 };
+
+
+// 宿舍管理
+//入住/换宿/退宿申请记录List
+export const applyForList = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/daily/applyForList`, params, method);
+};
+
+// 权限管理
+
+//增加菜单
+export const AddMenu = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/AddMenu`, params, method);
+};
+//修改菜单
+export const EditMenu = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/EditMenu`, params, method);
+};
+//查询菜单
+export const QueryMenu = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/QueryMenu`, params, method);
+};
+
+
+

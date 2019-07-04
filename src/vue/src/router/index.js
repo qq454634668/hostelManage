@@ -15,6 +15,12 @@ const  DailyManage = r => require.ensure([], () => r(require('@/views/dailyManag
 const  OccupancyManage = r => require.ensure([], () => r(require('@/views/dailyManage/occupancyManage')), 'occupancyManage'); //入住管理
 const  RetirementManage = r => require.ensure([], () => r(require('@/views/dailyManage/retirementManage')), 'retirementManage'); //退宿管理
 const  RelocationManage = r => require.ensure([], () => r(require('@/views/dailyManage/relocationManage')), 'relocationManage'); //换宿管理
+const  Rzsq = r => require.ensure([], () => r(require('@/views/dormitoryApplication/rzsq')), 'rzsq'); //入住申请
+const  Hssq = r => require.ensure([], () => r(require('@/views/dormitoryApplication/Hssq')), 'Hssq'); //换宿申请
+const  Tssq = r => require.ensure([], () => r(require('@/views/dormitoryApplication/tssq')), 'tssq'); //退宿申请
+const  UserManage = r => require.ensure([], () => r(require('@/views/qxgl/userManage')), 'userManage'); //用户管理
+const  RoleManage = r => require.ensure([], () => r(require('@/views/qxgl/roleManage')), 'roleManage'); //角色管理
+const  MenuManage = r => require.ensure([], () => r(require('@/views/qxgl/menuManage')), 'menuManage'); //角色管理
 Vue.use(Router)
 
 export default new Router({
@@ -111,8 +117,8 @@ export default new Router({
                   component: MissionPlan,
                   meta: {
                     requireAuth: true,
-                    breadcrumbparent:"住宿管理",
-                    breadcrumb: '床位管理'
+                    breadcrumbparent:"任务计划",
+                    breadcrumb: '自动计划'
                 },
               },
                 {
@@ -135,7 +141,6 @@ export default new Router({
                     breadcrumb: '退宿管理'
                 }
               },
-                
                 {
                   path: '/relocationManage',
                   name: 'relocationManage',
@@ -144,8 +149,69 @@ export default new Router({
                     requireAuth: true,
                     breadcrumbparent:"日常管理",
                     breadcrumb: '换宿管理'
+                  },
                 },
-                }
+                {
+                  path: '/rzsq',
+                  name: 'rzsq',
+                  component: Rzsq,
+                  meta: {
+                    requireAuth: true,
+                    breadcrumbparent:"宿舍申请",
+                    breadcrumb: '入住申请'
+                  },
+                },
+                {
+                path: '/hssq',
+                name: 'hssq',
+                component: Hssq,
+                meta: {
+                  requireAuth: true,
+                  breadcrumbparent:"宿舍申请",
+                  breadcrumb: '换宿申请'
+                },
+              },
+              {
+                path: '/tssq',
+                name: 'tssq',
+                component: Tssq,
+                meta: {
+                  requireAuth: true,
+                  breadcrumbparent:"宿舍申请",
+                  breadcrumb: '退宿申请'
+                },
+              },
+              {
+                path: '/userManage',
+                name: 'userManage',
+                component: UserManage,
+                meta: {
+                  requireAuth: true,
+                  breadcrumbparent:"权限管理",
+                  breadcrumb: '用户管理'
+                },
+              },
+              {
+                path: '/menuManage',
+                name: 'menuManage',
+                component: MenuManage,
+                meta: {
+                  requireAuth: true,
+                  breadcrumbparent:"权限管理",
+                  breadcrumb: '菜单管理'
+                },
+              },
+              {
+                path: '/roleManage',
+                name: 'roleManage',
+                component: RoleManage,
+                meta: {
+                  requireAuth: true,
+                  breadcrumbparent:"权限管理",
+                  breadcrumb: '角色管理'
+                },
+              }
+
               ]
             },
             {
