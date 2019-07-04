@@ -187,7 +187,6 @@ public class DailyController {
      * ycwbh原床位编号
      * sqcwbh申请床位编号
      * sqlx  申请类型
-     * sqlx  申请类型
      * zxzt  申请状态成功---2/申请状态失败---3
      * zxjgyy  执行结果原因
      */
@@ -195,11 +194,6 @@ public class DailyController {
     @ResponseBody
     public Map<String,Object> verifyAsk(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
-        Map<String,Object> param = new HashMap<>();
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String created_time = sdf.format(date);
-        param.put("rksj",created_time);
         try {
             String id = request.getParameter("id");
             String sqrxh = request.getParameter("sqrxh");
@@ -210,10 +204,10 @@ public class DailyController {
             String zxjgyy = request.getParameter("zxjgyy");
             dailyService.verifyAsk(sqrxh,ycwbh,sqcwbh,sqlx,zxzt,zxjgyy,id);
             result.put("data",null);
-            result.put("message","退宿操作成功");
+            result.put("message","操作成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","退宿操作失败");
+            result.put("message","操作失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }

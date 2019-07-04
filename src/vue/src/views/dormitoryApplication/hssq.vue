@@ -50,10 +50,10 @@
                       <el-table-column label="操作">
                             <template slot-scope="scope">
                               <el-button  size="mini"
-                                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                              <el-button size="mini"
+                                @click="cz(scope.$index, scope.row.id,scope.row.sqrxh,scope.row.ycwbh,scope.row.sqcwbh,scope.row.sqlx_code)">操作</el-button>
+                              <!-- <el-button size="mini"
                                 type="danger"
-                                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                                @click="handleDelete(scope.$index, scope.row)">不同意</el-button> -->
                             </template>
                         </el-table-column>
                     </el-table>
@@ -74,6 +74,19 @@
             </el-container>
           
           </div>
+          <el-dialog
+          title="换宿申请--操作"
+          :visible.sync="rzsq_cz"
+          width="30%" class="align-left">
+          <div>   
+              <span>处置结果原因:</span><el-input v-model="form.zxjgyy"></el-input>
+          </div>
+          <span slot="footer" class="dialog-footer">
+              <el-button @click="rzsq_cz =false">取 消</el-button>
+              <el-button type="primary" @click="sptg()">审批通过</el-button>
+              <el-button type="primary" @click="spbtg()">审批不通过</el-button>
+          </span>
+        </el-dialog>
         </el-main>
       </el-container>
     </div>

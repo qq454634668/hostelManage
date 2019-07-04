@@ -35,6 +35,7 @@
         <result column="SQCWBH" property="sqcwbh"/>
         <result column="YCWBH" property="ycwbh"/>
         <result column="SPSJ" property="spsj"/>
+        <result column="SQLX_CODE" property="sqlx_code"/>
     </resultMap>
     <resultMap id="StuList" type="java.util.Map">
         <result column="ID" property="id"/>
@@ -177,6 +178,7 @@
                t.sqrxh,
                t.sqsj,
 			  (select name from dictionary a where t.sqlx=a.code and a.lx='sqlx') sqlx,
+                t.sqlx sqlx_code,
 			  (select name from dictionary a where t.zxzt=a.code and a.lx='sqzt') zxzt,
 			   t.sqyy,
                t.zxjgyy,

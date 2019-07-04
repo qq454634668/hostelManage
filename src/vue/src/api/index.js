@@ -171,6 +171,10 @@ export const BedListMap = (params, method) => {
 export const applyForList = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/daily/applyForList`, params, method);
 };
+//审批申请-----同意/不同意申请
+export const verifyAsk = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/daily/verifyAsk`, params, method);
+};
 
 // 权限管理
 
