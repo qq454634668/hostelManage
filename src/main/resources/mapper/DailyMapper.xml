@@ -85,7 +85,7 @@
         t.xqbh,
         (select name from campus_info c where  t.xqbh = c.bh) xqname,
         t.gybh,
-        (select name from apartment_info d where  t.gybh = d.gybh) gyname,
+        (select name from apartment_info d where  t.gybh = d.bh) gyname,
         t.louzt,
         (select name from dictionary a where a.lx='xb' and t.louzt = a.code) louztname,
         t.rksj,
