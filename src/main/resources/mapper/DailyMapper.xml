@@ -25,16 +25,16 @@
     </resultMap>
     <resultMap id="ApplyAsk" type="java.util.Map">
         <result column="ID" property="id"/>
-        <result column="BH" property="sqrxm"/>
-        <result column="FJBH" property="sqrxh"/>
-        <result column="FJBZ" property="sqsj"/>
-        <result column="FJBZNAME" property="sqlx"/>
-        <result column="LOUBH" property="zxzt"/>
-        <result column="LOUNAME" property="sqyy"/>
-        <result column="XQBH" property="zxjgyy"/>
-        <result column="XQNAME" property="sqcwbh"/>
-        <result column="GYBH" property="ycwbh"/>
-        <result column="GYNAME" property="spsj"/>
+        <result column="SQRXM" property="sqrxm"/>
+        <result column="SQRXH" property="sqrxh"/>
+        <result column="SQSJ" property="sqsj"/>
+        <result column="SQLX" property="sqlx"/>
+        <result column="ZXZT" property="zxzt"/>
+        <result column="SQYY" property="sqyy"/>
+        <result column="ZXJGYY" property="zxjgyy"/>
+        <result column="SQCWBH" property="sqcwbh"/>
+        <result column="YCWBH" property="ycwbh"/>
+        <result column="SPSJ" property="spsj"/>
     </resultMap>
     <resultMap id="StuList" type="java.util.Map">
         <result column="ID" property="id"/>

@@ -157,21 +157,11 @@ public class DailyController {
      */
     @RequestMapping("/applyForList")
     @ResponseBody
-    public Map<String,Object> applyForList(HttpServletRequest request){
+    public Map<String,Object> applyForList(HttpServletRequest request,int pageNum,int pageSize){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         List<Map<String,Object>> list=new ArrayList<>();
         try {
-            String pageNumS =request.getParameter("pageNum");
-            String pageSizeS=request.getParameter("pageSize");
-            int pageNum =1;
-            int pageSize =10;
-            if(pageNumS!=null){
-                pageNum = Integer.parseInt(pageNumS);
-            }
-            if(pageSizeS!=null){
-                pageSize= Integer.parseInt(pageSizeS);
-            }
             String zxzt = request.getParameter("zxzt");
             String sqlx = request.getParameter("sqlx");
             param.put("zxzt",zxzt);

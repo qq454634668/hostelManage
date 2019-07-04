@@ -40,7 +40,7 @@
         update menu_info set name=#{name},url=#{url},icon=#{icon},px=#{px} where id =#{id}
     </update>
     <select id="QueryMenu" parameterType="java.util.Map" resultMap="MenuInfo">
-        select * from menu_info where parent_id = #{parent_id}
+        select * from menu_info where parent_id = #{parent_id} order by px
     </select>
     <delete id="DeleteMenu" parameterType="java.util.Map">
         delete from menu_info where id =#{id} or parent_id =#{id}
