@@ -143,6 +143,10 @@ export const RoomDictionary = (params, method) => {
 export const BuildStatusDictionary = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/dic/DicGet`, params, method);
 };
+//混合字典子级下拉
+export const DicGets = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/dic/DicGets`, params, method);
+};
 
 // 任务计划
 export const plan = (params, method) => {
