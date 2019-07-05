@@ -5,6 +5,9 @@
         <div class="content">
           <el-container>
             <el-main>
+              <div class="align-left">
+                <el-button type="warning" @click="add(dataList[dataList.length-1].parentMenu,dataList[dataList.length-1].parentMenu.parent_id)">增加一级菜单</el-button>
+              </div>
               <div class="left flex-box menuMange" v-for="(item,index) in dataList" :key="index">
                 <div class="Level1">
                   <ul class="border menuborder1">
@@ -12,6 +15,9 @@
                     <li>{{item.parentMenu.url}}</li>
                     <div class="setMenu">
                        <i class="iconfont icon-xiugai2" @click="edit(item.parentMenu)"></i>
+                         <i class="iconfont icon-shanchu3" @click="deleteFunc(item.parentMenu)"></i>
+                       <!-- <i class="iconfont" @click="up(dataList,index)">上移</i>
+                       <i class="iconfont" @click="down(dataList,index)">下移</i> -->
                     </div>
                   </ul>
                 </div>
@@ -35,12 +41,21 @@
                 </div>
                 <div class="level2">
                   <ul>
-                    <li v-for="(item,index2) in item.sonMenu" :key="index2">{{item.name}} {{item.url}}</li>
-                    <li>+</li>
+                    <li v-for="(item,index2) in item.sonMenu" :key="index2">
+                           <span>{{item.name}} {{item.url}} </span> 
+                           <div class="setMenu">
+                                <i class="iconfont icon-xiugai2" @click="edit(item)"></i>
+                                <i class="iconfont icon-shanchu3" @click="deleteFunc(item)"></i>
+                                <!-- <i class="iconfont" @click="up(dataList,index)">上移</i>
+                                <i class="iconfont" @click="down(dataList,index)">下移</i> -->
+                          </div>
+                    </li>
+                    <li @click="add(item.sonMenu[item.sonMenu.length-1],item.parentMenu.id)">
+                      <i class="iconfont">+</i>
+                    </li>
                   </ul>
                 </div>
               </div>
-
               <el-dialog title="修改" :visible.sync="dialogFormVisible" width="30%">
                   <el-form :model="editform" label-width="80px">
                     <el-form-item label="名称" >
@@ -52,11 +67,27 @@
                     <el-form-item label="图标" >
                        <el-input v-model="editform.icon" auto-complete="off"></el-input>
                     </el-form-item>
-                      
                  </el-form>
                    <div slot="footer" class="dialog-footer">
                       <el-button @click="dialogFormVisible = false">取 消</el-button>
-                      <el-button type="primary" @click="addFunction">确 定</el-button>
+                      <el-button type="primary" @click="editFunction">确 定</el-button>
+                    </div>
+              </el-dialog>
+              <el-dialog title="增加" :visible.sync="dialogAdd" width="30%">
+                  <el-form :model="addform" label-width="80px">
+                    <el-form-item label="名称" >
+                      <el-input v-model="addform.name" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="地址">
+                       <el-input v-model="addform.url" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="图标" >
+                       <el-input v-model="addform.icon" auto-complete="off"></el-input>
+                    </el-form-item>
+                 </el-form>
+                   <div slot="footer" class="dialog-footer">
+                      <el-button @click="dialogAdd = false">取 消</el-button>
+                      <el-button type="primary" @click="addFunction()">确 定</el-button>
                     </div>
               </el-dialog>
             </el-main>
@@ -88,7 +119,8 @@ export default {
       width: 0%;
       .menuborder1 {
         padding: 10px;
-        background-color: blueviolet;
+        min-height:50px;
+        background-color: #3D6DD1;
         color: #fff;
         position: relative;
         // height: 80px;
@@ -99,6 +131,11 @@ export default {
           right:20px;
           color:#fff;
           top:10px;
+          >i{
+            cursor pointer;
+            display:inline-block;
+                padding:0px 5px;
+          }
         }
        
       }
@@ -117,6 +154,7 @@ export default {
           li{
             height:50px;
             margin-bottom:20px;
+           
           }
           li:first-child{
             height:25px;
@@ -160,7 +198,24 @@ export default {
           line-height:40px;
           height:50px;
           margin-bottom:20px;
+          position:relative;
+          //  background-color:#6497FF;
+           border-radius:4px;
           border:1px solid #999;
+          .setMenu{
+              position:absolute;
+              right:20px;
+              color:#333;
+              top:10px;
+              >i{
+                cursor pointer;
+                display:inline-block;
+                padding:0px 5px;
+              }
+            }
+            i{
+              cursor pointer;
+            }
         }
          li:last-child{
             margin-bottom:0px;
