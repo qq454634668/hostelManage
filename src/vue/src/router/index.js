@@ -13,6 +13,7 @@ const  BedManage = r => require.ensure([], () => r(require('@/views/accommodatio
 const  MissionPlan = r => require.ensure([], () => r(require('@/views/missionPlan/missionPlan')), 'missionPlan'); //任务计划
 const  DailyManage = r => require.ensure([], () => r(require('@/views/dailyManage/dailyManage')), 'dailyManage'); //日常管理
 const  OccupancyManage = r => require.ensure([], () => r(require('@/views/dailyManage/occupancyManage')), 'occupancyManage'); //入住管理
+const  Xzz = r => require.ensure([], () => r(require('@/views/dailyManage/xzz')), 'xzz'); //闲置中
 const  RetirementManage = r => require.ensure([], () => r(require('@/views/dailyManage/retirementManage')), 'retirementManage'); //退宿管理
 const  RelocationManage = r => require.ensure([], () => r(require('@/views/dailyManage/relocationManage')), 'relocationManage'); //换宿管理
 const  Rzsq = r => require.ensure([], () => r(require('@/views/dormitoryApplication/rzsq')), 'rzsq'); //入住申请
@@ -131,6 +132,16 @@ export default new Router({
                     breadcrumb: '入住管理'
                 }
               },
+              {
+                path: '/xzz',
+                name: 'xzz',
+                component: Xzz,
+                meta: {
+                  requireAuth: true,
+                  breadcrumbparent:"日常管理",
+                  breadcrumb: '安排入住'
+              }
+            },
                 {
                   path: '/retirementManage',
                   name: 'retirementManage',

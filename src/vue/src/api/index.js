@@ -194,6 +194,10 @@ export const QueryMenu = (params, method) => {
 export const QueryUserList = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/purview/QueryUserList`, params, method);
 };
+//删除菜单
+export const DeleteMenu = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/DeleteMenu`, params, method);
+};
 
 
 

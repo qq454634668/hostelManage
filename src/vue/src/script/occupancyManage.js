@@ -18,6 +18,7 @@ export default {
             districtSelect:'',
             building:'',
             buildingSelect:'',
+            buildName:'',
           }
         
           
@@ -27,13 +28,14 @@ export default {
       onSubmit(){
         this.tableData();
       },
-      handleCurrentChange(val){
-        this.page.pageNum = val;
-        this.tableData();
-      },
-      handleSelectionChange(){
-
-      },
+      //下拉框选中事件
+        selectGet(vId){//这个vId也就是value值
+          let obj = {};
+          obj = this.form.buildingSelect.find((item)=>{//这里的userList就是上面遍历的数据源
+              return item.code === vId;//筛选出匹配数据
+          });
+          this.form.buildName = obj.name;
+        },
       selectChange(apart){
            if(apart == 'apart'){
                this.form.district="";
@@ -47,6 +49,9 @@ export default {
                 this.apartLou(this.form.district)
            }
       },
+      link(){
+        this.$router.push({ path: '/xzz' });
+      },
       // 床位
       async bedList(){
           this.loading = true;
@@ -58,6 +63,7 @@ export default {
           var res = await BedListMap(params);
           if(res.code == 200){
               this.loading = false;
+              this.tableDataList = res.data;
                 console.log(res)
           }else{
             this.loading = false;
@@ -111,6 +117,7 @@ export default {
             if(res.code == 200){
               this.form.buildingSelect = res.data;
               this.form.building = res.data[0].code;
+              this.form.buildName = res.data[0].name;
               this.bedList();
             }else{
               this.$message(res.message)
