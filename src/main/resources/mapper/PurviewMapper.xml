@@ -17,6 +17,7 @@
         <result column="REALNAME" property="realname"/>
         <result column="LXDH" property="lxdh"/>
         <result column="XY" property="xy"/>
+        <result column="XYCODE" property="xycode"/>
         <result column="NJ" property="nj"/>
         <result column="RKSJ" property="rksj"/>
     </resultMap>
@@ -97,7 +98,10 @@
                                 where id =#{user_id}
     </update>
     <select id="QueryUserList" parameterType="java.util.Map" resultMap="UserList">
-        select * from user_teacher
+        select t.id,t.username,t.realname,t.lxdh,
+        (select name from dictionary a where a.code = t.xy and a.lx='xy') xy,
+        xy xycode,
+        nj,t.rksj from user_teacher t
         <where>
             <if test="key!=null and key!=''">
                 username like #{key} or
