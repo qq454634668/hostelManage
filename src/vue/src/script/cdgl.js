@@ -1,4 +1,4 @@
-import { QueryMenu,EditMenu} from '@/api';
+import { QueryMenu,EditMenu,QueryUserList} from '@/api';
 export default {
     data(){
       return{
@@ -24,6 +24,7 @@ export default {
                 {name:'申请成功',code:'2'},
                 {name:'申请失败',code:'3'},
             ],
+            key:'',
           },
           editform:{
             name:'',
@@ -69,12 +70,16 @@ export default {
       // list
       async tableData(){
           this.loading = true;
-           var params = {};
-          var res = await QueryMenu(params);
+          var params = {
+            key:this.form.key,
+            pageSize:10,
+            pageNum:this.page.pageNum
+           };
+          var res = await QueryUserList(params);
           if(res.code == 200){
               this.loading = false;
               this.dataList= res.data;
-                console.log(res)
+              console.log(res)
           }else{
             this.loading = false;
             this.$message(res.message)

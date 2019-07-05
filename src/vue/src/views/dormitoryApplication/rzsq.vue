@@ -6,21 +6,6 @@
             <el-container>
                 <el-header>
                   <el-form :inline="true" :model="form" class="demo-form-inline left">
-                       <!-- <el-form-item label="">
-                         <el-select v-model="form.apart" placeholder="校区" @change="selectChange('apart')">
-                           <el-option v-for="(item,index) in form.apartSelect" :key="index" :label="item.name" :value="item.code"></el-option>
-                        </el-select>
-                      </el-form-item>
-                      <el-form-item label="">
-                         <el-select v-model="form.district" placeholder="公寓区" @change="selectChange('district')">
-                           <el-option v-for="(item,index) in form.districtSelect" :key="index" :label="item.name" :value="item.code"></el-option>
-                        </el-select>
-                      </el-form-item>
-                      <el-form-item label="">
-                         <el-select v-model="form.building" placeholder="选择公寓楼" >
-                           <el-option v-for="(item,index) in form.buildingSelect" :key="index" :label="item.name" :value="item.code"></el-option>
-                        </el-select>
-                      </el-form-item> -->
                        <el-form-item label="">
                          <el-select v-model="form.rzsq" placeholder="申请状态" >
                            <el-option v-for="(item,index) in form.rzsqSelect" :key="index" :label="item.name" :value="item.code"></el-option>
