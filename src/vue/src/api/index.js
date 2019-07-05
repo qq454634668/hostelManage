@@ -144,8 +144,16 @@ export const BuildStatusDictionary = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/dic/DicGet`, params, method);
 };
 //混合字典子级下拉
-export const DicGets = (params, method) => {
-  return formMiddlePromise(`${hotelBaseUrl}/dic/DicGets`, params, method);
+export const DicGetS = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/dic/DicGetS`, params, method);
+};
+//年级下拉
+export const DicNj = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/dic/DicNj`, params, method);
+};
+//班级下拉
+export const DicBj = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/dic/DicBj`, params, method);
 };
 
 // 任务计划
@@ -204,5 +212,11 @@ export const DeleteMenu = (params, method) => {
 };
 
 
+
+// 入职管理学生列表
+
+export const StudentList = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/daily/StudentList`, params, method);
+};
 
 

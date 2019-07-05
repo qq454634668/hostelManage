@@ -5,55 +5,52 @@
           <div class="content">
             <el-container>
                 <el-header>
-                      <el-form :inline="true" :model="form" class="demo-form-inline left">
-                        <el-form-item label>
-                            <el-select v-model="form.apart" placeholder="校区" @change="selectChange('apart')">
-                                <el-option
-                                v-for="(item,index) in form.apartSelect"
-                                :key="index"
+                      <el-form :inline="true" :model="form" class="demo-form-inline left" label-position="left">
+                        <el-form-item label="学院">
+                            <el-select v-model="form.xy" placeholder="学院" @change="selectChange('xy')">
+                                <el-option v-for="(item,index) in form.xySelect" :key="index"
                                 :label="item.name"
-                                :value="item.code"
-                                ></el-option>
+                                :value="item.code"></el-option>
                             </el-select>
-                            </el-form-item>
-                            <el-form-item label>
-                            <el-select
-                                v-model="form.district"
-                                placeholder="公寓区"
-                                @change="selectChange('district')"
-                            >
-                                <el-option
-                                v-for="(item,index) in form.districtSelect"
-                                :key="index"
+                        </el-form-item>
+                        <el-form-item label="专业">
+                            <el-select v-model="form.zy" placeholder="专业" @change="selectChange('zy')">
+                                <el-option v-for="(item,index) in form.zySelect" :key="index"
                                 :label="item.name"
-                                :value="item.code"
-                                ></el-option>
+                                :value="item.code"></el-option>
                             </el-select>
-                            </el-form-item>
-                            <el-form-item label>
-                            <el-select
-                                v-model="form.building"
-                                placeholder="选择公寓楼"
-                                @change="selectGet"
-                                filterable
-                            >
-                                <el-option
-                                v-for="(item,index) in form.buildingSelect"
-                                :key="index"
-                                :label="item.name"
-                                :value="item.code"
-                                ></el-option>
+                        </el-form-item>
+                        <el-form-item label="年级">
+                            <el-select v-model="form.nj" placeholder="年级" @change="selectChange('nj')">
+                                <el-option v-for="(item,index) in form.njSelect" :key="index"
+                                :label="item.nj"
+                                :value="item.nj"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="班级">
+                            <el-select v-model="form.bj" placeholder="班级">
+                                <el-option v-for="(item,index) in form.bjSelect" :key="index"
+                                :label="item.bj"
+                                :value="item.bj"></el-option>
                             </el-select>
                         </el-form-item>
                         <el-form-item>
-                        <el-button type="primary" @click="bedList()">查询</el-button>
+                                <el-button type="primary" @click="tableData()">查询</el-button>
                         </el-form-item>
                     </el-form>
                 </el-header>
                 <el-main class="padding-0">
-                      <div></div>
-                      <div></div>
-                      <div></div>
+                      <!-- <el-table :data="tableData" style="width: 100%">
+                        <el-table-column
+                        label="日期"
+                        width="180"
+                        prop="data">
+                        <template slot-scope="scope">
+                            <i class="el-icon-time"></i>
+                            <span style="margin-left: 10px">{{ scope.row.date }}</span>
+                        </template>
+                        </el-table-column>
+                      </el-table> -->
                 </el-main>
             </el-container>
           
@@ -64,75 +61,131 @@
 </template>
 <script>
   import { mapMutations } from 'vuex';
-  import { BedListMap, AllBuildDictionary, ApartDictionary, CampusDictionary, BuildDictionary } from '@/api';
+  import { BuildStatusDictionary,DicGetS,DicNj,DicBj,StudentList } from '@/api';
   import { jquery } from '@/script/jquery-1.7.1';
 export default{
   data(){
       return{
+          tableList:[],
          form: {
-            apart: '',
-            apartSelect: '',
-            district: '',
-            districtSelect: '',
-            building: '',
-            buildingSelect: '',
-            buildName: ''
+            xy: '',
+            xySelect: [],
+            zy: '',
+            zySelect: [],
+            nj:'',
+            njSelect:[],
+            bj:'',
+            bjSelect:[]
+
         }  
       }
   },
   methods:{
-          // 校区
-    async apart() {
-      var params = {};
-      var res = await CampusDictionary(params);
+    selectChange(xy){
+        if(xy == 'xy'){
+            this.form.zy='';
+            this.form.zySelect=[];
+            this.form.nj='';
+            this.form.njSelect=[];
+            this.form.bj='';
+            this.form.bjSelect=[];
+            var  params = {
+                lx:'zy',
+                id:this.form.xy
+            }
+            this.zyxz(params)
+        }else if(xy=="zy"){
+            this.form.nj='';
+            this.form.njSelect=[];
+            this.form.bj='';
+            this.form.bjSelect=[];
+            this.njxz();
+        }else if(xy=="nj"){
+            this.form.bj='';
+            this.form.bjSelect=[];
+            this.bjxz();
+        }
+    },
+    // 学生列表
+    async tableData(params) {
+        var  params = {
+            xy:this.form.xy,
+            zy:this.form.zy,
+            nj:this.form.nj,
+            bj:this.form.bj,
+        }
+      var res = await StudentList(params);
       if (res.code == 200) {
-        this.form.apartSelect = res.data;
+          console.log(res)
+        this.tableList =  res.data; 
       } else {
         this.$message(res.message)
       }
     },
-    // 公寓区下拉
-    async districtPart(code) {
-      var params = {
-        code: code
-      };
-      var res = await ApartDictionary(params);
+    // 公共字典查询学院和专业
+    async apart(params,select) {
+      var res = await BuildStatusDictionary(params);
       if (res.code == 200) {
-        this.loading = false;
-        this.form.districtSelect = res.data;
-      } else {
-        this.loading = false;
-        this.$message(res.message);
-        return
-      }
-    },
-    // 公寓楼
-    async apartLou(code) {
-      var params = {
-        code: code
-      };
-      var res = await BuildDictionary(params);
-      if (res.code == 200) {
-        this.form.buildingSelect = res.data;
+        this.form.xySelect =  res.data; 
       } else {
         this.$message(res.message)
       }
     },
-    // 公寓楼all
-    async apartLouAll() {
-      var params = {
-        code: ''
-      };
-      var res = await AllBuildDictionary(params);
+    // 专业选择
+     async zyxz(params) {
+      var res = await DicGetS(params);
       if (res.code == 200) {
-        this.form.buildingSelect = res.data;
+           this.form.zySelect =  res.data;
+        
+         
       } else {
         this.$message(res.message)
       }
     },
+     // 年级选择
+     async njxz() {
+          var  params = {
+                    xy:this.form.xy,
+                    zy:this.form.zy
+        }
+      var res = await DicNj(params);
+      if (res.code == 200) {
+           this.form.njSelect =  res.data;
+        
+         
+      } else {
+        this.$message(res.message)
+      }
+    },
+       // 班级选择
+     async bjxz() {
+        this.form.bj='';
+        this.form.bjSelect=[];
+         var  params = {
+                    xy:this.form.xy,
+                    zy:this.form.zy,
+                    nj:this.form.nj
+            }
+      var res = await DicBj(params);
+      if (res.code == 200) {
+            console.log(res);
+            this.form.bjSelect =  res.data;
+        
+         
+      } else {
+        this.$message(res.message)
+      }
+    },
+   
+    
 
   },
   mounted(){
+      var params = {
+          lx:'xy'
+      }
+   this.apart(params,'xy');
+   this.tableData();
     
   }
 }
