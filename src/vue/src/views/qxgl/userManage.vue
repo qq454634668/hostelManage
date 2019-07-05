@@ -15,7 +15,7 @@
                                 </el-form>
                               </el-header>
                                 <el-main>
-                                  <el-table
+                                  <!-- <el-table
                                     :data="tableDataList"
                                     max-height="300px"
                                     border
@@ -24,7 +24,6 @@
                                       <el-table-column prop="sqrxm"  label="姓名" > </el-table-column>
                                       <el-table-column  prop="sqrxh"  label="学号"> </el-table-column>
                                       <el-table-column  prop="sqcwbh" label="申请床位编号"> </el-table-column>
-                                      <!-- <el-table-column  prop="ycwbh"  label="原床位编号">   </el-table-column> -->
                                       <el-table-column  prop="zxzt" label="执行状态"> </el-table-column>
                                       <el-table-column  prop="sqyy"  label="申请原因">   </el-table-column>
                                       <el-table-column  prop="sqsj"  label="申请时间">   </el-table-column>
@@ -34,12 +33,9 @@
                                           <template slot-scope="scope">
                                             <el-button  size="mini"
                                               @click="cz(scope.$index, scope.row.id,scope.row.sqrxh,scope.row.ycwbh,scope.row.sqcwbh,scope.row.sqlx_code)">操作</el-button>
-                                            <!-- <el-button size="mini"
-                                              type="danger"
-                                              @click="handleDelete(scope.$index, scope.row)">不同意</el-button> -->
                                           </template>
                                       </el-table-column>
-                                  </el-table>
+                                  </el-table> -->
                                 </el-main>
                                   <el-footer class="pagination">
                                 <span>
