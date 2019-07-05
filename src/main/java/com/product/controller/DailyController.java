@@ -215,6 +215,8 @@ public class DailyController {
         return result;
     }
     /**
+     *
+     * 未使用
      * 申请(入住/换宿/退宿)---生成申请记录
      * sqrxm 申请人姓名
      * sqrxh 申请人学号
