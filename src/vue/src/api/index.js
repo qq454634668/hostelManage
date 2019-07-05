@@ -171,6 +171,10 @@ export const BedListMap = (params, method) => {
 export const applyForList = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/daily/applyForList`, params, method);
 };
+//审批申请-----同意/不同意申请
+export const verifyAsk = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/daily/verifyAsk`, params, method);
+};
 
 // 权限管理
 
@@ -186,6 +190,11 @@ export const EditMenu = (params, method) => {
 export const QueryMenu = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/purview/QueryMenu`, params, method);
 };
+//查询用户列表
+export const QueryUserList = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/QueryUserList`, params, method);
+};
+
 
 
 

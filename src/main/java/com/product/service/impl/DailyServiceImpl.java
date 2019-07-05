@@ -7,10 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class DailyServiceImpl implements DailyService {
@@ -73,17 +71,21 @@ public class DailyServiceImpl implements DailyService {
     @Transactional
     public void verifyAsk(String sqrxh, String ycwbh, String sqcwbh, String sqlx,String zxzt,String zxjgyy,String id) {
         Map<String,Object> param = new HashMap<>();
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String created_time = sdf.format(date);
+        param.put("rksj",created_time);
         param.put("sqrxh",sqrxh);
-        if(zxzt=="2"){
+        if(zxzt.equals("2")){
             //同意申请
-            if(sqlx=="1"){
+            if(sqlx.equals("1")){
                 //申请入住
                 param.put("zt","2");
                 param.put("cwbh",sqcwbh);
                 param.put("fpzt","3");
                 dailyMapper.UpdateBed(param);
                 dailyMapper.UpdateStudent(param);
-            }else if(sqlx=="2"){
+            }else if(sqlx.equals("2")){
                 //申请换宿
                 param.put("zt","1");
                 param.put("cwbh",ycwbh);
@@ -93,7 +95,7 @@ public class DailyServiceImpl implements DailyService {
                 param.put("fpzt","3");
                 dailyMapper.UpdateBed(param);
                 dailyMapper.UpdateStudent(param);
-            }else if(sqlx=="3"){
+            }else if(sqlx.equals("3")){
                 //申请退宿
                 param.put("zt","1");
                 param.put("cwbh",ycwbh);
@@ -105,7 +107,7 @@ public class DailyServiceImpl implements DailyService {
         }else{
             //不同意申请
         }
-        param.put("id",zxzt);
+        param.put("id",id);
         param.put("zxzt",zxzt);
         param.put("zxjgyy",zxjgyy);
         dailyMapper.updateApply(param);

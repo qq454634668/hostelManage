@@ -1,4 +1,4 @@
-import { QueryMenu,EditMenu,AddMenu,DeleteMenu} from '@/api';
+import { QueryMenu,EditMenu,QueryUserList} from '@/api';
 export default {
     data(){
       return{
@@ -6,7 +6,7 @@ export default {
           dataList:[],
           loading:false,
           page:{
-             pageNum:1, 
+             pageNum:1,
              pageSize:5,
              startRow:0,
              endRow:0
@@ -24,6 +24,7 @@ export default {
                 {name:'申请成功',code:'2'},
                 {name:'申请失败',code:'3'},
             ],
+            key:'',
           },
           editform:{
             name:'',
@@ -40,8 +41,8 @@ export default {
             icon:'',
           },
           dialogFormVisible:false,
-          dialogAdd:false,    
-      }  
+          dialogAdd:false,
+      }
     },
     methods:{
       onSubmit(){
@@ -90,13 +91,13 @@ export default {
       }).then(() => {
        var  id = item.id;
         this.deletefunction(id);
-       
-        
+
+
       }).catch(() => {
 
       });
-     
-      
+
+
     },
 
     async deletefunction(id){
@@ -115,7 +116,7 @@ export default {
             list[index] = obj;
             this.dataList = list;
         }
-        
+
 
       },
       add(item,id){
@@ -127,7 +128,7 @@ export default {
         }else{
           this.addform.px = parseInt(item.px)+1;
         }
-       
+
       },
       // list
       async tableData(){
@@ -145,10 +146,10 @@ export default {
     },
 
 
-  
+
     },
     mounted(){
        this.tableData();
-   
+
     }
 }
