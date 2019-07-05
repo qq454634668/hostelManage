@@ -63,7 +63,7 @@
 <script>
   import { mapMutations } from 'vuex';
   import { jquery } from '@/script/jquery-1.7.1';
-  import cdgl from '@/script/cdgl.js';
+  import cdgl from '@/script/yhgl.js';
 export default{
   ...cdgl
 }
