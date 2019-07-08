@@ -148,6 +148,13 @@ public class PurviewServiceImpl implements PurviewService {
         int flag = purviewMapper.AddUser(param);
         if(flag <= 0){
             throw new RuntimeException("添加失败");
+        }else{
+            param.put("user_id",param.get("id"));
+            param.put("role_id",0);
+            int flag2 = purviewMapper.AddUserRole(param);
+            if(flag2 <= 0){
+                throw new RuntimeException("添加失败");
+            }
         }
     }
 
