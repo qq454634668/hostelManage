@@ -221,7 +221,10 @@ export const StudentList = (params, method) => {
 export const QuitSs = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/daily/QuitSs`, params, method);
 };
-
+//点击床位入住/换宿
+export const MoveInto = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/daily/MoveInto`, params, method);
+};
 
 // 角色list
 export const RoleList = (params, method) => {
@@ -252,6 +255,7 @@ export const DeleteRole = (params, method) => {
 export const ExistRoleUser = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/purview/ExistRoleUser`, params, method);
 };
+
 
 
 

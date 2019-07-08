@@ -5,7 +5,9 @@ export default {
           tableDataList:[],
           peopleDataList:[],
           loading:false,
-          rzsq_cz:false,
+          editUser_model:false,
+          editURole_model:false,
+          del_model:false,
           page:{
              pageNum:1, 
              pageSize:5,
@@ -26,6 +28,11 @@ export default {
                 {name:'申请失败',code:'3'}
             ],
             key:'',
+            id:'',
+            realname:'',
+            lxdh:'',
+            xy:'',
+            role_id:'',
           }
         
           
@@ -55,11 +62,12 @@ export default {
                 this.apartLou(this.form.district)
            }
       }, 
-      //审批通过
-      sptg(){
-        var param={
-                
-              }
+      editUser(index,id,realname,lxdh,xy){
+        this.editUser_model = true;
+        this.form.id = id;
+        this.form.realname = realname;
+        this.form.lxdh = lxdh;
+        this.form.xy = xy;
       },
       //审批不通过
       spbtg(){

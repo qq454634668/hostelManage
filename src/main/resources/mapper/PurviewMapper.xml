@@ -20,6 +20,8 @@
         <result column="XYCODE" property="xycode"/>
         <result column="NJ" property="nj"/>
         <result column="RKSJ" property="rksj"/>
+        <result column="ROLE_NAME" property="role_name"/>
+        <result column="ROLE_ID" property="role_id"/>
     </resultMap>
     <resultMap id="MenuList" type="java.util.Map">
         <result column="ID" property="id"/>
@@ -98,10 +100,13 @@
                                 where id =#{user_id}
     </update>
     <select id="QueryUserList" parameterType="java.util.Map" resultMap="UserList">
+        select b.*,(select a.role_name from role_info a where a.id = b.role_id) role_name
+        from (
         select t.id,t.username,t.realname,t.lxdh,
         (select name from dictionary a where a.code = t.xy and a.lx='xy') xy,
-        xy xycode,
-        nj,t.rksj from user_teacher t
+        xy xycode,t1.role_id,
+        nj,t.rksj from user_teacher t,user_role t1,role_info t2 where t.id = t1.user_id
+            ) b
         <where>
             <if test="key!=null and key!=''">
                 username like #{key} or
