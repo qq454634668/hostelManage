@@ -214,9 +214,44 @@ export const DeleteMenu = (params, method) => {
 
 
 // 入职管理学生列表
-
 export const StudentList = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/daily/StudentList`, params, method);
 };
+// 点击床位编号入住
+export const QuitSs = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/daily/QuitSs`, params, method);
+};
+
+
+// 角色list
+export const RoleList = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/RoleList`, params, method);
+};
+// 可选择菜单
+export const SelectMenu = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/SelectMenu`, params, method);
+};
+// 创建角色
+export const AddRole = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/AddRole`, params, method);
+};
+// 修改角色
+export const EditRoleName = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/EditRoleName`, params, method);
+};
+// 修改角色菜单
+export const EditRoleMenu = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/EditRoleMenu`, params, method);
+};
+
+// 删除角色
+export const DeleteRole = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/DeleteRole`, params, method);
+};
+// 角色是否存在关联用户
+export const ExistRoleUser = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/ExistRoleUser`, params, method);
+};
+
 
 

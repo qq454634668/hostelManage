@@ -63,7 +63,7 @@
                         <span class="xuhao">{{index2+1}}</span>
                         {{tem.realname}}
                       </div>
-                      <div v-show="tem.zt==1" class="xianzhi" @click="link()">
+                      <div v-show="tem.zt==1" class="xianzhi" @click="link(tem.bh)">
                         <span class="xuhao">{{index2+1}}</span>
                         {{tem.ztname}}
                       </div>

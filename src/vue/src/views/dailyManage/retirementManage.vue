@@ -1,85 +1,135 @@
 <template>
-    <div class="page page-campus">
-      <el-container>
-        <el-main class="padding-0">
-          <div class="content">
-            <el-container>
-                <el-header>
-                  <el-form :inline="true" :model="form" class="demo-form-inline left">
-                       <el-form-item label="">
-                         <el-select v-model="form.apart" placeholder="校区" @change="selectChange('apart')">
-                           <el-option v-for="(item,index) in form.apartSelect" :key="index" :label="item.name" :value="item.code"></el-option>
-                        </el-select>
-                      </el-form-item>
-                      <el-form-item label="">
-                         <el-select v-model="form.district" placeholder="公寓区" @change="selectChange('district')">
-                           <el-option v-for="(item,index) in form.districtSelect" :key="index" :label="item.name" :value="item.code"></el-option>
-                        </el-select>
-                      </el-form-item>
-                      <el-form-item label="">
-                         <el-select v-model="form.building" placeholder="选择公寓楼" >
-                           <el-option v-for="(item,index) in form.buildingSelect" :key="index" :label="item.name" :value="item.code"></el-option>
-                        </el-select>
-                      </el-form-item>
-                      <el-form-item>
-                        <el-button type="primary" @click="tableData()">查询</el-button>
-                      </el-form-item>
-                  </el-form>
-                </el-header>
-                <el-main class="border padding-0">
-                   <el-table
-                      :data="tableDataList"
-                      max-height="300px"
-                      border
-                      style="width: 100%"
-                      v-loading="loading">
-                        <el-table-column prop="task_name"  label="计划名称" > </el-table-column>
-                        <el-table-column  prop="hfgz"  label="分配规则"> </el-table-column>
-                        <el-table-column  prop="hfbh" label="分配编号"> </el-table-column>
-                        <el-table-column  prop="rwbh" label="任务编号"> </el-table-column>
-                        <el-table-column  prop="kssj" label="开始时间"> </el-table-column>
-                        <el-table-column  prop="jssj"  label="结束时间">   </el-table-column>
-                      <el-table-column label="操作">
-                            <template slot-scope="scope">
-                              <el-button  size="mini"
-                                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                              <el-button size="mini"
-                                type="danger"
-                                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                </el-main>
-                 
-                <el-footer class="pagination">
-                  <span>
-                    显示第<em>{{page.startRow}}</em>到第 <em>{{page.endRow}}</em> 条记录，总共 <em>{{page.total}}</em> 条记录
-                  </span>
-                   <el-pagination
-                      @current-change="handleCurrentChange"
-                      layout="prev, pager, next,total"
-                      :total="page.total" class="right"
-                      :page-sizes="[100, 200, 300, 400]"
-                      :page-size="5">
-                    </el-pagination>
-                </el-footer>
-            </el-container>
-          
-          </div>
-        </el-main>
-      </el-container>
-    </div>
+  <div class="page page-occupancy">
+    <el-container>
+      <el-main class="padding-0">
+        <div class="content">
+          <el-container>
+            <el-header>
+              <el-form :inline="true" :model="form" class="demo-form-inline left">
+                <el-form-item label>
+                  <el-select v-model="form.apart" placeholder="校区" @change="selectChange('apart')">
+                    <el-option
+                      v-for="(item,index) in form.apartSelect"
+                      :key="index"
+                      :label="item.name"
+                      :value="item.code"
+                    ></el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label>
+                  <el-select
+                    v-model="form.district"
+                    placeholder="公寓区"
+                    @change="selectChange('district')">
+                    <el-option v-for="(item,index) in form.districtSelect"
+                      :key="index"
+                      :label="item.name"
+                      :value="item.code"
+                    ></el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label>
+                  <el-select
+                    v-model="form.building"
+                    placeholder="选择公寓楼"
+                    @change="selectGet"
+                    filterable>
+                    <el-option v-for="(item,index) in form.buildingSelect"
+                      :key="index"
+                      :label="item.name"
+                      :value="item.code"></el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="bedList()">查询</el-button>
+                </el-form-item>
+              </el-form>
+            </el-header>
+            <el-main class="border padding-0">
+              <div class="flex-box">
+                <div class="onewrap" v-for="(item,index) in tableDataList" :key="index">
+                  <div class="buildShow">
+                    <!-- <span>{{form.buildName}}</span> -->
+                    <span>房间编号:{{item.fjbh}}</span>
+                  </div>
+                  <div class="flex-box border-right zynr">
+                    <div v-for="(tem,index2) in item.fjList" :key="index2">
+                      <div v-show="tem.zt==2" class="renyan" @click="tsgl(tem.bh)">
+                        <span class="xuhao">{{index2+1}}</span>
+                        {{tem.realname}}
+                      </div>
+                      <div v-show="tem.zt==1" class="xianzhi" @click="link(tem.bh)">
+                        <span class="xuhao">{{index2+1}}</span>
+                        {{tem.ztname}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </el-main>
+          </el-container>
+        </div>
+      </el-main>
+    </el-container>
+  </div>
 </template>
 <script>
-  import { mapMutations } from 'vuex';
-  import { jquery } from '@/script/jquery-1.7.1';
-  import occupancyManage from '@/script/occupancyManage.js';
-export default{
-  ...occupancyManage
-}
+import { mapMutations } from "vuex";
+import { jquery } from "@/script/jquery-1.7.1";
+import tsgl from "@/script/tsgl.js";
+export default {
+  ...tsgl
+};
 </script>
 <style lang="stylus" scoped>
-    
+.page-occupancy {
+  .buildShow {
+    line-height: 40px;
+    color: #0000F6;
+    border-bottom: 1px solid #dedede;
+  }
+
+  .flex-box {
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+
+    >div {
+      width: 200px;
+      // margin-left:20px;
+      // margin-top:20px;
+    }
+
+    .onewrap {
+      border-top: 1px solid #dedede;
+      border-bottom: 1px solid #dedede;
+      border-right: 1px solid #dedede;
+      margin-top: 20px;
+
+      .zynr {
+        line-height: 40px;
+
+        .xianzhi {
+          color: orange;
+          cursor: pointer;
+        }
+        .renyan:hover{
+          color:orange;
+          cursor pointer;
+        }
+
+        .xuhao {
+          display: inline-block;
+          padding: 0 10px;
+        }
+      }
+    }
+
+    .border-right {
+      // border-right:1px solid #999;
+    }
+  }
+}
 </style>
 
 

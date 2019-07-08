@@ -14,6 +14,8 @@ const  MissionPlan = r => require.ensure([], () => r(require('@/views/missionPla
 const  DailyManage = r => require.ensure([], () => r(require('@/views/dailyManage/dailyManage')), 'dailyManage'); //日常管理
 const  OccupancyManage = r => require.ensure([], () => r(require('@/views/dailyManage/occupancyManage')), 'occupancyManage'); //入住管理
 const  Xzz = r => require.ensure([], () => r(require('@/views/dailyManage/xzz')), 'xzz'); //闲置中
+const  Hsz = r => require.ensure([], () => r(require('@/views/dailyManage/hsz')), 'hsz'); //换宿中
+const  Tsz = r => require.ensure([], () => r(require('@/views/dailyManage/tsz')), 'tsz'); //退宿中
 const  RetirementManage = r => require.ensure([], () => r(require('@/views/dailyManage/retirementManage')), 'retirementManage'); //退宿管理
 const  RelocationManage = r => require.ensure([], () => r(require('@/views/dailyManage/relocationManage')), 'relocationManage'); //换宿管理
 const  Rzsq = r => require.ensure([], () => r(require('@/views/dormitoryApplication/rzsq')), 'rzsq'); //入住申请
@@ -21,7 +23,7 @@ const  Hssq = r => require.ensure([], () => r(require('@/views/dormitoryApplicat
 const  Tssq = r => require.ensure([], () => r(require('@/views/dormitoryApplication/tssq')), 'tssq'); //退宿申请
 const  UserManage = r => require.ensure([], () => r(require('@/views/qxgl/userManage')), 'userManage'); //用户管理
 const  RoleManage = r => require.ensure([], () => r(require('@/views/qxgl/roleManage')), 'roleManage'); //角色管理
-const  MenuManage = r => require.ensure([], () => r(require('@/views/qxgl/menuManage')), 'menuManage'); //角色管理
+const  MenuManage = r => require.ensure([], () => r(require('@/views/qxgl/menuManage')), 'menuManage'); //菜单管理
 Vue.use(Router)
 
 export default new Router({
@@ -142,6 +144,26 @@ export default new Router({
                   breadcrumb: '安排入住'
               }
             },
+            {
+              path: '/hsz',
+              name: 'hsz',
+              component: Hsz,
+              meta: {
+                requireAuth: true,
+                breadcrumbparent:"日常管理",
+                breadcrumb: '换宿'
+            }
+          },
+          {
+            path: '/tsz',
+            name: 'tsz',
+            component: Tsz,
+            meta: {
+              requireAuth: true,
+              breadcrumbparent:"日常管理",
+              breadcrumb: '退宿'
+          }
+        },
                 {
                   path: '/retirementManage',
                   name: 'retirementManage',

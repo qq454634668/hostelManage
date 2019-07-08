@@ -49,8 +49,8 @@ export default {
         this.apartLou(this.form.district)
       }
     },
-    link() {
-      this.$router.push({ path: '/xzz' });
+    link(cwbh) {
+      this.$router.push({ path: '/xzz',query:{cwbh:cwbh}});
     },
     // 床位
     async bedList() {
@@ -64,7 +64,6 @@ export default {
       if (res.code == 200) {
         this.loading = false;
         this.tableDataList = res.data;
-        console.log(res)
       } else {
         this.loading = false;
         this.$message(res.message)

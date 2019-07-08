@@ -35,22 +35,24 @@
                             </el-select>
                         </el-form-item>
                         <el-form-item>
-                                <el-button type="primary" @click="tableData()">查询</el-button>
+                             <el-button type="primary" @click="tableData()">查询</el-button>
                         </el-form-item>
                     </el-form>
                 </el-header>
                 <el-main class="padding-0">
-                      <!-- <el-table :data="tableData" style="width: 100%">
-                        <el-table-column
-                        label="日期"
-                        width="180"
-                        prop="data">
-                        <template slot-scope="scope">
-                            <i class="el-icon-time"></i>
-                            <span style="margin-left: 10px">{{ scope.row.date }}</span>
-                        </template>
+                      <el-table :data="tableList" style="width: 100%">
+                        <el-table-column label="姓名"  prop="realname"></el-table-column>
+                        <el-table-column label="学院"  prop="xy"></el-table-column>
+                        <el-table-column label="类别"  prop="lb"></el-table-column>
+                        <el-table-column label="专业"  prop="zy"></el-table-column>
+                        <el-table-column label="性别"  prop="xb"></el-table-column>
+                        <el-table-column label="入住状态"  prop="zsztname"></el-table-column>
+                        <el-table-column label="学院" >
+                                 <template slot-scope="scope">
+                                    <el-button @click="anpairz(scope.row)" type="success">安排入住</el-button>
+                                </template>
                         </el-table-column>
-                      </el-table> -->
+                      </el-table>
                 </el-main>
             </el-container>
           
@@ -61,7 +63,7 @@
 </template>
 <script>
   import { mapMutations } from 'vuex';
-  import { BuildStatusDictionary,DicGetS,DicNj,DicBj,StudentList } from '@/api';
+  import { BuildStatusDictionary,DicGetS,DicNj,DicBj,StudentList,MoveInto } from '@/api';
   import { jquery } from '@/script/jquery-1.7.1';
 export default{
   data(){
@@ -77,7 +79,8 @@ export default{
             bj:'',
             bjSelect:[]
 
-        }  
+        },
+
       }
   },
   methods:{
@@ -106,9 +109,24 @@ export default{
             this.bjxz();
         }
     },
+   
+    // 点击安排入住
+    async anpairz(row) {
+        var  params = {
+            xh:row.xh,
+            cwbh:this.$route.query.cwbh,
+        }
+      var res = await MoveInto(params);
+      if (res.code == 200) {
+         this.tableData()
+      } else {
+        this.$message(res.message)
+      }
+    },
     // 学生列表
     async tableData(params) {
         var  params = {
+            zszt:1,
             xy:this.form.xy,
             zy:this.form.zy,
             nj:this.form.nj,
