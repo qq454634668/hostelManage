@@ -1,4 +1,4 @@
-import { RoleList,SelectMenu,AddRole,EditRole} from '@/api';
+import { RoleList,SelectMenu,AddRole,EditRole,DeleteRole} from '@/api';
 export default {
     data(){
       return{
@@ -83,6 +83,23 @@ export default {
         this.delRole_model = true;
         this.delForm.id = id;
       },
+     deljs(){
+        this.del();
+     },
+     async del(){
+      var params = {
+        id:this.delForm.id
+      };
+     var res = await DeleteRole(params);
+        if(res.code == 200){
+            this.delRole_model = false;
+            this.tableData();
+            this.$message(res.message);
+        }else{
+          this.delRole_model = false;
+          this.$message(res.message)
+        }
+     },
      async cjJs(){
         this.loading = true;
         var params = {

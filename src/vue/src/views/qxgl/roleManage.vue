@@ -78,10 +78,10 @@
                             </div>
                           </el-dialog>
                           <el-dialog title="删除角色" :visible.sync="delRole_model">
-                            <div slot="footer" class="dialog-footer">
+                            <!-- <div slot="footer" class="dialog-footer"> -->
                               <el-button @click="delRole_model = false">取 消</el-button>
-                              <el-button type="primary" @click="editjs()">确 定</el-button>
-                            </div>
+                              <el-button type="primary" @click="deljs()">确 定</el-button>
+                            <!-- </div> -->
                           </el-dialog>
                        </el-container>
                       
