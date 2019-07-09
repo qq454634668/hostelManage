@@ -6,13 +6,13 @@
                        <el-container>
                             <el-main>
                               <div class="align-left">
-                                <el-button type="warning" @click="dialogFormVisible=true"> 添加角色</el-button>
+                                <el-button type="warning" @click="addRole_model=true"> 添加角色</el-button>
                               </div>
                                <el-table :data="dataList" style="width: 100%">
                                   <el-table-column label="角色"  prop="role_name"></el-table-column>
                                   <el-table-column label="操作" >
                                           <template slot-scope="scope">
-                                              <el-button @click="editVisible=true;editForm.id=scope.row.id" type="success">修改</el-button>
+                                              <el-button @click="editRole(scope.row.id,scope.row.role_name,scope.row.menu_id)" type="success">修改</el-button>
                                               <el-button @click="anpairz(scope.row)" type="info">删除</el-button>
                                           </template>
                                   </el-table-column>
@@ -29,7 +29,7 @@
                             </el-pagination>
                         </el-footer>
 
-                        <el-dialog title="创建角色" :visible.sync="dialogFormVisible">
+                        <el-dialog title="创建角色" :visible.sync="addRole_model">
                             <el-form :model="addForm">
                               <el-form-item label="角色名称">
                                 <el-input v-model="addForm.name" auto-complete="off"></el-input>
@@ -49,14 +49,14 @@
                               </el-form-item>
                             </el-form>
                             <div slot="footer" class="dialog-footer">
-                              <el-button @click="editVisible = false">取 消</el-button>
+                              <el-button @click="addRole_model = false">取 消</el-button>
                               <el-button type="primary" @click="addJs()">确 定</el-button>
                             </div>
                           </el-dialog>
-                          <el-dialog title="修改角色" :visible.sync="editVisible">
+                          <el-dialog title="修改角色" :visible.sync="editRole_model">
                             <el-form :model="addForm">
                               <el-form-item label="角色名称">
-                                <el-input v-model="addForm.name" auto-complete="off"></el-input>
+                                <el-input v-model="editForm.name" auto-complete="off"></el-input>
                               </el-form-item>
                              <el-form-item label="选择菜单" >
                                  <el-select
@@ -73,7 +73,31 @@
                               </el-form-item>
                             </el-form>
                             <div slot="footer" class="dialog-footer">
-                              <el-button @click="editVisible = false">取 消</el-button>
+                              <el-button @click="editRole_model = false">取 消</el-button>
+                              <el-button type="primary" @click="editjs()">确 定</el-button>
+                            </div>
+                          </el-dialog>
+                          <el-dialog title="删除角色" :visible.sync="delRole_model">
+                            <el-form :model="addForm">
+                              <!-- <el-form-item label="角色名称">
+                                <el-input v-model="editForm.name" auto-complete="off"></el-input>
+                              </el-form-item>
+                             <el-form-item label="选择菜单" >
+                                 <el-select
+                                    v-model="editForm.menu"
+                                    :multiple="true"
+                                    :multiple-limit="0"
+                                    placeholder="请选择文章标签">
+                                    <el-option  v-for="(item,index) in dataMenu" :key="index" 
+                                      :label="item.name"
+                                      :value="item.id">
+                                    </el-option>
+                                  </el-select> -->
+
+                              </el-form-item>
+                            </el-form>
+                            <div slot="footer" class="dialog-footer">
+                              <el-button @click="delRole_model = false">取 消</el-button>
                               <el-button type="primary" @click="editjs()">确 定</el-button>
                             </div>
                           </el-dialog>

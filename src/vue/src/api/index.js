@@ -258,12 +258,16 @@ export const AddRole = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/purview/AddRole`, params, method);
 };
 // 修改角色
-export const EditRoleName = (params, method) => {
-  return formMiddlePromise(`${hotelBaseUrl}/purview/EditRoleName`, params, method);
-};
+// export const EditRoleName = (params, method) => {
+//   return formMiddlePromise(`${hotelBaseUrl}/purview/EditRoleName`, params, method);
+// };
 // 修改角色菜单
-export const EditRoleMenu = (params, method) => {
-  return formMiddlePromise(`${hotelBaseUrl}/purview/EditRoleMenu`, params, method);
+// export const EditRoleMenu = (params, method) => {
+//   return formMiddlePromise(`${hotelBaseUrl}/purview/EditRoleMenu`, params, method);
+// };
+//修改角色
+export const EditRole = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/EditRole`, params, method);
 };
 
 // 删除角色

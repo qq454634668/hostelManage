@@ -1,4 +1,4 @@
-import { RoleList,SelectMenu,AddRole} from '@/api';
+import { RoleList,SelectMenu,AddRole,EditRole} from '@/api';
 export default {
     data(){
       return{
@@ -24,8 +24,9 @@ export default {
               menu:'',
               role_id:''
           },
-          dialogFormVisible:false,
-          editVisible:false,
+          addRole_model:false,
+          editRole_model:false,
+          delRole_model:false,
         }  
     },
     methods:{
@@ -40,6 +41,7 @@ export default {
             this.$message('请选择菜单');
             return
           }
+          console.log(this.addForm.menu);
           this.addForm.menu = this.addForm.menu.join(',')
           this.cjJs()
       },
@@ -51,9 +53,29 @@ export default {
 
       },
       async editjs(){
-        console.log(this.editForm)
+        if(this.editForm.name ==''){
+          this.$message('请输入用户名');
+          return
+        }else if(this.editForm.menu =='' ){
+          this.$message('请选择菜单');
+          return
+        }
+        this.xgJs();
       },
-
+      editRole(id,role_name,menu_id){
+        this.editRole_model = true;
+        this.editForm.id = id;
+        this.editForm.name = role_name;
+        var menuString = menu_id;
+        var menuStringList = menuString.split(',');
+        
+        var intList = [];
+        for(var i=0;i<menuStringList.length;i++){
+          var a = parseInt(menuStringList[i]);
+          intList.push(a);
+        }
+        this.editForm.menu = intList;
+      },
      async cjJs(){
         this.loading = true;
         var params = {
@@ -62,15 +84,34 @@ export default {
         };
         var res = await AddRole(params);
         if(res.code == 200){
-            this.loading = false;
-            this.dataMenu= res.data;
-            this.dialogFormVisible = false;
+            this.addRole_model = false;
+            // this.dataMenu= res.data;
+            // this.dialogFormVisible = false;
             this.tableData();
+            this.$message(res.message);
         }else{
-        this.loading = false;
+        this.addRole_model = false;
         this.$message(res.message)
         }
     },
+    async xgJs(){
+      this.loading = true;
+      var params={
+        role_id:this.editForm.id,
+        menu_id:this.editForm.menu.join(','),
+        role_name:this.editForm.name
+      };
+      var res = await EditRole(params);
+      if(res.code == 200){
+          this.editRole_model = false;
+          // this.dataMenu= res.data;
+          this.tableData();
+          this.$message(res.message);
+      }else{
+      this.editRole_model = false;
+      this.$message(res.message);
+      }
+  },
       // list
       async tableData(){
           this.loading = true;
@@ -79,6 +120,7 @@ export default {
                pageNum:this.page.pageNum
            };
           var res = await RoleList(params);
+          // console.log(res);
           if(res.code == 200){
               this.loading = false;
               this.dataList= res.data;

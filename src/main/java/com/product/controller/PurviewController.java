@@ -228,59 +228,87 @@ public class PurviewController {
     }
 
 
+//    /**
+//     * 修改角色  --修改角色名
+//     * role_name
+//     * id
+//     */
+//    @RequestMapping("/EditRoleName")
+//    @ResponseBody
+//    public Map<String,Object> EditRoleName(HttpServletRequest request){
+//        Map<String,Object> result = new HashMap<>();
+//        Map<String,Object> param = new HashMap<>();
+//        try{
+//            String role_name = request.getParameter("role_name");
+//            String id = request.getParameter("id");
+//            param.put("role_name",role_name);
+//            param.put("id",id);
+//            purviewService.EditRoleName(param);
+//            result.put("message","修改角色名成功");
+//            result.put("code","200");
+//            result.put("data",null);
+//        }catch (Exception e){
+//            result.put("message","修改角色名失败");
+//            result.put("code","500");
+//            result.put("data",e.getMessage());
+//        }
+//        return result;
+//    }
+//    /**
+//     * 修改角色  --修改角色菜单（权限）
+//     * role_id
+//     * menu_id
+//     */
+//    @RequestMapping("/EditRoleMenu")
+//    @ResponseBody
+//    public Map<String,Object> EditRoleMenu(HttpServletRequest request){
+//        Map<String,Object> result = new HashMap<>();
+//        Map<String,Object> param = new HashMap<>();
+//        try{
+//            String role_id = request.getParameter("role_id");
+//            String menu_id = request.getParameter("menu_id");
+//            param.put("role_id",role_id);
+//            param.put("menu_id",menu_id);
+//            purviewService.EditRoleMenu(param);
+//            result.put("message","修改角色菜单成功");
+//            result.put("code","200");
+//            result.put("data",null);
+//        }catch (Exception e){
+//            result.put("message","修改角色菜单失败");
+//            result.put("code","500");
+//            result.put("data",e.getMessage());
+//        }
+//        return result;
+//    }
     /**
-     * 修改角色  --修改角色名
-     * role_name
-     * id
-     */
-    @RequestMapping("/EditRoleName")
-    @ResponseBody
-    public Map<String,Object> EditRoleName(HttpServletRequest request){
-        Map<String,Object> result = new HashMap<>();
-        Map<String,Object> param = new HashMap<>();
-        try{
-            String role_name = request.getParameter("role_name");
-            String id = request.getParameter("id");
-            param.put("role_name",role_name);
-            param.put("id",id);
-            purviewService.EditRoleName(param);
-            result.put("message","修改角色名成功");
-            result.put("code","200");
-            result.put("data",null);
-        }catch (Exception e){
-            result.put("message","修改角色名失败");
-            result.put("code","500");
-            result.put("data",e.getMessage());
-        }
-        return result;
-    }
-    /**
-     * 修改角色  --修改角色菜单（权限）
+     * 修改角色
      * role_id
      * menu_id
+     * role_name
      */
-    @RequestMapping("/EditRoleMenu")
+    @RequestMapping("/EditRole")
     @ResponseBody
-    public Map<String,Object> EditRoleMenu(HttpServletRequest request){
+    public Map<String,Object> EditRole(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
             String role_id = request.getParameter("role_id");
             String menu_id = request.getParameter("menu_id");
+            String role_name = request.getParameter("role_name");
             param.put("role_id",role_id);
             param.put("menu_id",menu_id);
-            purviewService.EditRoleMenu(param);
-            result.put("message","修改角色菜单成功");
+            param.put("role_name",role_name);
+            purviewService.EditRole(param);
+            result.put("message","修改角色成功");
             result.put("code","200");
             result.put("data",null);
         }catch (Exception e){
-            result.put("message","修改角色菜单失败");
+            result.put("message","修改角色失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }
         return result;
     }
-
 
     /**
      * 删除角色
