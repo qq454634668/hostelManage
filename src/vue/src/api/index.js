@@ -274,6 +274,7 @@ export const EditRole = (params, method) => {
 export const DeleteRole = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/purview/DeleteRole`, params, method);
 };
+
 // 角色是否存在关联用户
 export const ExistRoleUser = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/purview/ExistRoleUser`, params, method);
