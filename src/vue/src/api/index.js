@@ -202,14 +202,33 @@ export const EditMenu = (params, method) => {
 export const QueryMenu = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/purview/QueryMenu`, params, method);
 };
-//查询用户列表
-export const QueryUserList = (params, method) => {
-  return formMiddlePromise(`${hotelBaseUrl}/purview/QueryUserList`, params, method);
-};
+
 //删除菜单
 export const DeleteMenu = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/purview/DeleteMenu`, params, method);
 };
+//查询用户列表
+export const QueryUserList = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/QueryUserList`, params, method);
+};
+//修改用户信息
+export const EditUser = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/EditUser`, params, method);
+};
+//修改用户信息
+export const EditUserRole = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/EditUserRole`, params, method);
+};
+//删除用户
+export const DeleteUser = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/DeleteUser`, params, method);
+};
+//添加用户
+export const AddUser = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/purview/AddUser`, params, method);
+};
+
+
 
 
 
@@ -221,7 +240,10 @@ export const StudentList = (params, method) => {
 export const QuitSs = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/daily/QuitSs`, params, method);
 };
-
+//点击床位入住/换宿
+export const MoveInto = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/daily/MoveInto`, params, method);
+};
 
 // 角色list
 export const RoleList = (params, method) => {
@@ -256,6 +278,7 @@ export const ExistRoleUser = (params, method) => {
 export const MoveInto = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/daily/MoveInto'`, params, method);
 };
+
 
 
 

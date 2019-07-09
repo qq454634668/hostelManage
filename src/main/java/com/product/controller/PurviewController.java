@@ -453,8 +453,6 @@ public class PurviewController {
 
     /**
      * 修改用户 --修改用户基本信息
-     * @username  用户名
-     * @password  密码
      * @realname  真实姓名
      * @lxdh      联系电话
      * @xy        学院
@@ -472,14 +470,14 @@ public class PurviewController {
         try{
             String user_id = request.getParameter("id");
             param.put("user_id",user_id);
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+//            String username = request.getParameter("username");
+//            String password = request.getParameter("password");
             String realname = request.getParameter("realname");
             String lxdh = request.getParameter("lxdh");
             String xy = request.getParameter("xy");
             String nj = request.getParameter("nj");
-            param.put("username",username);
-            param.put("password",password);
+//            param.put("username",username);
+//            param.put("password",password);
             param.put("realname",realname);
             param.put("lxdh",lxdh);
             param.put("xy",xy);
@@ -498,7 +496,7 @@ public class PurviewController {
     }
 
     /**
-     * 修改用户 --修改用户授权
+     * 修改用户 --修改用户授权RoleList
      * @id  用户ID
      * @role_id  角色ID
      */
@@ -512,7 +510,7 @@ public class PurviewController {
             String role_id = request.getParameter("role_id");
             param.put("user_id",user_id);
             param.put("role_id",role_id);
-            purviewService.EditUser(param);
+            purviewService.EditUserRole(param);
             result.put("message","修改用户 --修改用户基本信息成功");
             result.put("code","200");
             result.put("data",null);

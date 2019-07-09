@@ -75,7 +75,7 @@
           
           </div>
            <el-dialog
-                  title="入住申请--操作"
+                  title="退宿申请--操作"
                   :visible.sync="rzsq_cz"
                   width="30%" class="align-left">
                   <div>   
