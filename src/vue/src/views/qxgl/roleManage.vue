@@ -13,7 +13,7 @@
                                   <el-table-column label="操作" >
                                           <template slot-scope="scope">
                                               <el-button @click="editRole(scope.row.id,scope.row.role_name,scope.row.menu_id)" type="success">修改</el-button>
-                                              <el-button @click="anpairz(scope.row)" type="info">删除</el-button>
+                                              <el-button @click="delRole(scope.row.id)" type="info">删除</el-button>
                                           </template>
                                   </el-table-column>
                                 </el-table>
