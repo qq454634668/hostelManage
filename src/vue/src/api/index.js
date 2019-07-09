@@ -253,5 +253,9 @@ export const ExistRoleUser = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/purview/ExistRoleUser`, params, method);
 };
 
+export const MoveInto = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/daily/MoveInto'`, params, method);
+};
+
 
 
