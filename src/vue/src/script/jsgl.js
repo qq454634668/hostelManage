@@ -23,7 +23,10 @@ export default {
               id:'',
               menu:'',
               role_id:''
-          },
+          }, 
+          delForm:{
+            id:'',
+        },
           addRole_model:false,
           editRole_model:false,
           delRole_model:false,
@@ -76,6 +79,10 @@ export default {
         }
         this.editForm.menu = intList;
       },
+      delRole(id){
+        this.delRole_model = true;
+        this.delForm.id = id;
+      },
      async cjJs(){
         this.loading = true;
         var params = {
@@ -85,8 +92,6 @@ export default {
         var res = await AddRole(params);
         if(res.code == 200){
             this.addRole_model = false;
-            // this.dataMenu= res.data;
-            // this.dialogFormVisible = false;
             this.tableData();
             this.$message(res.message);
         }else{

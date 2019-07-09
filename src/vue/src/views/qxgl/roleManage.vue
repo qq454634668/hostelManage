@@ -78,24 +78,6 @@
                             </div>
                           </el-dialog>
                           <el-dialog title="删除角色" :visible.sync="delRole_model">
-                            <el-form :model="addForm">
-                              <!-- <el-form-item label="角色名称">
-                                <el-input v-model="editForm.name" auto-complete="off"></el-input>
-                              </el-form-item>
-                             <el-form-item label="选择菜单" >
-                                 <el-select
-                                    v-model="editForm.menu"
-                                    :multiple="true"
-                                    :multiple-limit="0"
-                                    placeholder="请选择文章标签">
-                                    <el-option  v-for="(item,index) in dataMenu" :key="index" 
-                                      :label="item.name"
-                                      :value="item.id">
-                                    </el-option>
-                                  </el-select> -->
-
-                              </el-form-item>
-                            </el-form>
                             <div slot="footer" class="dialog-footer">
                               <el-button @click="delRole_model = false">取 消</el-button>
                               <el-button type="primary" @click="editjs()">确 定</el-button>
