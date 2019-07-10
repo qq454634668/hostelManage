@@ -15,7 +15,7 @@ export default {
               {name:'suibi',code:1}
           ],
           addForm:{
-                name:'', 
+                name:'',
                 menu:'',
           },
           editForm:{
@@ -26,7 +26,7 @@ export default {
           },
           dialogFormVisible:false,
           editVisible:false,
-        }  
+        }
     },
     methods:{
       onSubmit(){
@@ -40,7 +40,7 @@ export default {
             this.$message('请选择菜单');
             return
           }
-          this.addForm.menu = this.addForm.menu.join(',')
+          this.addForm.menu = this.addForm.menu.join(',');
           this.cjJs()
       },
       handleCurrentChange(val){
