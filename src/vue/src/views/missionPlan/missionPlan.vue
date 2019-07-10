@@ -124,13 +124,14 @@
                    width="60%"
                    class="header-left">
                         <el-form :inline="true" :model="formPeople" class="demo-form-inline">
-                            <el-form-item label="类别">
-                              <el-input v-model="formPeople.lb" placeholder="审批人"></el-input>
+                            <el-form-item label="学院">
+                              <el-select v-model="formPeople.xy" placeholder="学院" @change="DicGetZy()">
+                                <el-option v-for="(item,index) in xylist" :key="index" :label="item.name" :value="item.code"></el-option>
+                              </el-select>
                             </el-form-item>
-                            <el-form-item label="活动区域">
-                              <el-select v-model="formPeople.xy" placeholder="活动区域">
-                                <el-option label="区域一" value="shanghai"></el-option>
-                                <el-option label="区域二" value="beijing"></el-option>
+                            <el-form-item label="专业">
+                              <el-select v-model="formPeople.zy" placeholder="专业">
+                                <el-option v-for="(item,index) in zyList" :key="index" :label="item.name" :value="item.code"></el-option>
                               </el-select>
                             </el-form-item>
                             <el-form-item>
@@ -193,7 +194,7 @@
 </template>
 <script>
   import { mapMutations } from 'vuex';
-  import { plan,BuildStatusDictionary,CampusDictionary,AllBuildDictionary,studentList,EmptyBed} from '@/api';
+  import { plan,BuildStatusDictionary,CampusDictionary,AllBuildDictionary,studentList,EmptyBed,DicGetS} from '@/api';
   import { jquery } from '@/script/jquery-1.7.1';
 export default {
     data(){
@@ -237,7 +238,9 @@ export default {
             zy:'',
             nj:'',
             bj:''
-          }
+          },
+          xylist:[],
+          zyList:[]
           
       }  
     },
@@ -360,13 +363,33 @@ export default {
       },
       hfbhChange(){
           this.bedNum();
-      }
-   
+      },
+      async DicGetXy(){
+        var params = {lx:'xy'};
+        var res = await BuildStatusDictionary(params);
+        if(res.code == 200){
+          this.xylist = res.data;
+        }else{
+          this.$message(res.message);
+        }
+      },
+      async DicGetZy(){
+        this.zyList = [];
+        var params = {lx:'zy',
+                      id:this.formPeople.xy};
+        var res = await DicGetS(params);
+        if(res.code == 200){
+          this.zyList = res.data;
+        }else{
+          this.$message(res.message);
+        }
+      },
   
     },
     mounted(){
        this.tableData();
        this.hfgz('allocation')
+       this.DicGetXy();
     }
 }
 </script>
