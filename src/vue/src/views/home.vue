@@ -1,7 +1,7 @@
 <template>
     <el-container class="page page-home">
         <el-header class="home-header">
-                <h1>学生请假系统</h1>
+                <h1>学生公寓系统</h1>
                 <h3 class="iconfont icon-menu-two" @click="menu(right)"  v-if="isCollapse==false"></h3>
                 <h3 class="iconfont icon-menu-two" @click="menu(left)" v-if="isCollapse==true"></h3>
                 <div class="right userInfor">
@@ -10,7 +10,7 @@
                 </div>
         </el-header>
         <el-container>
-            <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" :router="true">
+            <el-menu class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" :router="true">
                 <div class="user">
                     <p :class="font"><i class="iconfont icon-ren3"></i></p>
                     <p v-if="isCollapse == false">
@@ -20,10 +20,10 @@
                 </div>
                     <el-submenu v-for="(item,j) in menuData" :key="j" :index="String(item.id)">
                         <template slot="title">
-                        <i class="iconfont icon-xinxiguanli1"></i>
+                        <i class="iconfont" :class="item.mainMenu.icon"></i>
                             <span slot="title">{{item.mainMenu.name}}</span>
                         </template>
-                        <el-menu-item v-for="(child,i) in item.UnderMenu" :key="i" :index="String(child.url)"><i class="iconfont icon-daohang"></i>{{child.name}}</el-menu-item>
+                        <el-menu-item v-for="(child,i) in item.UnderMenu" :key="i" :index="String(child.url)"><i class="iconfont" :class="child.icon"></i>{{child.name}}</el-menu-item>
                     </el-submenu>
                
             </el-menu>
@@ -77,6 +77,7 @@ export default {
             var res = await InitInfo(params);
             if(res.code == 200){
                 this.menuData = res.data.menuInfo;
+                console.log(this.menuData)
             }
          }
 
@@ -157,13 +158,24 @@ export default {
                     width:20px;
                     font-size:16px;
                     padding-right:10px;
-                    color:#444444;
+                    color:#333;
+                }
+                .iconfont{
+                    font-size:16px;
+                    padding-right:10px;
+                    color:#333;
                 }
             }
             .el-submenu__title{
                 text-align:left;
                 height:40px;
                 line-height:40px;
+                .iconfont{
+                    font-size:20px;
+                    padding-right:8px;
+                    color:#333;
+                    font-weight:bold;
+                }
             }
         }
         .contain{
