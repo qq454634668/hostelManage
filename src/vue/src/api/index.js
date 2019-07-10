@@ -230,8 +230,6 @@ export const AddUser = (params, method) => {
 
 
 
-
-
 // 入职管理学生列表
 export const StudentList = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/daily/StudentList`, params, method);
