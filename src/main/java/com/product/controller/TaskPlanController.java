@@ -100,7 +100,7 @@ public class TaskPlanController {
     }
     /**
      * 可划分选择人群---选择学生
-     * lb 类别(默认为空)
+     * 去掉类别lb 类别(默认为空)
      * xy 学院（默认为空）
      * zy 专业（默认为空）
      * nj 年级（默认为空）
@@ -112,12 +112,12 @@ public class TaskPlanController {
     public Map<String,Object> ChooseStu(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
-        String lb = request.getParameter("lb");
+//        String lb = request.getParameter("lb");
         String xy = request.getParameter("xy");
         String zy = request.getParameter("zy");
         String nj = request.getParameter("nj");
         String bj = request.getParameter("bj");
-        param.put("lb",lb);
+        param.put("lb","");
         param.put("xy",xy);
         param.put("zy",zy);
         param.put("nj",nj);

@@ -82,7 +82,7 @@
                    width="30%"
                    class="header-left">
                         <el-form label-position="right" label-width="120px" :model="add">
-                                <el-form-item label="task_name">
+                                <el-form-item label="计划名称">
                                       <el-input placeholder="请输入任务名称" v-model="add.task_name"></el-input>
                                 </el-form-item>
                                  <el-form-item label="划分规则">
@@ -115,7 +115,7 @@
                                  
                             </el-form>
                         <div slot="footer" class="dialog-footer">
-                          <el-button @click="tableListVisibel=false">取 消</el-button>
+                          <el-button @click="dialogFormVisible=false">取 消</el-button>
                           <el-button type="primary" @click="addPlan()">确 定</el-button>
                         </div>
               </el-dialog>
@@ -244,6 +244,9 @@ export default {
     methods:{
       onSubmit(){
         this.tableData();
+      },
+      addPlan(){
+
       },
       handleCurrentChange(val){
         this.page.pageNum = val;
