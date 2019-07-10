@@ -37,6 +37,10 @@ public interface PurviewService {
      */
     void EditRoleMenu(Map<String,Object> param);
     /**
+     *修改角色
+     */
+    void EditRole(Map<String,Object> param);
+    /**
      * 删除角色
      */
     void DeleteRole(Map<String,Object> param);

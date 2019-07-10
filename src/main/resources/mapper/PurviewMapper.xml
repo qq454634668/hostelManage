@@ -35,6 +35,7 @@
     <resultMap id="RoleList" type="java.util.Map">
         <result column="ID" property="id"/>
         <result column="ROLE_NAME" property="role_name"/>
+        <result column="MENU_ID" property="menu_id"/>
     </resultMap>
     <insert id="AddMenu" parameterType="java.util.Map">
          insert into menu_info (name,parent_id,url,icon,px) VALUES (#{name},#{parent_id},#{url},#{icon},#{px})
@@ -60,7 +61,7 @@
                 </foreach>
     </insert>
     <update id="EditRoleName" parameterType="java.util.Map">
-        update role_info set role_name = #{role_name} where id =#{id}
+        update role_info set role_name = #{role_name} where id =#{role_id}
     </update>
     <delete id="DeleteRoleMenu" parameterType="java.util.Map">
         delete from role_menu where role_id =#{role_id}
@@ -114,10 +115,24 @@
         </where>
     </select>
     <select id="SelectMenu" parameterType="java.util.Map" resultMap="MenuList">
+          select t1.* from menu_info t1 where
+              t1.parent_id= '0'  order by px
+    </select>
+    <select id="SelectMenu2" parameterType="java.util.Map" resultMap="MenuList">
           select t1.*,t.role_id from role_menu t,menu_info t1 where
               t1.parent_id= '0' and t.menu_id = t1.id order by px
     </select>
-    <select id="RoleList" parameterType="java.util.Map" resultMap="RoleList">
-          select t.id,t.role_name from role_info t
+    <select id="RoleList" parameterType="java.util.Map" resultType="com.product.pojo.RoleList">
+          SELECT
+                t.id,
+                t.role_name,
+                GROUP_CONCAT(t1.menu_id) menu_id
+            FROM
+                role_info t,
+                role_menu t1
+            WHERE
+                t.id = t1.role_id
+            GROUP BY
+                t.id
     </select>
 </mapper>

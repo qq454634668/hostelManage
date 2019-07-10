@@ -122,7 +122,33 @@ public class PurviewServiceImpl implements PurviewService {
         }
 
     }
+    @Override
+    @Transactional
+    public void EditRole(Map<String, Object> param) {
+        int flag = purviewMapper.DeleteRoleMenu(param);
+        if(flag <= 0){
+            throw new RuntimeException("修改失败");
+        }else{
+            String menu_id = (String) param.get("menu_id");
+            if(menu_id.length()!=0){
+                param.put("role_id",param.get("role_id"));
+                String[] menuId_String = menu_id.split(",");
+                List menuId_List =new ArrayList();
+                for(int i=0;i<menuId_String.length;i++){
+                    Map<String,Object> lsMap = new HashMap<>();
+                    lsMap.put("menu_id",menuId_String[i]);
+                    menuId_List.add(lsMap);
+                }
+                param.put("menuId_List",menuId_List);
+                purviewMapper.AddRoleMenu(param);
+            }
+            int flag2 = purviewMapper.EditRoleName(param);
+            if(flag2 <= 0){
+                throw new RuntimeException("修改失败");
+            }
+        }
 
+    }
     @Override
     @Transactional
     public void DeleteRole(Map<String, Object> param) {
