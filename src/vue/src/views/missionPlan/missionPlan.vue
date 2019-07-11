@@ -164,7 +164,7 @@
                         </el-table>
                         <div slot="footer" class="dialog-footer">
                           <el-button @click="tableListVisibel = false">取 消</el-button>
-                          <el-button type="primary"  @click="addUser()">确 定</el-button>
+                          <el-button type="primary"  @click="tableListVisibel=false">确 定</el-button>
                         </div>
               </el-dialog>
                <!-- <el-dialog title="删除信息" :visible.sync="deletecapmus"
@@ -211,7 +211,7 @@ export default {
       return{
           tableDataList:[],
           peopleDataList:[],
-          page:{
+          page:{  
              pageNum:1, 
              pageSize:5,
              startRow:0,
@@ -224,6 +224,7 @@ export default {
               kssj:'',
               jssj:'',
               user:'',
+              userId:[],
               hfgzSelect:[],
               hfbhSelect:[],
           },
@@ -264,13 +265,44 @@ export default {
         this.StudentList();
       },
       addPlan(){
-
+          // add:{
+          //     task_name:'',
+          //     hfgz:'',
+          //     hfbh:'',
+          //     kssj:'',
+          //     jssj:'',
+          //     user:'',
+          //     userId:[],
+          //     hfgzSelect:[],
+          //     hfbhSelect:[],
+          // },
+          // params = {
+          //   task_name:this.add.task_name;
+          //   hfgz:this.add.hfgz;
+          //   task_name:this.add.task_name;
+          //   task_name:this.add.task_name;
+          //   task_name:this.add.task_name;
+          // }
       },
       handleCurrentChange(val){
         this.page.pageNum = val;
         this.tableData()
       },
-      handleSelectionChange(){
+      handleSelectionChange(val){
+        var user_name = "";
+        var user_id = [];
+        for(var i=0;i<val.length;i++){
+          if(i==0){
+              user_name = val[i].realname;
+          }else{
+              user_name = user_name+","+val[i].realname;
+          }
+            user_id.push(val[i].id);
+        }
+        this.add.user = user_name;
+        this.add.userId = user_id;
+        // console.log(this.add.user);
+        // console.log(this.add.userId);
 
       },
       // 列表
@@ -368,7 +400,7 @@ export default {
              };
             var res = await EmptyBed(params);
             if(res.code == 200){
-                console.log(res)
+                // console.log(res)
               this.bedNum = res.data;
             }else{
               this.$message(res.message)
