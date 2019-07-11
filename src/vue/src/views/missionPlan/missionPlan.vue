@@ -126,7 +126,7 @@
                         <el-form :inline="true" :model="formPeople" class="demo-form-inline">
                             <el-form-item label="学院">
                               <el-select v-model="formPeople.xy" placeholder="学院" @change="DicGetZy()" style="width:180px" >
-                                <el-option v-for="(item,index) in xylist" :key="index" :label="item.name" :value="item.id" ></el-option>
+                                <el-option v-for="(item,index) in xylist" :key="index" :label="item.name" :value="item.code" ></el-option>
                               </el-select>
                             </el-form-item>
                             <el-form-item label="专业">
@@ -145,7 +145,7 @@
                               </el-select>
                             </el-form-item>
                             <el-form-item>
-                              <el-button type="primary" @click="onSubmit">查询</el-button>
+                              <el-button type="primary" @click="onSelect">查询</el-button>
                             </el-form-item>
                         </el-form>
                         <el-table
@@ -260,6 +260,9 @@ export default {
       onSubmit(){
         this.tableData();
       },
+      onSelect(){
+        this.StudentList();
+      },
       addPlan(){
 
       },
@@ -339,7 +342,7 @@ export default {
           }else{
               this.tableListVisibel = true;
              var params = {
-                 lb:this.studentForm.lb,
+                //  lb:this.studentForm.lb,
                  xy:this.studentForm.xy,
                  zy:this.studentForm.zy,
                  nj:this.studentForm.nj,
@@ -377,8 +380,9 @@ export default {
           this.bedNum();
       },
       async DicGetXy(){
-        var params = {lx:'xy'};
-        var res = await BuildStatusDictionary(params);
+        var params = {lx:'xy',
+                      id:'0'};
+        var res = await DicGetS(params);
         if(res.code == 200){
           this.xylist = res.data;
         }else{
@@ -387,7 +391,7 @@ export default {
       },
       async DicGetZy(){
         this.zyList = [];
-        var params = {lx:'zy',
+        var params = {lx:'xy',
                       id:this.formPeople.xy};
 
         var res = await DicGetS(params);

@@ -162,7 +162,7 @@ export const plan = (params, method) => {
 };
 // 任务对应学生信息List
 export const studentList = (params, method) => {
-  return formMiddlePromise(`${hotelBaseUrl}/taskPlan/ChooseStus`, params, method);
+  return formMiddlePromise(`${hotelBaseUrl}/taskPlan/ChooseStu`, params, method);
 };
 // 任务对应学生空床位数
 export const EmptyBed = (params, method) => {

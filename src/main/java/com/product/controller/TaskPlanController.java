@@ -107,7 +107,7 @@ public class TaskPlanController {
      * bj 班级（默认为空）
      *
      */
-    @RequestMapping("/ChooseStus")
+    @RequestMapping("/ChooseStu")
     @ResponseBody
     public Map<String,Object> ChooseStu(HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
