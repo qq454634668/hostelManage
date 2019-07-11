@@ -5,7 +5,7 @@
     <resultMap id="DicMb" type="java.util.Map">
         <result column="CODE" property="code"/>
         <result column="NAME" property="name"/>
-        <result column="NAME" property="name"/>
+        <result column="ID" property="id"/>
     </resultMap>
     <select id="DicCampus" parameterType="java.util.Map" resultMap="DicMb">
         select bh code,name from campus_info
@@ -23,15 +23,15 @@
         select bh code,fjbh name from room_info where loubh = #{loubh}
     </select>
     <select id="DicGet" parameterType="java.util.Map" resultMap="DicMb">
-       SELECT  code,name from dictionary where lx =#{lx}
+       SELECT  code,name,id from dictionary where lx =#{lx}
     </select>
     <select id="DicGetS" parameterType="java.util.Map" resultMap="DicMb">
-       SELECT  code,name from dictionary where lx =#{lx} and parent_id =#{id}
+       SELECT  code,name,id from dictionary where lx =#{lx} and parent_id =#{id}
     </select>
     <select id="DicNj" parameterType="java.util.Map" resultMap="DicMb">
-       SELECT nj from user_student t where t.xy =#{xy} and t.zy =#{zy} GROUP BY nj
+       SELECT nj from user_student t where  t.zy =#{zy} GROUP BY nj
     </select>
     <select id="DicBj" parameterType="java.util.Map" resultMap="DicMb">
-       SELECT bj from user_student t where t.xy =#{xy} and t.zy =#{zy} and nj =#{nj} GROUP BY bj
+       SELECT bj from user_student t where  t.zy =#{zy} and nj =#{nj} GROUP BY bj
     </select>
 </mapper>

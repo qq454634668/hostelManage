@@ -179,7 +179,7 @@ public class DicController {
     }
     /**
      *年级字典
-     * xy  学院
+//     * xy  学院
      * zy  专业
      */
     @RequestMapping("/DicNj")
@@ -188,7 +188,7 @@ public class DicController {
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
-            param.put("xy",xy);
+//            param.put("xy",xy);
             param.put("zy",zy);
             result.put("data",dicService.DicNj(param));
             result.put("message","年级字典查询成功");
@@ -202,7 +202,7 @@ public class DicController {
     }
     /**
      *班级字典
-     * xy  学院
+//     * xy  学院
      * zy  专业
      * nj  年级
      */
@@ -212,7 +212,7 @@ public class DicController {
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
         try{
-            param.put("xy",xy);
+//            param.put("xy",xy);
             param.put("zy",zy);
             param.put("nj",nj);
             result.put("data",dicService.DicBj(param));

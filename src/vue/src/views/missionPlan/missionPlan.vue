@@ -125,13 +125,23 @@
                    class="header-left">
                         <el-form :inline="true" :model="formPeople" class="demo-form-inline">
                             <el-form-item label="学院">
-                              <el-select v-model="formPeople.xy" placeholder="学院" @change="DicGetZy()">
-                                <el-option v-for="(item,index) in xylist" :key="index" :label="item.name" :value="item.code"></el-option>
+                              <el-select v-model="formPeople.xy" placeholder="学院" @change="DicGetZy()" style="width:180px" >
+                                <el-option v-for="(item,index) in xylist" :key="index" :label="item.name" :value="item.id" ></el-option>
                               </el-select>
                             </el-form-item>
                             <el-form-item label="专业">
-                              <el-select v-model="formPeople.zy" placeholder="专业">
+                              <el-select v-model="formPeople.zy" placeholder="专业" @change="DicGetNj()" style="width:180px">
                                 <el-option v-for="(item,index) in zyList" :key="index" :label="item.name" :value="item.code"></el-option>
+                              </el-select>
+                            </el-form-item>
+                            <el-form-item label="年级">
+                              <el-select v-model="formPeople.nj" placeholder="年级" @change="DicGetbj()" style="width:180px">
+                                <el-option v-for="(item,index) in njList" :key="index" :label="item.name" :value="item.code"></el-option>
+                              </el-select>
+                            </el-form-item>
+                            <el-form-item label="班级">
+                              <el-select v-model="formPeople.bj" placeholder="班级" style="width:180px" >
+                                <el-option v-for="(item,index) in bjList" :key="index" :label="item.name" :value="item.code"></el-option>
                               </el-select>
                             </el-form-item>
                             <el-form-item>
@@ -194,7 +204,7 @@
 </template>
 <script>
   import { mapMutations } from 'vuex';
-  import { plan,BuildStatusDictionary,CampusDictionary,AllBuildDictionary,studentList,EmptyBed,DicGetS} from '@/api';
+  import { plan,BuildStatusDictionary,CampusDictionary,AllBuildDictionary,studentList,EmptyBed,DicGetS,DicNj,DicBj} from '@/api';
   import { jquery } from '@/script/jquery-1.7.1';
 export default {
     data(){
@@ -240,7 +250,9 @@ export default {
             bj:''
           },
           xylist:[],
-          zyList:[]
+          zyList:[],
+          njList:[],
+          bjList:[],
           
       }  
     },
@@ -377,13 +389,43 @@ export default {
         this.zyList = [];
         var params = {lx:'zy',
                       id:this.formPeople.xy};
+
         var res = await DicGetS(params);
+        console.log(res);
         if(res.code == 200){
           this.zyList = res.data;
         }else{
           this.$message(res.message);
         }
       },
+      async DicGetNj(){
+        this.njList = [];
+        var params = {xy:this.formPeople.xy,
+                      zy:this.formPeople.zy
+                      };
+        var res = await DicNj(params);
+        // console.log(res);
+        if(res.code == 200){
+          this.njList = res.data;
+        }else{
+          this.$message(res.message);
+        }
+      },
+      async DicGetbj(){
+        this.bjList = [];
+        var params = {xy:this.formPeople.xy,
+                      zy:this.formPeople.zy,
+                      nj:this.formPeople.nj,
+                      };
+        var res = await DicBj(params);
+        // console.log(res);
+        if(res.code == 200){
+          this.bjList = res.data;
+        }else{
+          this.$message(res.message);
+        }
+      },
+
   
     },
     mounted(){
