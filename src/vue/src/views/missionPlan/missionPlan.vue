@@ -340,13 +340,13 @@ export default {
           if(!this.add.hfgz || !this.add.hfbh){
               this.$message('请选择划分规则及划分编号')
           }else{
-              this.tableListVisibel = true;
+            this.tableListVisibel = true;
              var params = {
                 //  lb:this.studentForm.lb,
-                 xy:this.studentForm.xy,
-                 zy:this.studentForm.zy,
-                 nj:this.studentForm.nj,
-                 bj:this.studentForm.bj,
+                 xy:this.formPeople.xy,
+                 zy:this.formPeople.zy,
+                 nj:this.formPeople.nj,
+                 bj:this.formPeople.bj,
              };
             var res = await studentList(params);
             if(res.code == 200){

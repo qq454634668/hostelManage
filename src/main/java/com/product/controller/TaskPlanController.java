@@ -113,12 +113,12 @@ public class TaskPlanController {
         Map<String,Object> result = new HashMap<>();
         Map<String,Object> param = new HashMap<>();
 //        String lb = request.getParameter("lb");
-//        String xy = request.getParameter("xy");
+        String xy = request.getParameter("xy");
         String zy = request.getParameter("zy");
         String nj = request.getParameter("nj");
         String bj = request.getParameter("bj");
         param.put("lb","");
-        param.put("xy","");
+        param.put("xy",xy);
         param.put("zy",zy);
         param.put("nj",nj);
         param.put("bj",bj);
