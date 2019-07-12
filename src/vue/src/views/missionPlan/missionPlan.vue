@@ -99,14 +99,18 @@
                                       <el-date-picker
                                             v-model="add.kssj"
                                             type="date"
-                                            placeholder="请选择开始时间">
+                                            placeholder="请选择开始时间"
+                                            format="yyyy 年 MM 月 dd 日"
+                                            value-format="yyyyMMdd">
                                      </el-date-picker>
                                  </el-form-item>
                                   <el-form-item label="结束时间" >
                                       <el-date-picker
                                             v-model="add.jssj"
                                             type="date"
-                                            placeholder="请选择结束时间">
+                                            placeholder="请选择结束时间"
+                                            format="yyyy 年 MM 月 dd 日"
+                                            value-format="yyyyMMdd">
                                      </el-date-picker>
                                  </el-form-item>
                                  <el-form-item label="人员">
@@ -153,6 +157,8 @@
                             :data="peopleDataList"
                             tooltip-effect="dark"
                             style="width:100%"
+                            row-key="getRowKeys" 
+                            :expand-row-keys="expands"
                             @selection-change="handleSelectionChange">
                             <el-table-column type="selection" width="100"></el-table-column>
                             <el-table-column prop="realname"  label="姓名"></el-table-column>
@@ -167,15 +173,15 @@
                           <el-button type="primary"  @click="tableListVisibel=false">确 定</el-button>
                         </div>
               </el-dialog>
-               <!-- <el-dialog title="删除信息" :visible.sync="deletecapmus"
+               <el-dialog title="删除信息" :visible.sync="delModel"
                    width="30%"
                    class="header-left">
-                       <span>确定要删除此校公寓信息</span>
+                       <span>确定要删除此次任务计划</span>
                         <div slot="footer" class="dialog-footer">
-                          <el-button @click="deletecapmus = false">取 消</el-button>
-                          <el-button type="primary"  :loading="loading">确 定</el-button>
+                          <el-button @click="delModel = false">取 消</el-button>
+                          <el-button type="primary"  :click="delSubmit()">确 定</el-button>
                         </div>
-              </el-dialog> -->
+              </el-dialog>
                <!-- 
               <el-dialog title="编辑校区" :visible.sync="editVisibel"
                    width="30%"
@@ -204,11 +210,12 @@
 </template>
 <script>
   import { mapMutations } from 'vuex';
-  import { plan,BuildStatusDictionary,CampusDictionary,AllBuildDictionary,studentList,EmptyBed,DicGetS,DicNj,DicBj} from '@/api';
+  import { plan,BuildStatusDictionary,CampusDictionary,AllBuildDictionary,studentList,EmptyBed,DicGetS,DicNj,DicBj,AddTaskPlan,DelTaskPlan} from '@/api';
   import { jquery } from '@/script/jquery-1.7.1';
 export default {
     data(){
       return{
+          expands:[], 
           tableDataList:[],
           peopleDataList:[],
           page:{  
@@ -228,6 +235,9 @@ export default {
               hfgzSelect:[],
               hfbhSelect:[],
           },
+          del:{
+              rwbh:'',
+          },
           form:{
             zt:"1",
            
@@ -235,6 +245,7 @@ export default {
           loading:false,
           dialogFormVisible:false,
           tableListVisibel:false,
+          delModel:false,
           studentForm:{
               lb:'',
               xy:'',
@@ -254,10 +265,35 @@ export default {
           zyList:[],
           njList:[],
           bjList:[],
-          
+           // 获取row的key值
+          getRowKeys(row) {
+              return row.id;
+          },
       }  
     },
     methods:{
+      handleEdit(index,row){
+        console.log(row.user_student_id);
+      },
+      handleDelete(index,row){
+        this.delModel = true;
+        this.del.rwbh = row.rwbh;
+      },
+      delSubmit(){
+        this.delTask();
+      },
+      async delTask(rwbh){
+          var params ={rwbh:rwbh};
+          var res = await DelTaskPlan(params);
+          if(res.code == 200){
+            this.delModel = false;
+            this.tableData();
+            this.$message(res.message)
+        }else{
+          this.delModel = false;
+          this.$message(res.message)
+        }
+      },
       onSubmit(){
         this.tableData();
       },
@@ -265,24 +301,24 @@ export default {
         this.StudentList();
       },
       addPlan(){
-          // add:{
-          //     task_name:'',
-          //     hfgz:'',
-          //     hfbh:'',
-          //     kssj:'',
-          //     jssj:'',
-          //     user:'',
-          //     userId:[],
-          //     hfgzSelect:[],
-          //     hfbhSelect:[],
-          // },
-          // params = {
-          //   task_name:this.add.task_name;
-          //   hfgz:this.add.hfgz;
-          //   task_name:this.add.task_name;
-          //   task_name:this.add.task_name;
-          //   task_name:this.add.task_name;
-          // }
+         this.addTaskPlan();
+      },
+      async addTaskPlan(){
+        var params = {
+            task_name:this.add.task_name,
+            hfgz:this.add.hfgz,
+            hfbh:this.add.hfbh,
+            kssj:this.add.kssj,
+            jssj:this.add.jssj,
+            users:this.add.userId
+          }
+        var res = await AddTaskPlan(params);
+        if(res.code == 200){
+          this.dialogFormVisible = false;
+          this.tableData();
+        }else{
+          this.$message(res.message)
+        }
       },
       handleCurrentChange(val){
         this.page.pageNum = val;
@@ -387,6 +423,7 @@ export default {
               this.$message(res.message)
             }
           }
+          this.expands.push(3);
             
       },
       // 学生列表
@@ -427,7 +464,7 @@ export default {
                       id:this.formPeople.xy};
 
         var res = await DicGetS(params);
-        console.log(res);
+        // console.log(res);
         if(res.code == 200){
           this.zyList = res.data;
         }else{

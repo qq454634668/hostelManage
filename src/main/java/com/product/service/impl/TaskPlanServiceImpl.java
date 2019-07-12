@@ -4,6 +4,7 @@ package com.product.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.product.mapper.TaskPlanMapper;
 import com.product.service.TaskPlanService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,12 +29,14 @@ public class TaskPlanServiceImpl implements TaskPlanService {
         param.put("rwbh",rwbh);
         //插入任务基础表
         int flag = taskPlanMapper.InsTaskBase(param);
+//        int flag = 1;
         if(flag <= 0){
             throw new RuntimeException("添加失败");
         }else{
             //插入任务详情人员名单表
             String users = (String) param.get("users");
-            String[] usersString = users.split(",");
+            String Stringusers = StringUtils.strip(users.toString(),"[]");
+            String[] usersString = Stringusers.split(",");
             param.put("users",usersString);
             List userList =new ArrayList();
             for(int i=0;i<usersString.length;i++){

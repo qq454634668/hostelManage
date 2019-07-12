@@ -19,6 +19,7 @@
         <result column="HFBH" property="hfbh"/>
         <result column="ZT" property="zt"/>
         <result column="HFGZ" property="hfgz"/>
+        <result column="USER_STUDENT_ID" property="user_student_id"/>
     </resultMap>
     <resultMap id="StuList" type="java.util.Map">
         <result column="ID" property="id"/>
@@ -124,10 +125,10 @@
         delete from task_baseinfo where rwbh = #{rwbh}
     </delete>
     <select id="taskBaseList" parameterType="java.util.Map" resultMap="taskBaseList">
-        select t.id,t.rwbh,t.task_name,t.kssj,t.jssj,hfbh,
+        select t.id,t.rwbh,t.task_name,t.kssj,t.jssj,hfbh,group_concat(t1.user_student_id) user_student_id,
 			(select name from dictionary a where a.code = t.zt and a.lx='task') zt,
 			(select name from dictionary a where a.code = t.hfgz and a.lx='allocation') hfgz
-			 from task_baseinfo t where t.zt =#{zt}
+			 from task_baseinfo t,task_detailed t1 where t.zt =#{zt} and t.rwbh = t1.rwbh group by t.id
     </select>
     <select id="taskDeStu" parameterType="java.util.Map" resultMap="StuList">
         select  t.id,t.username,t.realname,t.lxdh,t.xh,

@@ -23,7 +23,8 @@ public class TimeTask {
     private TaskService taskService;
 
 
-    @Scheduled(cron = "0/30 * * * * ?")
+//    @Scheduled(cron = "0/30 * * * * ?")
+    @Scheduled(cron = "0 0 12 * * ? ")  //每天12点执行1次
     public void autoMode(){
 
         taskService.rwfp();

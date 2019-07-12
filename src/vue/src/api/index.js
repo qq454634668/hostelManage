@@ -168,6 +168,14 @@ export const studentList = (params, method) => {
 export const EmptyBed = (params, method) => {
   return formMiddlePromise(`${hotelBaseUrl}/taskPlan/EmptyBed`, params, method);
 };
+// 添加任务计划
+export const AddTaskPlan = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/taskPlan/AddTaskPlan`, params, method);
+};
+// 删除任务计划
+export const DelTaskPlan = (params, method) => {
+  return formMiddlePromise(`${hotelBaseUrl}/taskPlan/DelTaskPlan`, params, method);
+};
 
 
 

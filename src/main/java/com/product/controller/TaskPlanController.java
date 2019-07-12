@@ -62,10 +62,10 @@ public class TaskPlanController {
             param.put("users",users);
             taskPlanService.AddTaskPlan(param);
             result.put("data",null);
-            result.put("message","停用楼操作成功");
+            result.put("message","创建计划操作成功");
             result.put("code","200");
         }catch (Exception e){
-            result.put("message","停用楼操作失败");
+            result.put("message","创建计划操作失败");
             result.put("code","500");
             result.put("data",e.getMessage());
         }
