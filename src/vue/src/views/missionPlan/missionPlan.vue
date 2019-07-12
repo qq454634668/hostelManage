@@ -179,7 +179,7 @@
                        <span>确定要删除此次任务计划</span>
                         <div slot="footer" class="dialog-footer">
                           <el-button @click="delModel = false">取 消</el-button>
-                          <el-button type="primary"  :click="delSubmit()">确 定</el-button>
+                          <el-button type="primary"  @click="delSubmit()">确 定</el-button>
                         </div>
               </el-dialog>
                <!-- 
