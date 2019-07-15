@@ -53,9 +53,9 @@
                         </el-table-column>
                       <el-table-column label="操作">
                             <template slot-scope="scope">
-                              <el-button
+                              <!-- <el-button
                                 size="mini"
-                                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                                @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
                               <el-button
                                 size="mini"
                                 type="danger"
@@ -282,8 +282,8 @@ export default {
       delSubmit(){
         this.delTask();
       },
-      async delTask(rwbh){
-          var params ={rwbh:rwbh};
+      async delTask(){
+          var params ={rwbh:this.del.rwbh};
           var res = await DelTaskPlan(params);
           if(res.code == 200){
             this.delModel = false;
