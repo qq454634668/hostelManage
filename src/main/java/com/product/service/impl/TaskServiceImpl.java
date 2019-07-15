@@ -79,7 +79,7 @@ public class TaskServiceImpl implements TaskService {
             if(taskDetailedMaleList.size()>0) {
                 if (taskDetailedMaleList.size() <= bedInfoMaleList.size()) {
                     this.updateUserSutdent("3", "2", bedInfoMaleList, taskDetailedMaleList);
-                    this.updateBedInfo("4", bedInfoMaleList);
+                    this.updateBedInfo("2", bedInfoMaleList);
                     this.updateTaskDetailed("2", taskDetailedMaleList);
                     this.updateTaskBaseInfo("2",taskBaseinfo.getRwbh());
                 }else{
@@ -92,7 +92,7 @@ public class TaskServiceImpl implements TaskService {
             if(taskDetailedFeMaleList.size()>0){
                 if(taskDetailedFeMaleList.size()<=bedInfoFeMaleList.size()){
                     this.updateUserSutdent("3","2",bedInfoFeMaleList,taskDetailedFeMaleList);
-                    this.updateBedInfo("4",bedInfoFeMaleList);
+                    this.updateBedInfo("2",bedInfoFeMaleList);
                     this.updateTaskDetailed("2",taskDetailedFeMaleList);
                     this.updateTaskBaseInfo("2",taskBaseinfo.getRwbh());
                 }else{
