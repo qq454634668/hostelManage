@@ -88,7 +88,6 @@ public class TaskServiceImpl implements TaskService {
                     this.updateTaskBaseInfo("3",taskBaseinfo.getRwbh());
                 }
             }
-
             if(taskDetailedFeMaleList.size()>0){
                 if(taskDetailedFeMaleList.size()<=bedInfoFeMaleList.size()){
                     this.updateUserSutdent("3","2",bedInfoFeMaleList,taskDetailedFeMaleList);
@@ -102,13 +101,9 @@ public class TaskServiceImpl implements TaskService {
                     this.updateTaskBaseInfo("3",taskBaseinfo.getRwbh());
                 }
             }
-
-
             if(taskDetailedFeMaleList.size()<=0&&taskDetailedMaleList.size()<=0){
                 this.updateTaskBaseInfo("3",taskBaseinfo.getRwbh());
             }
-
-
         }
     }
 
